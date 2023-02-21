@@ -24,12 +24,12 @@ FullOfMemory, is the clone of stackoverflow
 * users can delete/update their own answer
 * when adding or delete answer, answer number should be changed.
 
+## 4. likes
+* All users can like questions and answers.
+* All users can remove their own likes on questions and ansers.
+* If I have this feature, the likes number will show up on Question Page/Single question Page/Answers
 
-## 4. Search/filters
 
-* All users & nonusers can use search bar
-* Users & nonusers can view a list of search results
-* when you click the question, it will jumping to single question page.
 
 
 ## 5. User Profile
@@ -39,12 +39,15 @@ FullOfMemory, is the clone of stackoverflow
 
 
 ## Bonus
-## 6. saved items
+
+
+## 6. Search/filters
+
+* All users & nonusers can use search bar
+* Users & nonusers can view a list of search results
+* when you click the question, it will jumping to single question page.
+
+## 7. saved items
 * All users can saved questions and answers.
 * All users can remove questions and ansers.
 * All saved items can show up on user profile page.
-
-## 7. likes
-* All users can like questions and answers.
-* All users can remove their own likes on questions and ansers.
-* If I have this feature, the likes number will show up on Question Page/Single question Page/Answers
