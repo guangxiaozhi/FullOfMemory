@@ -27,6 +27,6 @@ class Question(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'discription': self.discription,
+            'description': self.description,
             "tags":self.tags
         }
