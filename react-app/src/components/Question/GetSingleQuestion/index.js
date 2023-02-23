@@ -4,7 +4,7 @@ import {useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
 import OpenModalButton from "../../OpenModalButton";
 import UpdateQuestion from '../UpdateQuestionModal';
-
+import './singleQuestion.css'
 
 function GetSingleQuestion() {
   const dispatch = useDispatch();
@@ -42,27 +42,25 @@ function GetSingleQuestion() {
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
     isLoaded && (
-      <>
-        <div key={question.id} className="question">
-          <div className="like-answer">
-            <div>{question.like_count} likes</div>
-            <div>{question.answer_count} answers</div>
-          </div>
-          <div>
-            <div >{question.title}</div>
-            <div>
-              <p>createdAt: {new Date(question.createdAt).toLocaleDateString("en-US", options)}</p>
-              <p>updatedAt: {new Date(question.updatedAt).toLocaleDateString("en-US", options)}</p>
-            </div>
-            <div> {question.description}</div>
-            <div>{question.tags}</div>
-          </div>
-          <div>
-            {sessionUser && question.user_id === sessionUser.id ? <button className="delete-review red-button" onClick={handleDelete(question.id)}><span className="delete-review-text">Delete Question</span></button> : ""}
-            {sessionUser && question.user_id === sessionUser.id ? <OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/> : ""}
-          </div>
+      <div key={question.id} className="single-question-container">
+        <div className="single-like-answer">
+          <div>{question.like_count} likes</div>
+          <div className='single-answer'>{question.answer_count} answers</div>
         </div>
-      </>
+        <div className='single-question-body'>
+          <div className='single-title'>{question.title}</div>
+          <div className= 'single-time'>
+            <p className= 'time'>createdAt: {new Date(question.createdAt).toLocaleDateString("en-US", options)}</p>
+            <p className= 'time'>updatedAt: {new Date(question.updatedAt).toLocaleDateString("en-US", options)}</p>
+          </div>
+          <div className='single-description'> {question.description}</div>
+          <div className="tags">{question.tags}</div>
+        </div>
+        <div>
+          {sessionUser && question.user_id === sessionUser.id ? <button className="delete-update-question" onClick={handleDelete(question.id)}>Delete Question</button> : ""}
+          {sessionUser && question.user_id === sessionUser.id ? <OpenModalButton className="delete-update-question" buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/> : ""}
+        </div>
+      </div>
     )
   )
 
