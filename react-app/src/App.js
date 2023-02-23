@@ -29,10 +29,10 @@ function App() {
           <Route exact path="/">
             <GetAllQuestions />
           </Route>
-          <Route exact path="/api/questions/:questionId">
+          <Route exact path="/questions/:questionId">
             <GetSingleQuestion />
           </Route>
-          
+
         </Switch>
       )}
     </>
