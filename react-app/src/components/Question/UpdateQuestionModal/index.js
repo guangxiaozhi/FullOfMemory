@@ -29,6 +29,7 @@ function UpdateQuestion({singleQuestion}) {
     }
 
     dispatch(updateQuestionThunk(updatedQuestion,questionId))
+      .then(() => dispatch(fetchOneQuestion(questionId)))
       .then(closeModal())
       .catch(
         async (res) => {
