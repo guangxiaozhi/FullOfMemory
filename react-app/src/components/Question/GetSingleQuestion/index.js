@@ -25,6 +25,7 @@ function GetSingleQuestion() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect( () => {
+    console.log("%%%%%% start fetchONeQuestion")
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
   }, [dispatch, questionId])
 
@@ -40,7 +41,7 @@ function GetSingleQuestion() {
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
-    isLoaded && (
+
       <>
         <div key={question.id} className="question">
           <div className="like-answer">
@@ -64,7 +65,7 @@ function GetSingleQuestion() {
       </>
 
     )
-  )
+  
 }
 
 export default GetSingleQuestion
