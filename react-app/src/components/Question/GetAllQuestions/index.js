@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {fetchAllQuestions} from '../../../store/question'
 import { Link } from "react-router-dom";
 import OpenModalButton from '../../OpenModalButton'
-import CreateQuestionModal from "../CreateQuestionModal";
+import CreateQuestion from "../CreateQuestionModal";
 import './getAllQuestions.css'
 
 function GetAllQuestions() {
@@ -28,7 +28,7 @@ function GetAllQuestions() {
             sessionUser && (
               <OpenModalButton
                 buttonText="Create Question"
-                modalComponent={< CreateQuestionModal/>}
+                modalComponent={< CreateQuestion />}
               />
             )
           }

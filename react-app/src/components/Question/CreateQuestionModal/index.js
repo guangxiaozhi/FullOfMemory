@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal'
 
-function CreateQuestionModal(){
+import {createQuestionThunk, fetchAllQuestions} from '../../../store/question'
+
+function CreateQuestion(){
+
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -15,10 +18,26 @@ function CreateQuestionModal(){
   const { closeModal } = useModal();
 
   const sessionUser = useSelector(state => state.session.user);
+  console.log("sessionUser", sessionUser)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    const newQuestion = {
+      title,
+      description,
+      tags
+    }
+    console.log("handle submit newQuestion", newQuestion)
+    dispatch(createQuestionThunk(newQuestion))
+      .then(() => dispatch(fetchAllQuestions()) )
+      .then(closeModal())
+      .catch(
+        async (res) => {
+            // const data = await res.json();
+            console.log("data",res.errors)
+            if (res && res.errors) setErrors(res.errors);
+        }
+      )
   }
 
   return (
@@ -64,4 +83,4 @@ function CreateQuestionModal(){
     </>
   )
 }
-export default CreateQuestionModal
+export default CreateQuestion

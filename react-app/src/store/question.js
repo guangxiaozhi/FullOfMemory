@@ -77,6 +77,31 @@ export const updateQuestionThunk = (updatedQuestion,questionId) => async (dispat
   }
 }
 
+
+//Create question
+const CREATE_QUESTION = "questions/CREATE_QUESTION"
+const createOneQuestion = (question) => {
+  return {
+    type:CREATE_QUESTION,
+    question
+  }
+}
+
+export const createQuestionThunk = (newQuestion) => async (dispatch) => {
+  console.log("newQuestion from thunk", newQuestion)
+  const res = await fetch('/api/questions/',  {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body:JSON.stringify(newQuestion)
+  })
+  console.log("create question thunk res.ok", res.ok)
+  if (res.ok){
+    const data = await res.json()
+    dispatch(createOneQuestion(data))
+    return data.id
+  }
+}
+
 const initialState = {};
 export default function questionReducer(state = initialState, action){
   const newState = {...state}
@@ -100,14 +125,16 @@ export default function questionReducer(state = initialState, action){
       console.log("action.singleQuestion", action.singleQuestion)
       console.log("newState in reducer", newState)
       newState.singleQuestion = {...action.singleQuestion}
-      // newState.singleQuestion["answer_count"] = action.singleQuestion["answer_count"]
-      // newState.singleQuestion["like_count"] = action.singleQuestion["like_count"]
-      // newState.singleQuestion["question"] = {... action.singleQuestion.question}
       return newState
 
     case DELETE_ONE_QUESTION:
       delete newState.allQuestions[action.questionId]
       newState.singleQuestion = {}
+      return newState
+
+    case CREATE_QUESTION:
+      console.log("state from create question", state)
+      newState.allQuestions[action.question.id] = action.question;
       return newState
 
     default:

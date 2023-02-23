@@ -37,7 +37,7 @@ function UpdateQuestion({singleQuestion}) {
             console.log("data", data.errors)
             if (data && data.errors) setErrors(data.errors);
         }
-    )
+      )
   }
 
   let sessionLinks;

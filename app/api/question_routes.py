@@ -103,6 +103,7 @@ def update_question(id):
 @question_routes.route('/', methods=["POST"])
 @login_required
 def create_question():
+   print("@@@@@@backend create question")
    questions = Question.query.all()
 
    titles = [ques.to_dict()["title"] for ques in questions]
