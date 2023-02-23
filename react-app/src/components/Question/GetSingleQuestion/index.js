@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
 import OpenModalButton from "../../OpenModalButton";
-import UpdateQuestion from '../UpdateQuestion';
+import UpdateQuestion from '../UpdateQuestionModal';
 
 
 function GetSingleQuestion() {
@@ -31,7 +31,6 @@ function GetSingleQuestion() {
   const handleDelete = (questionId) => async (e) => {
     console.log("handle delete ")
     await dispatch(deleteOneQuestionThunk(questionId))
-      // .then(() => dispatch(fetchAllReviewsByRestaurantId(restaurantId)))
     history.push(`/`)
   }
 
