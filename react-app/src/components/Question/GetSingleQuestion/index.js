@@ -41,7 +41,7 @@ function GetSingleQuestion() {
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
-
+    isLoaded && (
       <>
         <div key={question.id} className="question">
           <div className="like-answer">
@@ -63,9 +63,9 @@ function GetSingleQuestion() {
           </div>
         </div>
       </>
-
     )
-  
+  )
+
 }
 
 export default GetSingleQuestion
