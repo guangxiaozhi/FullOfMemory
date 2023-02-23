@@ -25,6 +25,7 @@ class Answer(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'title': self.title,
-            'discription': self.discription
+            'user_id': self.user_id,
+            'question_id': self.question_id,
+            'answer_body':self.answer_body
         }

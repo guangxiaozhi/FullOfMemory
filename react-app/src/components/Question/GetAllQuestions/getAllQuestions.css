@@ -1,0 +1,41 @@
+.allQuestionsList{
+  width:75%
+}
+.question{
+  /* border:1px solid gray; */
+  display: flex;
+  flex-direction: row;
+  width:auto;
+  margin:20px
+}
+
+.like-answer{
+  width:15%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-body {
+  width:80%
+}
+
+.title {
+  font-size: 20px;
+}
+
+.description {
+  margin:10px;
+}
+
+.tags {
+  margin:10px;
+  color: rgb(74, 192, 221);
+}
+
+.answer {
+  border:1px solid green;
+  border-radius: 5px;
+  padding: 2px;
+}

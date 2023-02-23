@@ -5,3 +5,9 @@
 .hidden {
   display: none;
 }
+
+.navigation {
+  width:80%;
+  display: flex;
+  justify-content: space-between
+}
