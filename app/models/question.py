@@ -29,5 +29,7 @@ class Question(db.Model):
             'user_id': self.user_id,
             'title': self.title,
             'description': self.description,
-            "tags":self.tags
+            "tags":self.tags,
+            "createdAt":self.createdAt,
+            "updatedAt": self.updatedAt
         }

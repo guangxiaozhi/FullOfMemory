@@ -18,8 +18,8 @@ def delete_question(id):
    if not question:
       return {"errors": ["Question couldn't be found"]}, 404
 
-   if not question.user_id == current_user.id:
-      return {"errors": ["you cann't delete the question is not owned you"]}, 403
+   # if not question.user_id == current_user.id:
+   #    return {"errors": ["you cann't delete the question is not owned you"]}, 403
 
    db.session.delete(question)
    db.session.commit()
@@ -34,18 +34,19 @@ def get_all_question():
     for question in questions:
       answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
       like_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id).all())
-      print("answer_count", answer_count)
+      # print("answer_count", answer_count)
       questionInfo = {}
-      questionInfo[str(question.id)] = question.to_dict()
+      questionInfo.update(question.to_dict())
       questionInfo["answer_count"] = answer_count
       questionInfo["like_count"] = like_count
       data.append(questionInfo)
-    return {"questions": data}
+    return data
 
 
 # Get Question details by Question Id
 @question_routes.route('/<int:id>')
 def get_question_by_id(id):
+   print("$$$$$ question id", id)
    question = Question.query.get(id)
    if not question:
       return {"errors": ["question couldn't be found"]}, 404
@@ -53,8 +54,9 @@ def get_question_by_id(id):
    like_count = len(QuestionLike.query.filter(QuestionLike.question_id == question.id).all())
    answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
    questionInfo = {"answer_count":answer_count, "like_count": like_count}
-   questionInfo[str(question.id)] = question.to_dict()
-   return {"question" : questionInfo}
+   questionInfo.update(question.to_dict())
+
+   return questionInfo
 
 # Get current user's questions and answers
 @question_routes.route('/current')

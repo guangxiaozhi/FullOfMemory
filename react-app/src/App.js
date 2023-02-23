@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import GetAllQuestions from "./components/Question/GetAllQuestions";
+import GetSingleQuestion from "./components/Question/GetSingleQuestion";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,13 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path="/">
+            <GetAllQuestions />
+          </Route>
+          <Route exact path="/api/questions/:questionId">
+            <GetSingleQuestion />
+          </Route>
+          
         </Switch>
       )}
     </>
