@@ -16,8 +16,9 @@ function CreateQuestionModal(){
 
   const sessionUser = useSelector(state => state.session.user);
 
-  const handleSubmit = () => {
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
   }
 
   return (
@@ -29,6 +30,35 @@ function CreateQuestionModal(){
                 <li key={idx}>{error}</li>
             ))}
         </ul>
+
+        <label>
+              <span>Title</span>
+              <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+              />
+            </label>
+
+            <label>
+              <span>Description</span>
+              <input
+                  type="text"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+              />
+            </label>
+
+            <label>
+              <span>Tags</span>
+              <input
+                  type="text"
+                  value={tags}
+                  onChange={(e) => setTags(e.target.value)}
+              />
+            </label>
+
+            <button type="submit"> Submit </button>
 
       </form>
     </>

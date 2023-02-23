@@ -42,7 +42,7 @@ function GetAllQuestions() {
                   <div className="answer">{question.answer_count} answers</div>
                 </div>
                 <div className="question-body">
-                  <Link className="title" to={`/api/questions/${question.id}`} >{question.title}</Link>
+                  <Link className="title" to={`/questions/${question.id}`} >{question.title}</Link>
                   <div className="description">{question.description.substring(0,200)}......</div>
                   <div className="tags">{question.tags}</div>
                 </div>
