@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory,  useParams} from 'react-router-dom';
 import {updateQuestionThunk, fetchOneQuestion} from '../../../store/question';
 import { useModal } from '../../../context/Modal';
 
@@ -30,7 +29,6 @@ function UpdateQuestion({singleQuestion}) {
     }
 
     dispatch(updateQuestionThunk(updatedQuestion,questionId))
-      .then(() => dispatch(fetchOneQuestion(questionId)))
       .then(closeModal())
       .catch(
         async (res) => {
@@ -47,7 +45,7 @@ function UpdateQuestion({singleQuestion}) {
     const questionUserId = singleQuestion.user_id;
     const userId = sessionUser.id
 
-    if(questionUserId == userId){
+    if(questionUserId === userId){
       sessionLinks = (
         <>
           <form
