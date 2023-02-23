@@ -18,7 +18,7 @@ function CreateQuestion(){
   const { closeModal } = useModal();
 
   const sessionUser = useSelector(state => state.session.user);
-  console.log("sessionUser", sessionUser)
+  // console.log("sessionUser", sessionUser)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,14 +27,13 @@ function CreateQuestion(){
       description,
       tags
     }
-    console.log("handle submit newQuestion", newQuestion)
+    // console.log("handle submit newQuestion", newQuestion)
     dispatch(createQuestionThunk(newQuestion))
       .then(() => dispatch(fetchAllQuestions()) )
       .then(closeModal())
       .catch(
         async (res) => {
-            // const data = await res.json();
-            console.log("data",res.errors)
+            // console.log("data",res.errors)
             if (res && res.errors) setErrors(res.errors);
         }
       )

@@ -12,7 +12,7 @@ question_routes = Blueprint('questions', __name__)
 @question_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_question(id):
-   print("delete start")
+   # print("delete start")
    question = Question.query.get(id)
 
    if not question:
@@ -46,7 +46,7 @@ def get_all_question():
 # Get Question details by Question Id
 @question_routes.route('/<int:id>')
 def get_question_by_id(id):
-   print("$$$$$ question id", id)
+   # print("$$$$$ question id", id)
    question = Question.query.get(id)
    if not question:
       return {"errors": ["question couldn't be found"]}, 404
@@ -78,7 +78,7 @@ def get_questions_by_current_user():
 @login_required
 def update_question(id):
    question = Question.query.get(id)
-   print("question by id", question.to_dict())
+   # print("question by id", question.to_dict())
    if not question:
       return {"errors": ["question couldn't be found"]}, 404
 
@@ -103,17 +103,17 @@ def update_question(id):
 @question_routes.route('/', methods=["POST"])
 @login_required
 def create_question():
-   print("@@@@@@backend create question")
+   # print("@@@@@@backend create question")
    questions = Question.query.all()
 
    titles = [ques.to_dict()["title"] for ques in questions]
-   print("all titles value", titles)
-   print('how do i autosize a resource image into a datagridview column' in titles)
+   # print("all titles value", titles)
+   # print('how do i autosize a resource image into a datagridview column' in titles)
    descriptions = [ques.to_dict()["description"] for ques in questions]
 
    form = QuestionForm()
    form["csrf_token"].data = request.cookies["csrf_token"]
-   print("**********request", request.get_json())
+   # print("**********request", request.get_json())
    if form.validate_on_submit():
       question = Question(
          user_id = int(current_user.id),

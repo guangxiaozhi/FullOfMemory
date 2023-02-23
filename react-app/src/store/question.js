@@ -11,7 +11,7 @@ export const fetchAllQuestions = () => async(dispatch) => {
   const res = await fetch('/api/questions')
   if (res.ok) {
     const questions = await res.json()
-    console.log("questions from thunk", questions)
+    // console.log("questions from thunk", questions)
     dispatch(loadAllQuestions(questions))
   }
 }
@@ -25,13 +25,13 @@ const loadOneQuestion = (singleQuestion) => {
   }
 }
 export const fetchOneQuestion = (questionId) => async (dispatch) => {
-  console.log("start thunk", questionId)
+  // console.log("start thunk", questionId)
   const res = await fetch(`/api/questions/${questionId}`);
-  console.log(res.ok)
+  // console.log(res.ok)
   // console.log("res.ok", await res.json())
   if(res.ok){
     const singleQuestion = await res.json();
-    console.log("singleQuestion from thunk", singleQuestion)
+    // console.log("singleQuestion from thunk", singleQuestion)
     await dispatch(loadOneQuestion(singleQuestion))
     return singleQuestion
   }
@@ -64,7 +64,7 @@ const updateOneQuestion = (question) => {
   }
 }
 export const updateQuestionThunk = (updatedQuestion,questionId) => async (dispath) => {
-  console.log("updated question", updatedQuestion)
+  // console.log("updated question", updatedQuestion)
   const res = await fetch(`/api/questions/${questionId}`,  {
     method: "PUT",
     headers: {"Content-Type":"application/json"},
@@ -88,13 +88,13 @@ const createOneQuestion = (question) => {
 }
 
 export const createQuestionThunk = (newQuestion) => async (dispatch) => {
-  console.log("newQuestion from thunk", newQuestion)
+  // console.log("newQuestion from thunk", newQuestion)
   const res = await fetch('/api/questions/',  {
     method: "POST",
     headers: {"Content-Type":"application/json"},
     body:JSON.stringify(newQuestion)
   })
-  console.log("create question thunk res.ok", res.ok)
+  // console.log("create question thunk res.ok", res.ok)
   if (res.ok){
     const data = await res.json()
     dispatch(createOneQuestion(data))
@@ -120,10 +120,9 @@ export default function questionReducer(state = initialState, action){
       }
 
     case GET_QUESTION_DETAILS:
-      console.log("?????? state ????????", state)
-      // newState.singleQuestion
-      console.log("action.singleQuestion", action.singleQuestion)
-      console.log("newState in reducer", newState)
+      // console.log("?????? state ????????", state)
+      // console.log("action.singleQuestion", action.singleQuestion)
+      // console.log("newState in reducer", newState)
       newState.singleQuestion = {...action.singleQuestion}
       return newState
 
@@ -133,7 +132,7 @@ export default function questionReducer(state = initialState, action){
       return newState
 
     case CREATE_QUESTION:
-      console.log("state from create question", state)
+      // console.log("state from create question", state)
       newState.allQuestions[action.question.id] = action.question;
       return newState
 

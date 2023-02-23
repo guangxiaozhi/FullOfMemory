@@ -9,7 +9,7 @@ import './getAllQuestions.css'
 function GetAllQuestions() {
   const sessionUser = useSelector(state => state.session.user)
   const allQuestionsObj = useSelector(state => {
-    console.log("state from useSelector", state)
+    // console.log("state from useSelector", state)
     return state.question.allQuestions
   })
 

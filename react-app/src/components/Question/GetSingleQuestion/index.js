@@ -25,12 +25,12 @@ function GetSingleQuestion() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect( () => {
-    console.log("%%%%%% start fetchONeQuestion")
+    // console.log("%%%%%% start fetchONeQuestion")
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
   }, [dispatch, questionId])
 
   const handleDelete = (questionId) => async (e) => {
-    console.log("handle delete ")
+    // console.log("handle delete ")
     await dispatch(deleteOneQuestionThunk(questionId))
     history.push(`/`)
   }
