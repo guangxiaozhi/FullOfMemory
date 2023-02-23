@@ -26,7 +26,7 @@ function GetSingleQuestion() {
 
   useEffect( () => {
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
-  }, [dispatch])
+  }, [dispatch, questionId])
 
   const handleDelete = (questionId) => async (e) => {
     console.log("handle delete ")
