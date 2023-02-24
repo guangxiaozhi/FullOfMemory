@@ -23,14 +23,6 @@
   width:95%
 }
 
-.delete-update-question {
-  height:25px;
-  margin-right:10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color:antiquewhite;
-  cursor: pointer;
-}
 
 .single-title {
   font-size: 20px
@@ -46,4 +38,28 @@
 
 .single-description {
   margin: 10px;
+}
+
+.update-delete-button-container {
+  width:20%;
+  display:flex;
+  flex-direction: column;
+}
+
+/* .update-question-model-button {
+  height:25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
+} */
+
+.delete-update-question {
+  height:25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
 }

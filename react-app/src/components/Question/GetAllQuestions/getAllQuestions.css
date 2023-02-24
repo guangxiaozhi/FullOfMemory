@@ -46,15 +46,17 @@
   justify-content: flex-end;
 }
 
-.creste-question-button {
-  height:25px;
-  margin-right:10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color:antiquewhite;
-  cursor: pointer;
-}
 
 .all-question-container {
   width:80%
+}
+
+
+.create-question-model-button button {
+  /* list-style-type: none; */
+  border-radius: 10px;
+  background-color:antiquewhite;
+  margin:2px;
+  margin-right:50px;
+  cursor: pointer;
 }

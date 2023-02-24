@@ -36,16 +36,16 @@ function LoginFormPage() {
 
   return (
     <>
-      <h1 className='login-header'>Log In</h1>
-      <form onSubmit={handleSubmit} className="login-form-container">
-        <ul  className='login-errors'>
+      <h1>Log In</h1>
+      <form onSubmit={handleSubmit}>
+        <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label>
           Email
-          <input className='login-information'
+          <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -54,15 +54,15 @@ function LoginFormPage() {
         </label>
         <label>
           Password
-          <input className='login-information'
+          <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <button className='login-button' type="submit">Log In</button>
-        <button className='login-button' onClick={demoUserClick}>demo-user</button>
+        <button type="submit">Log In</button>
+        <button onClick={demoUserClick}>demo-user</button>
       </form>
     </>
   );

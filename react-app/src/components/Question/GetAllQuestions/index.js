@@ -25,13 +25,12 @@ function GetAllQuestions() {
       <div className="all-question-container" >
         <div className="create-question-button-container">
           {
-            sessionUser && (
+            <div className="create-question-model-button">
               <OpenModalButton
-                className='creste-question-button'
                 buttonText="Create Question"
                 modalComponent={< CreateQuestion />}
               />
-            )
+            </div>
           }
         </div>
         <div className="allQuestionsList">

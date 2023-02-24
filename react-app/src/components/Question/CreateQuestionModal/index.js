@@ -40,46 +40,61 @@ function CreateQuestion(){
       )
   }
 
+  let sessionLinks
+  if(sessionUser){
+    sessionLinks = (
+      <div className='create-question-container'>
+        <h2 className='create-question-text'>Create New Question</h2>
+        <form className='create-question-form' onSubmit={handleSubmit}>
+          <ul>
+              {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+              ))}
+          </ul>
+
+          <label className='create-question-body-item'>
+            <span>Title:</span>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+          </label>
+
+          <label className='create-question-body-item'>
+            <span>Description:</span>
+            <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
+          </label>
+
+          <label className='create-question-body-item'>
+            <span>Tags:</span>
+            <input
+                type="text"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+            />
+          </label>
+
+          <button className="create-question-button" type="submit"> Submit </button>
+
+        </form>
+      </div>
+    )
+  }else {
+    sessionLinks = (
+      <h1>
+         Please log in to create the Question
+      </h1>
+    )
+  }
+
   return (
-    <div className='create-question-container'>
-      <h2 className='create-question-text'>Create New Question</h2>
-      <form className='create-question-form' onSubmit={handleSubmit}>
-        <ul>
-            {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-            ))}
-        </ul>
-
-        <label className='create-question-body-item'>
-          <span>Title:</span>
-          <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>
-
-        <label className='create-question-body-item'>
-          <span>Description:</span>
-          <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-
-        <label className='create-question-body-item'>
-          <span>Tags:</span>
-          <input
-              type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-          />
-        </label>
-
-        <button className="create-question-button" type="submit"> Submit </button>
-
-      </form>
+    <div>
+      {sessionLinks}
     </div>
   )
 }
