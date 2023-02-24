@@ -5,8 +5,8 @@ import { useModal } from '../../../context/Modal';
 
 
 function UpdateQuestion({singleQuestion}) {
-  console.log("update question ", singleQuestion)
-  console.log("update question ", singleQuestion.id)
+  // console.log("update question ", singleQuestion)
+  // console.log("update question ", singleQuestion.id)
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState(singleQuestion.title);
@@ -34,10 +34,10 @@ function UpdateQuestion({singleQuestion}) {
       .catch(
         async (res) => {
             const data = await res.json();
-            console.log("data", data.errors)
+            // console.log("data", data.errors)
             if (data && data.errors) setErrors(data.errors);
         }
-    )
+      )
   }
 
   let sessionLinks;

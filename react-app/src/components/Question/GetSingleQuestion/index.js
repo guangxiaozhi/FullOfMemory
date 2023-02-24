@@ -25,12 +25,12 @@ function GetSingleQuestion() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect( () => {
-    console.log("%%%%%% start fetchONeQuestion")
+    // console.log("%%%%%% start fetchONeQuestion")
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
   }, [dispatch, questionId])
 
   const handleDelete = (questionId) => async (e) => {
-    console.log("handle delete ")
+    // console.log("handle delete ")
     await dispatch(deleteOneQuestionThunk(questionId))
     history.push(`/`)
   }
@@ -41,7 +41,7 @@ function GetSingleQuestion() {
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
-
+    isLoaded && (
       <>
         <div key={question.id} className="question">
           <div className="like-answer">
@@ -63,9 +63,9 @@ function GetSingleQuestion() {
           </div>
         </div>
       </>
-
     )
-  
+  )
+
 }
 
 export default GetSingleQuestion
