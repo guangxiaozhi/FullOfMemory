@@ -55,7 +55,7 @@
   cursor: pointer;
 } */
 
-.delete-update-question {
+.delete-update-question button {
   height:25px;
   margin-right:10px;
   margin-bottom: 10px;

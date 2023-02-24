@@ -57,9 +57,8 @@ function GetSingleQuestion() {
           <div className="tags">{question.tags}</div>
         </div>
         <div className='update-delete-button-container'>
-          {sessionUser && question.user_id === sessionUser.id ? <button className="delete-update-question" onClick={handleDelete(question.id)}>Delete Question</button> : ""}
-          {/* {sessionUser && question.user_id === sessionUser.id ? <OpenModalButton className="delete-update-question" buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/> : ""} */}
-          {sessionUser && question.user_id === sessionUser.id ? <div className='delete-update-question'><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""}
+          {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
+          {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""}
         </div>
       </div>
     )
