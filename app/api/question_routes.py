@@ -85,6 +85,10 @@ def update_question(id):
    if not question.user_id == current_user.id:
       return {"errors": ["you cann't edit the question is not owned you"]}, 403
 
+   questions = Question.query.filter(Question.id != id).all()
+   titles = [ques.to_dict()["title"] for ques in questions]
+   descriptions = [ques.to_dict()["description"] for ques in questions]
+
    form = QuestionForm()
    form["csrf_token"].data = request.cookies["csrf_token"]
    if form.validate_on_submit():
@@ -92,11 +96,16 @@ def update_question(id):
       question.description = request.get_json()["description"]
       question.tags = request.get_json()["tags"]
       question.updatedAt = func.now()
+
+      if question.to_dict()["title"] in titles:
+         return {"errors": "Question title should be unique"}, 400
+      if question.to_dict()["description"] in descriptions:
+         return {"errors": "Question description should be unique"}, 400
+
       db.session.commit()
       return question.to_dict()
    elif form.errors:
-      return {"errors": {"title": "Question title is required",
-    "description": "description is required"}}, 400
+      return form.errors, 400
 
 
 # Create question
@@ -124,12 +133,12 @@ def create_question():
          updatedAt = func.now()
       )
       if question.to_dict()["title"] in titles:
-         return {"errors": {"title": "title should be unique"}}, 400
+         return {"errors": "Question title should be unique"}, 400
       if question.to_dict()["description"] in descriptions:
-         return {"errors": {"description": "description should be unique"}}, 400
+         return {"errors": "Question description should be unique"}, 400
       db.session.add(question)
       db.session.commit()
       return question.to_dict()
    elif form.errors:
-      return {"errors": {"title": "Question title is required",
-    "description": "description is required"}}, 400
+      # print("form.errors from backend create question", form.errors)
+      return form.errors, 400

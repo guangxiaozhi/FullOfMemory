@@ -21,7 +21,7 @@ function CreateQuestion(){
   const sessionUser = useSelector(state => state.session.user);
   // console.log("sessionUser", sessionUser)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newQuestion = {
       title,
@@ -29,15 +29,19 @@ function CreateQuestion(){
       tags
     }
     // console.log("handle submit newQuestion", newQuestion)
-    dispatch(createQuestionThunk(newQuestion))
-      .then(() => dispatch(fetchAllQuestions()) )
-      .then(closeModal())
-      .catch(
-        async (res) => {
-            // console.log("data",res.errors)
-            if (res && res.errors) setErrors(res.errors);
-        }
-      )
+    const createdQuestionRes = await dispatch(createQuestionThunk(newQuestion))
+    // console.log("createdQuestionRes", createdQuestionRes)
+    if (typeof(createdQuestionRes) == "number"){
+      dispatch(fetchAllQuestions())
+        .then(closeModal())
+        .catch(
+          async (res) => {
+              if (res && res.errors) setErrors(res.errors);
+          })
+    }else{
+      setErrors(createdQuestionRes)
+    }
+
   }
 
   let sessionLinks
@@ -48,7 +52,7 @@ function CreateQuestion(){
         <form className='create-question-form' onSubmit={handleSubmit}>
           <ul>
               {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <li  className='question-errors-item' key={idx}>{error}</li>
               ))}
           </ul>
 

@@ -18,7 +18,7 @@ function UpdateQuestion({singleQuestion}) {
 
   const sessionUser = useSelector(state => state.session.user);
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const questionId = singleQuestion.id;
     const userId = sessionUser.id
@@ -28,16 +28,22 @@ function UpdateQuestion({singleQuestion}) {
       tags,
     }
 
-    dispatch(updateQuestionThunk(updatedQuestion,questionId))
-      .then(() => dispatch(fetchOneQuestion(questionId)))
-      .then(closeModal())
-      .catch(
-        async (res) => {
-            const data = await res.json();
-            // console.log("data", data.errors)
-            if (data && data.errors) setErrors(data.errors);
-        }
-      )
+    const updatedQuestionRes = await dispatch(updateQuestionThunk(updatedQuestion,questionId))
+
+    if(typeof(updatedQuestionRes) == "number"){
+      dispatch(fetchOneQuestion(questionId))
+        .then(closeModal())
+        .catch(
+          async (res) => {
+              // const data = await res.json();
+              // console.log("data", data.errors)
+              if (res && res.errors) setErrors(res.errors);
+          }
+        )
+    }else{
+      setErrors(updatedQuestionRes)
+    }
+
   }
 
   let sessionLinks;
@@ -53,9 +59,9 @@ function UpdateQuestion({singleQuestion}) {
             className='update-question-form'
             onSubmit={handleUpdate}
           >
-            <ul>
+            <ul className='errors-container'>
               {errors.map((error, idx) => (
-                  <li key={idx}>{error}</li>
+                  <li  className='question-errors-item' key={idx}>{error}</li>
               ))}
             </ul>
 

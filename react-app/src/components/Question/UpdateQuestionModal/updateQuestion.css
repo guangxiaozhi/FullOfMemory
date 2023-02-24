@@ -36,3 +36,7 @@
   background-color:antiquewhite;
   cursor: pointer;
 }
+
+.question-errors-item {
+  color: red;
+}
