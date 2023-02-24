@@ -73,7 +73,20 @@ export const updateQuestionThunk = (updatedQuestion,questionId) => async (dispat
   if(res.ok){
     const data = await res.json()
     dispath(updateOneQuestion(data))
-    return data
+    return data.id
+  }else {
+    const data = await res.json()
+    // console.log("errorr data from create thunk", data)
+    const result = []
+    if ("errors" in data){
+      // console.log("unique error")
+      result.push(Object.values(data))
+    }else{
+      for (let key in data) {
+      result.push([`Question ${key} is required`])
+      }
+    }
+    return result
   }
 }
 
@@ -99,6 +112,19 @@ export const createQuestionThunk = (newQuestion) => async (dispatch) => {
     const data = await res.json()
     dispatch(createOneQuestion(data))
     return data.id
+  }else {
+    const data = await res.json()
+    // console.log("errorr data from create thunk", data)
+    const result = []
+    if ("errors" in data){
+      // console.log("unique error")
+      result.push(Object.values(data))
+    }else{
+      for (let key in data) {
+      result.push([`Question ${key} is required`])
+      }
+    }
+    return result
   }
 }
 
