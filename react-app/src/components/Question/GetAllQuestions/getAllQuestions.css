@@ -1,5 +1,5 @@
 .allQuestionsList{
-  width:75%
+  width:auto
 }
 .question{
   /* border:1px solid gray; */
@@ -38,4 +38,23 @@
   border:1px solid green;
   border-radius: 5px;
   padding: 2px;
+}
+
+.create-question-button-container {
+  width:auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.creste-question-button {
+  height:25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
+}
+
+.all-question-container {
+  width:80%
 }

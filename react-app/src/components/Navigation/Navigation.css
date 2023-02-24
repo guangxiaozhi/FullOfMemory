@@ -7,7 +7,50 @@
 }
 
 .navigation {
-  width:80%;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+  margin-right:10%;
+  align-items: center;
 }
+
+.menu-list{
+  width:100px;
+  list-style-type: none;
+  margin-left: 3px;
+}
+
+.icon-list{
+  list-style-type: none;
+}
+.icon-list img{
+  width:25px;
+}
+
+.icon-menu{
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu{
+  margin:10px;
+  list-style-type: none;
+}
+
+.profile-dropdown-li button{
+  border-radius: 10px;
+  background-color:antiquewhite;
+  margin:2px;
+  cursor: pointer;
+}
+
+
+button:hover {
+  background-color: lightgray;
+}
+
+.profile-dropdown-information{
+  list-style-type: none;
+}
+

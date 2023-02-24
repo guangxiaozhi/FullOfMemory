@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateQuestionThunk, fetchOneQuestion} from '../../../store/question';
 import { useModal } from '../../../context/Modal';
-
+import './updateQuestion.css'
 
 function UpdateQuestion({singleQuestion}) {
   // console.log("update question ", singleQuestion)
@@ -48,7 +48,7 @@ function UpdateQuestion({singleQuestion}) {
 
     if(questionUserId === userId){
       sessionLinks = (
-        <>
+        <div className='update-question-container'>
           <form
             className='update-question-form'
             onSubmit={handleUpdate}
@@ -59,8 +59,8 @@ function UpdateQuestion({singleQuestion}) {
               ))}
             </ul>
 
-            <label>
-              <span>Title</span>
+            <label className='question-body-item'>
+              <span >Title:</span>
               <input
                   type="text"
                   value={title}
@@ -68,8 +68,8 @@ function UpdateQuestion({singleQuestion}) {
               />
             </label>
 
-            <label>
-              <span>Description</span>
+            <label className='question-body-item'>
+              <span>Description:</span>
               <input
                   type="text"
                   value={description}
@@ -77,8 +77,8 @@ function UpdateQuestion({singleQuestion}) {
               />
             </label>
 
-            <label>
-              <span>Tags</span>
+            <label className='question-body-item'>
+              <span>Tags:</span>
               <input
                   type="text"
                   value={tags}
@@ -86,10 +86,10 @@ function UpdateQuestion({singleQuestion}) {
               />
             </label>
 
-            <button type="submit"> Submit </button>
+            <button className="update-question-button" type="submit"> Submit </button>
 
           </form>
-        </>
+        </div>
       )
     } else {
       sessionLinks = (
@@ -109,10 +109,10 @@ function UpdateQuestion({singleQuestion}) {
 
 
   return (
-    <>
+    <div className = "container">
       <h2 className='update-question-text'>Update Question</h2>
       {sessionLinks}
-    </>
+    </div>
   )
 }
 

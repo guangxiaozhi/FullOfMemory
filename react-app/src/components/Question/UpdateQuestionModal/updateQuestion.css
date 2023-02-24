@@ -1,0 +1,38 @@
+.container{
+  width:290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.update-question-form {
+  width:270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.question-body-item {
+  display: flex;
+  padding: 0.2em 0
+}
+
+.update-question-form span {
+  width: 120px
+}
+
+.update-question-form input {
+  width: 200px;
+  height:18px
+}
+
+.update-question-button {
+  width:270px;
+  height:25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
+}
