@@ -27,5 +27,7 @@ class Answer(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'question_id': self.question_id,
-            'answer_body':self.answer_body
+            'answer_body':self.answer_body,
+            'createdAt':self.createdAt,
+            'updatedAt':self.updatedAt,
         }
