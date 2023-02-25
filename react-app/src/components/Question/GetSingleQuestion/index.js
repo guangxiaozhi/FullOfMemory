@@ -32,7 +32,9 @@ function GetSingleQuestion() {
   }
   // console.log("allId", allId)
   // console.log("sessionUser.id", sessionUser.id)
-  const isHave = allId.includes(sessionUser.id)
+  let isHave
+
+  isHave = sessionUser ? allId.includes(sessionUser.id): true
   // console.log("isHave", isHave)
   // console.log("singleQuestion????????", singleQuestion)
   const question = singleQuestion?singleQuestion:[]
