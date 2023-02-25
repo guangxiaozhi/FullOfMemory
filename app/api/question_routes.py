@@ -18,8 +18,8 @@ def delete_question(id):
    if not question:
       return {"errors": ["Question couldn't be found"]}, 404
 
-   # if not question.user_id == current_user.id:
-   #    return {"errors": ["you cann't delete the question is not owned you"]}, 403
+   if not question.user_id == current_user.id:
+      return {"errors": ["you cann't delete the question is not owned you"]}, 403
 
    db.session.delete(question)
    db.session.commit()

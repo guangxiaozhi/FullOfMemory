@@ -27,7 +27,7 @@ function GetAllQuestions() {
           {
             <div className="create-question-model-button">
               <OpenModalButton
-                buttonText="Create Question"
+                buttonText="Ask Question"
                 modalComponent={< CreateQuestion />}
               />
             </div>

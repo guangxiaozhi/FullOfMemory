@@ -20,3 +20,16 @@
   flex-direction: column;
   align-items: flex-end;
 }
+
+.delete-update-answer-container {
+  display: flex;
+}
+
+.delete-update-answer{
+  height:25px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  /* border-radius: 8px; */
+  /* background-color:antiquewhite; */
+  cursor: pointer;
+}
