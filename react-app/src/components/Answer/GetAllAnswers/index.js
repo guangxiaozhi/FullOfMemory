@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllAnswersByQuestionId, fetchDeleteAnswer } from '../../../store/answer'
+import { fetchOneQuestion } from "../../../store/question"
 import { useHistory } from "react-router-dom"
 import {Link} from 'react-router-dom'
 import './getAllAnswer.css'
@@ -30,6 +31,7 @@ export default function GetAllAnswers({questionId}) {
   const handleDelete = (answerId) => async (e) => {
     // console.log("handle delete ")
     await dispatch(fetchDeleteAnswer(answerId))
+      .then(() => dispatch(fetchOneQuestion(questionId)))
     history.push(`/questions/${questionId}`)
   }
 
