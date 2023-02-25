@@ -1,5 +1,8 @@
-.single-question-container {
+.single-question-root-container {
   width:75%;
+}
+.single-question-container {
+  width:auto;
   display: flex;
   margin:20px;
 }
@@ -41,19 +44,11 @@
 }
 
 .update-delete-button-container {
-  width:20%;
+  width:30%;
   display:flex;
   flex-direction: column;
 }
 
-/* .update-question-model-button {
-  height:25px;
-  margin-right:10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color:antiquewhite;
-  cursor: pointer;
-} */
 
 .delete-update-question button {
   height:25px;

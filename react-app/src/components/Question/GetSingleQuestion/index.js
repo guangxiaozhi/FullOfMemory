@@ -4,6 +4,7 @@ import {useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
 import OpenModalButton from "../../OpenModalButton";
 import UpdateQuestion from '../UpdateQuestionModal';
+import GetAllAnswers from '../../Answer/GetAllAnswers'
 import './singleQuestion.css'
 
 function GetSingleQuestion() {
@@ -42,8 +43,9 @@ function GetSingleQuestion() {
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
     isLoaded && (
-      <div key={question.id} className="single-question-container">
-        <div className="single-like-answer">
+      <div key={question.id} className="single-question-root-container">
+        <div className="single-question-container">
+          <div className="single-like-answer">
           <div>{question.like_count} likes</div>
           <div className='single-answer'>{question.answer_count} answers</div>
         </div>
@@ -59,6 +61,11 @@ function GetSingleQuestion() {
         <div className='update-delete-button-container'>
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""}
+        </div>
+        </div>
+
+        <div className='all-answers-owned-by-current-question'>
+          {question.answer_count? <GetAllAnswers questionId={question.id}/> : ""}
         </div>
       </div>
     )
