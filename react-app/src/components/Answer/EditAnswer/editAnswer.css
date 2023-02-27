@@ -1,0 +1,42 @@
+.update-answer-container {
+  border:1px solid grey;
+  width:290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.update-answer-form {
+  width:280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-answer-errors-item {
+  color: red;
+}
+
+.update-answer-body-item {
+  margin: 10px;
+}
+
+.update-answer-body-item-span {
+  width: 15%
+}
+
+.update-answer-body-item input {
+  width: 75%;
+  height:18px;
+  margin-left: 5px;
+}
+
+.update-answer-button {
+  width:260px;
+  height:25px;
+  margin-left:9px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
+}

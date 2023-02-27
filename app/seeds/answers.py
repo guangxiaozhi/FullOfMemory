@@ -10,7 +10,7 @@ def seed_answers():
     answer3 = Answer(
         user_id=4, question_id=3, answer_body="The fastest way is to write explicit code to create new objects of the class and assign the properties from the corresponding columns directly, that is specific to the class and DataTable and returning a List<T>.")
     answer4 = Answer(
-        user_id=2, question_id=1, answer_body="Your approximation is that the human did not jump and stayed on the ground! This contradicts the information we have that the jump lasted exactly 6 seconds")
+        user_id=2, question_id=3, answer_body="Your approximation is that the human did not jump and stayed on the ground! This contradicts the information we have that the jump lasted exactly 6 seconds")
     answer5 = Answer(
         user_id=3, question_id=1, answer_body="I disagree with y'(0) = c0 = 0. This is a human jumping. There is an initial velocity in the upwards direction when the human pushes off the ground, although its exact value is unknown. You have to deduce its value by using the fact that y' is 0 at t=3 seconds, or that y is 0 at t=6 seconds")
     answer6 = Answer(

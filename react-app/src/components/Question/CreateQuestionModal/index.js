@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal'
 
 import {createQuestionThunk, fetchAllQuestions} from '../../../store/question'
@@ -9,7 +8,6 @@ import './createQuestion.css'
 function CreateQuestion(){
 
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -91,7 +89,7 @@ function CreateQuestion(){
   }else {
     sessionLinks = (
       <h1>
-         Please log in to create the Question
+         Please log in to Ask Question
       </h1>
     )
   }
