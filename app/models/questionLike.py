@@ -15,7 +15,7 @@ class QuestionLike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("questions.id")), nullable=False)
-    like_unlike = db.Column(db.Integer, nullable=False, default=0)
+    like_unlike = db.Column(db.Integer, nullable=False)
     createdAt = db.Column(db.DateTime, nullable=False, server_default=func.now())
 
     question = db.relationship("Question", back_populates="question_likes")
