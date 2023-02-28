@@ -3,27 +3,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchAddQuestionLike, fetchDeleteQuestionLike } from '../../../store/questionLike'
 import { fetchOneQuestion } from '../../../store/question'
 import './getAllLikes.css'
-import OpenModalButton from "../../OpenModalButton"
-import { useModal } from "../../../context/Modal"
 
 export default function GetAllLikes({questionId}){
   const dispatch = useDispatch()
   const like_count = useSelector(state => state.question.singleQuestion.like_count)
 
   const [errors, setErrors] = useState([])
-  const sessionUser = useSelector(state => state.session.user)
-  const { closeModal } = useModal();
 
   const handleAddLike = async (questionId) => {
     const newQuestionLike = {
       like_unlike:1
     }
     const addLikeThunkRes = await dispatch(fetchAddQuestionLike(newQuestionLike, questionId))
-    console.log("addLikeThunkRes", addLikeThunkRes.errors)
+    // console.log("addLikeThunkRes", addLikeThunkRes.errors)
     if(typeof(addLikeThunkRes) == "number"){
       dispatch(fetchOneQuestion(questionId))
         .catch(async (res) => {
-          console.log("catch errors")
+          // console.log("catch errors")
           if(res && res.errors) setErrors(res.errors)
         });
     }else {
@@ -36,11 +32,11 @@ export default function GetAllLikes({questionId}){
       like_unlike:-1
     }
     const deleteLikeThunkRes = await dispatch(fetchDeleteQuestionLike(newQuestionLike, questionId))
-    console.log("deleteLikeThunkRes", deleteLikeThunkRes.errors)
+    // console.log("deleteLikeThunkRes", deleteLikeThunkRes.errors)
     if(typeof(deleteLikeThunkRes) == "number"){
       dispatch(fetchOneQuestion(questionId))
         .catch(async (res) => {
-          console.log("catch errors")
+          // console.log("catch errors")
           if(res && res.errors) setErrors(res.errors)
         });
     }else {
@@ -48,7 +44,7 @@ export default function GetAllLikes({questionId}){
     }
 
   }
-  console.log("errors", errors)
+  // console.log("errors", errors)
 
 
   return (

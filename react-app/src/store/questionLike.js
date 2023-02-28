@@ -30,14 +30,14 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newQuestionLike)
   })
-  console.log("res.ok", res.ok)
+  // console.log("res.ok", res.ok)
   if (res.ok){
     const questionLike = await res.json()
     dispath(addLike(questionLike))
     return questionLike.id
   }else{
     const data = await res.json()
-    console.log("add question like res.eroor", data)
+    // console.log("add question like res.eroor", data)
     return data
   }
 }
@@ -56,15 +56,15 @@ export const fetchDeleteQuestionLike = (newQuestionLike,questionId) => async (di
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newQuestionLike)
   })
-  console.log("delete question like thunk res.ok", res.ok)
+  // console.log("delete question like thunk res.ok", res.ok)
   if (res.ok){
     const questionLike = await res.json()
     dispath(deleteLike(questionLike))
     return questionLike.id
   }else{
-    console.log("delete meet error", res)
+    // console.log("delete meet error", res)
     const data = await res.json()
-    console.log("delete question like res.eroor", data)
+    // console.log("delete question like res.eroor", data)
     return data
   }
 }
@@ -80,15 +80,15 @@ export default function questionLikeReducer(state = initialState, action){
       });
       return newState
     case ADD_LIKE:
-      console.log("add likes reducer state", state)
-      console.log("add likes reducer action", action)
-      console.log("add likes reducer action.questionLike", action.questionLike)
-      console.log("add likes reducer action.questionLike.id", action.questionLike.id)
+      // console.log("add likes reducer state", state)
+      // console.log("add likes reducer action", action)
+      // console.log("add likes reducer action.questionLike", action.questionLike)
+      // console.log("add likes reducer action.questionLike.id", action.questionLike.id)
       newState[`${action.questionLike.id}`] = action.questionLike
       return newState
 
     case DELETE_LIKE:
-      console.log("delete likes question reducer state", state)
+      // console.log("delete likes question reducer state", state)
       newState[`${action.questionLike.id}`] = action.questionLike
       return newState
 
