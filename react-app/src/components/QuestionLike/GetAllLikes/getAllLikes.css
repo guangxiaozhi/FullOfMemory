@@ -1,0 +1,31 @@
+.all-question-likes-container img{
+  width: 30px;
+  height: 15px;
+  margin-top: 4px;
+  margin-right: 12px;
+}
+
+.single-question-upside-down {
+  transform: scaleY(-1);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tootip .tooltiptext {
+  visibility: hidden;
+}
+
+.tootip:hover .tooltiptext{
+  visibility: visible;
+}
+
+/* .tooltiptext {
+  display: none;
+}
+
+.tooltip:hover + tooltiptext {
+  display: block;
+} */

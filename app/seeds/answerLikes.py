@@ -3,15 +3,15 @@ from app.models import db, AnswerLike, environment, SCHEMA
 
 # Adds a demo user, you can add other users here if you want
 def seed_answer_likes():
-    answer_like1 = AnswerLike(user_id=1, answer_id=2)
-    answer_like2 = AnswerLike(user_id=2, answer_id=3)
-    answer_like3 = AnswerLike(user_id=3, answer_id=1)
-    answer_like4 = AnswerLike(user_id=4, answer_id=2)
-    answer_like5 = AnswerLike(user_id=5, answer_id=3)
-    answer_like6 = AnswerLike(user_id=5, answer_id=1)
-    answer_like7 = AnswerLike(user_id=6, answer_id=1)
-    answer_like8 = AnswerLike(user_id=7, answer_id=2)
-    answer_like9 = AnswerLike(user_id=8, answer_id=1)
+    answer_like1 = AnswerLike(user_id=1, answer_id=2, like_unlike=1)
+    answer_like2 = AnswerLike(user_id=2, answer_id=3, like_unlike=1)
+    answer_like3 = AnswerLike(user_id=3, answer_id=1, like_unlike=1)
+    answer_like4 = AnswerLike(user_id=4, answer_id=2, like_unlike=1)
+    answer_like5 = AnswerLike(user_id=5, answer_id=3, like_unlike=1)
+    answer_like6 = AnswerLike(user_id=5, answer_id=1, like_unlike=1)
+    answer_like7 = AnswerLike(user_id=6, answer_id=1, like_unlike=1)
+    answer_like8 = AnswerLike(user_id=7, answer_id=2, like_unlike=1)
+    answer_like9 = AnswerLike(user_id=8, answer_id=1, like_unlike=1)
 
     answer_like_lists = [answer_like1, answer_like2, answer_like3, answer_like4, answer_like5, answer_like6, answer_like7, answer_like8, answer_like9]
     added_answer_like = [db.session.add(like) for like in answer_like_lists]

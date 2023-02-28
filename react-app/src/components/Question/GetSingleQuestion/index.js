@@ -2,16 +2,19 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
+import { fetchAddQuestionLike } from '../../../store/questionLike'
 import OpenModalButton from "../../OpenModalButton";
 import UpdateQuestion from '../UpdateQuestionModal';
 import GetAllAnswers from '../../Answer/GetAllAnswers'
 import AnswerQuestion from '../../Answer/AnserQuestionModal'
+import GetAllLikes from '../../QuestionLike/GetAllLikes'
 import './singleQuestion.css'
 
 function GetSingleQuestion() {
   const dispatch = useDispatch();
   const history = useHistory();
   const {questionId} = useParams();
+  const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -32,10 +35,10 @@ function GetSingleQuestion() {
   }
   // console.log("allId", allId)
   // console.log("sessionUser.id", sessionUser.id)
-  let isHave
+  let hasAnswer
 
-  isHave = sessionUser ? allId.includes(sessionUser.id): true
-  // console.log("isHave", isHave)
+  hasAnswer = sessionUser ? allId.includes(sessionUser.id): true
+  // console.log("hasAnswer", hasAnswer)
   // console.log("singleQuestion????????", singleQuestion)
   const question = singleQuestion?singleQuestion:[]
   // console.log("???????? question", question)
@@ -58,13 +61,15 @@ function GetSingleQuestion() {
     history.push(`/questions/${questionId}/update`)
   }
 
+
+
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
     isLoaded && (
       <div key={question.id} className="single-question-root-container">
         <div className="single-question-container">
           <div className="single-like-answer">
-          <div>{question.like_count} likes</div>
+          <div> <GetAllLikes questionId = {question.id}/> </div>
           <div className='single-answer'>{question.answer_count} answers</div>
         </div>
         <div className='single-question-body'>
@@ -75,7 +80,7 @@ function GetSingleQuestion() {
           </div>
           <div className='single-description'> {question.description}</div>
           <div className="tags">{question.tags}</div>
-          <div>{sessionUser && question.user_id !== sessionUser.id && !isHave? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div>
+          <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div>
         </div>
         <div className='update-delete-button-container'>
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
