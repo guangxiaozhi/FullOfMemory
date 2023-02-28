@@ -13,3 +13,45 @@
 .all-answer-likes-container{
   width: 70px;
 }
+
+.answer-like-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.answer-like-tooltiptext {
+  width: 200px;
+  position: absolute;
+  font-size: 15px;
+  visibility: hidden;
+}
+
+.answer-like-tooltip:hover .answer-like-tooltiptext{
+  visibility: visible;
+}
+
+
+
+.single-answer-upside {
+  cursor: pointer;
+}
+
+.answer-unlike-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.answer-unlike-tooltiptext {
+  width: 200px;
+  position: absolute;
+  font-size: 15px;
+  visibility: hidden;
+}
+
+.answer-unlike-tooltip:hover .answer-unlike-tooltiptext{
+  visibility: visible;
+}
+
+.single-answer-upside-down {
+  cursor: pointer;
+}

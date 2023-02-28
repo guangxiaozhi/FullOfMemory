@@ -126,7 +126,7 @@ def get_likes_by_answerId(answerId):
 @login_required
 def add_like_by_answerId(answerId):
   like = AnswerLike.query.filter(AnswerLike.user_id == current_user.id, AnswerLike.answer_id == answerId).all()
-  print("len(likes)", len(like))
+  # print("len(likes)", len(like))
 
   if len(like):
     if like[0].like_unlike == 1:
@@ -144,15 +144,15 @@ def add_like_by_answerId(answerId):
 
     db.session.add(newLike)
     db.session.commit()
-    print("newLike.to_dict()", newLike.to_dict())
+    # print("newLike.to_dict()", newLike.to_dict())
     return newLike.to_dict()
 
 # delete one like on one answer
-@answer_routes.route('/<int:answerId>/likes', methods = ["DELETE"])
+@answer_routes.route('/<int:answerId>/unlikes', methods = ["POST"])
 @login_required
 def delete_like_by_answerId(answerId):
   like = AnswerLike.query.filter(AnswerLike.user_id == current_user.id, AnswerLike.answer_id == answerId).all()
-  print("len(likes)", len(like))
+  # print("len(likes)", len(like))
 
   if len(like):
     if like[0].like_unlike == -1:
@@ -170,5 +170,5 @@ def delete_like_by_answerId(answerId):
 
     db.session.add(newLike)
     db.session.commit()
-    print("newLike.to_dict()", newLike.to_dict())
+    # print("newLike.to_dict()", newLike.to_dict())
     return newLike.to_dict()

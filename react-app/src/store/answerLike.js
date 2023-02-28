@@ -30,14 +30,14 @@ export const fetchAddAnswerLike = (newAnswerLike, answerId) => async (dispath) =
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newAnswerLike)
   })
-  console.log("fetch add answer like res.ok", res.ok)
+  // console.log("fetch add answer like res.ok", res.ok)
   if (res.ok){
     const answerLike = await res.json()
     dispath(addLike(answerLike))
     return answerLike.id
   }else{
     const data = await res.json()
-    console.log("add thunk res.eroor", await data)
+    // console.log("add thunk res.eroor", await data)
     return data
   }
 }
@@ -51,20 +51,20 @@ const deleteAnswerLike = (answerLike) => {
 }
 
 export const fetchDeleteAnswerLike = (newAnswerLike, answerId) => async (dispath) => {
-  const res = await fetch(`/api/answers/${answerId}/likes`, {
-    method:"DELETE",
+  const res = await fetch(`/api/answers/${answerId}/unlikes`, {
+    method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newAnswerLike)
   })
-  console.log("delete answerLike thunk res.ok", res.ok)
+  // console.log("delete answerLike thunk res.ok", res.ok)
   if (res.ok){
     const answerLike = await res.json()
-    console.log("deleted answerLike", answerLike)
+    // console.log("deleted answerLike", answerLike)
     dispath(deleteAnswerLike(answerLike))
     return answerLike.id
   }else{
     const data = await res.json()
-    console.log("res.eroor", await data)
+    // console.log("res.eroor", await data)
     return data
   }
 }
@@ -80,15 +80,15 @@ export default function answerLikeReducer(state = initialState, action){
       return newState
 
     case ADD_LIKE:
-      console.log("add likes answerLike reducer state", state)
-      console.log("add likes answerLike reducer action", action)
-      console.log("add likes answerLike reducer action.questionLike", action.answerLike)
-      console.log("add likes answerLike reducer action.questionLike.id", action.answerLike.id)
+      // console.log("add likes answerLike reducer state", state)
+      // console.log("add likes answerLike reducer action", action)
+      // console.log("add likes answerLike reducer action.questionLike", action.answerLike)
+      // console.log("add likes answerLike reducer action.questionLike.id", action.answerLike.id)
       newState[`${action.answerLike.id}`] = action.answerLike
       return newState
 
     case DELETE_LIKE:
-      console.log("delete likes answerLike reducer state", state)
+      // console.log("delete likes answerLike reducer state", state)
       // console.log("delete likes reducer action", action)
       // console.log("delete likes reducer action.questionLike", action.answerLike)
       // console.log("delete likes reducer action.questionLike.id", action.answerLike.id)

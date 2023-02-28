@@ -166,9 +166,9 @@ def get_likes(questionId):
 @question_routes.route('/<int:questionId>/likes', methods=["POST"])
 @login_required
 def add_like(questionId):
-   print("start backend add like")
+   # print("start backend add like")
    like = QuestionLike.query.filter(QuestionLike.user_id == current_user.id, QuestionLike.question_id == questionId).all()
-   print("len(likes)", len(like))
+   # print("len(likes)", len(like))
 
    if len(like):
       if like[0].like_unlike == 1:
@@ -186,16 +186,16 @@ def add_like(questionId):
 
       db.session.add(newLike)
       db.session.commit()
-      print("newLike.to_dict()", newLike.to_dict())
+      # print("newLike.to_dict()", newLike.to_dict())
       return newLike.to_dict()
 
 
 # remove like by question id:
-@question_routes.route('/<int:questionId>/likes', methods=["DELETE"])
+@question_routes.route('/<int:questionId>/unlikes', methods=["POST"])
 @login_required
 def remove_like(questionId):
    like = QuestionLike.query.filter(QuestionLike.user_id == current_user.id, QuestionLike.question_id == questionId).all()
-   print("delete like")
+   # print("delete like")
    if len(like):
       if like[0].like_unlike == -1:
          return {"errors": "you already unliked this question"}, 403
@@ -212,5 +212,5 @@ def remove_like(questionId):
 
       db.session.add(newLike)
       db.session.commit()
-      print("newLike.to_dict()", newLike.to_dict())
+      # print("newLike.to_dict()", newLike.to_dict())
       return newLike.to_dict()
