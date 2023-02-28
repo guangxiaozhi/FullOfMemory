@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchAddQuestionLike, fetchDeleteQuestionLike } from '../../../store/questionLike'
 import { fetchOneQuestion } from '../../../store/question'
 import './getAllLikes.css'
+import OpenModalButton from "../../OpenModalButton"
+import { useModal } from "../../../context/Modal"
 
 export default function GetAllLikes({questionId}){
   const dispatch = useDispatch()
@@ -10,6 +12,7 @@ export default function GetAllLikes({questionId}){
 
   const [errors, setErrors] = useState([])
   const sessionUser = useSelector(state => state.session.user)
+  const { closeModal } = useModal();
 
   const handleAddLike = async (questionId) => {
     const newQuestionLike = {
@@ -48,6 +51,9 @@ export default function GetAllLikes({questionId}){
 
   }
   console.log("errors", errors)
+  const handleClick = (e) => async ()=> {
+    closeModal()
+  }
 
   return (
     <div className="all-question-likes-container">
@@ -55,6 +61,7 @@ export default function GetAllLikes({questionId}){
         {errors.map((error, idx) => (
             <li  className='answer-question-errors-item' key={idx}>{error}</li>
         ))}
+        {errors.length > 0 ? <OpenModalButton onClick ={handleClick} buttonText = {`${errors}`}/>: ""}
       </ul>
       <div className="tooltip">
         <img src="https://emojis.wiki/thumbs/emojis/eject-button.webp" alt="" className="single-question-upside" onClick={ () => handleAddLike(questionId)} />
