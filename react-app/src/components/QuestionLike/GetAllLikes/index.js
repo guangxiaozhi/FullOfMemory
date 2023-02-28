@@ -1,19 +1,17 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
 import { fetchAddQuestionLike, fetchDeleteQuestionLike } from '../../../store/questionLike'
 import { fetchOneQuestion } from '../../../store/question'
 import './getAllLikes.css'
 
 export default function GetAllLikes({questionId}){
   const dispatch = useDispatch()
-  const history = useHistory()
   const like_count = useSelector(state => state.question.singleQuestion.like_count)
 
   const [errors, setErrors] = useState([])
+  const sessionUser = useSelector(state => state.session.user)
 
   const handleAddLike = async (questionId) => {
-    // need complish
     const newQuestionLike = {
       like_unlike:1
     }
@@ -29,11 +27,10 @@ export default function GetAllLikes({questionId}){
       setErrors([addLikeThunkRes.errors])
     }
 
+
   }
 
   const handleDeleteLike = async (questionId) => {
-    // need complish
-    // history.push(`/questions/${questionId}`)
     const newQuestionLike = {
       like_unlike:-1
     }

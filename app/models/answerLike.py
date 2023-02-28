@@ -24,6 +24,7 @@ class AnswerLike(db.Model):
         return {
             'id': self.id,
             'answer_id': self.answer_id,
-            'createdAt': self.createdAt,
-            'like_unlike': self.like_unlike
+            'user_id':self.user_id,
+            'like_unlike': self.like_unlike,
+            'createdAt': self.createdAt
         }

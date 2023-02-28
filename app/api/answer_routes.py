@@ -23,15 +23,16 @@ def get_answers_by_questionId(questionId):
   data = []
   for answer in answers:
     user = User.query.filter(User.id == answer.user_id).all()
-    like_count = len(AnswerLike.query.filter(AnswerLike.answer_id == answer.id, AnswerLike.like_unlike == 1).all())
-    unlike_count = len(AnswerLike.query.filter(AnswerLike.answer_id == answer.id, AnswerLike.like_unlike == 0).all())
-    # like_count = AnswerLike.query.filter(AnswerLike.answer_id == answer.id).all()
+    answer_likes = AnswerLike.query.filter(AnswerLike.answer_id == answer.id).all()
+    like_count = 0
+    for like in answer_likes:
+      like_count = like_count + like.like_unlike
     # print("user by answer user_id", user[0].to_dict())
     # print("answer by question id", answer.to_dict())
     answerInfo = {}
     answerInfo.update(answer.to_dict())
     answerInfo["user"]=user[0].to_dict()
-    answerInfo["like_count"] = like_count - unlike_count
+    answerInfo["like_count"] = like_count
     # print("answerInfo",answerInfo)
     data.append(answerInfo)
   # print("data", data)
@@ -111,7 +112,63 @@ def delete_answer(answerId):
   return {"message": ["Successfully deleted"]},200
 
 
+#get all likes by answerId
+@answer_routes.route('/<int:answerId>/likes', methods=["GET"])
+def get_likes_by_answerId(answerId):
+  likes = AnswerLike.query.filter(AnswerLike.answer_id == answerId).all()
+  if not likes:
+    return {"message": ["current answer doesn't have likes now"]}
+
+  return {"likes":[like.to_dict() for like in likes]}
+
+# add like on one answer
 @answer_routes.route('/<int:answerId>/likes', methods = ["POST"])
 @login_required
 def add_like_by_answerId(answerId):
-  pass
+  like = AnswerLike.query.filter(AnswerLike.user_id == current_user.id, AnswerLike.answer_id == answerId).all()
+  print("len(likes)", len(like))
+
+  if len(like):
+    if like[0].like_unlike == 1:
+        return {"errors": "you already liked this answer"}, 403
+    elif like[0].like_unlike < 1:
+        like[0].like_unlike = like[0].like_unlike + 1
+        db.session.commit()
+        return like[0].to_dict()
+  else:
+    newLike = AnswerLike(
+        user_id = current_user.id,
+        answer_id = answerId,
+        like_unlike = request.get_json()["like_unlike"],
+    )
+
+    db.session.add(newLike)
+    db.session.commit()
+    print("newLike.to_dict()", newLike.to_dict())
+    return newLike.to_dict()
+
+# delete one like on one answer
+@answer_routes.route('/<int:answerId>/likes', methods = ["DELETE"])
+@login_required
+def delete_like_by_answerId(answerId):
+  like = AnswerLike.query.filter(AnswerLike.user_id == current_user.id, AnswerLike.answer_id == answerId).all()
+  print("len(likes)", len(like))
+
+  if len(like):
+    if like[0].like_unlike == -1:
+        return {"errors": "you already unliked this answer"}, 403
+    elif like[0].like_unlike > -1:
+        like[0].like_unlike = like[0].like_unlike - 1
+        db.session.commit()
+        return like[0].to_dict()
+  else:
+    newLike = AnswerLike(
+        user_id = current_user.id,
+        answer_id = answerId,
+        like_unlike = request.get_json()["like_unlike"],
+    )
+
+    db.session.add(newLike)
+    db.session.commit()
+    print("newLike.to_dict()", newLike.to_dict())
+    return newLike.to_dict()

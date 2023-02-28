@@ -9,7 +9,7 @@
   transform: scaleY(-1);
 }
 
-.tootip {
+.tooltip {
   position: relative;
   display: inline-block;
 }
@@ -21,3 +21,11 @@
 .tootip:hover .tooltiptext{
   visibility: visible;
 }
+
+/* .tooltiptext {
+  display: none;
+}
+
+.tooltip:hover + tooltiptext {
+  display: block;
+} */

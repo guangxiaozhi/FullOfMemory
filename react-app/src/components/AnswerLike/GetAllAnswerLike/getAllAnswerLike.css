@@ -1,0 +1,15 @@
+.all-answer-likes-container img{
+  width: 30px;
+  height: 15px;
+  margin-top: 4px;
+  margin-right: 12px;
+}
+
+.single-answer-upside-down {
+  transform: scaleY(-1);
+}
+
+
+.all-answer-likes-container{
+  width: 70px;
+}

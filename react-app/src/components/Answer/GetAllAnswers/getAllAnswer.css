@@ -5,11 +5,7 @@
   margin: 20px;
 }
 
-.single-answer-likes {
-  width: 10%;
-  display: flex;
-  align-items: center;
-}
+
 
 .single-answer-body-container {
   width:80%

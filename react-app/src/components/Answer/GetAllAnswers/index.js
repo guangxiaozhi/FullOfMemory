@@ -4,6 +4,7 @@ import { fetchAllAnswersByQuestionId, fetchDeleteAnswer } from '../../../store/a
 import { fetchOneQuestion } from "../../../store/question"
 import { useHistory } from "react-router-dom"
 import {Link} from 'react-router-dom'
+import GetAllAnswerLikes from "../../AnswerLike/GetAllAnswerLike"
 import './getAllAnswer.css'
 
 export default function GetAllAnswers({questionId}) {
@@ -44,9 +45,10 @@ export default function GetAllAnswers({questionId}) {
         {
           answers.map(answer => (
             <div key={answer.id} className="single-answer-container">
-              <div className="single-answer-likes">
+              {/* <div className="single-answer-likes">
                 {answer.like_count} likes
-              </div>
+              </div> */}
+              <div> <GetAllAnswerLikes answer={answer} questionId={questionId}/></div>
               <div className="single-answer-body-container">
                 <div className="single-answer-body">
                   {answer.answer_body}

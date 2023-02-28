@@ -33,13 +33,15 @@ def get_all_question():
     data = []
     for question in questions:
       answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
-      like_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id, QuestionLike.like_unlike == 1).all())
-      unlike_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id, QuestionLike.like_unlike == 0).all())
+      question_likes = QuestionLike.query.filter(QuestionLike.question_id ==question.id).all()
+      like_count = 0
+      for like in question_likes:
+         like_count = like_count + like.like_unlike
       # print("answer_count", answer_count)
       questionInfo = {}
       questionInfo.update(question.to_dict())
       questionInfo["answer_count"] = answer_count
-      questionInfo["like_count"] = like_count - unlike_count
+      questionInfo["like_count"] = like_count
       data.append(questionInfo)
     return data
 

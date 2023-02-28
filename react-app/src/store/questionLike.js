@@ -87,6 +87,7 @@ export default function questionLikeReducer(state = initialState, action){
       return newState
 
     case DELETE_LIKE:
+      console.log("delete likes question reducer state", state)
       newState[`${action.questionLike.id}`] = action.questionLike
       return newState
 
