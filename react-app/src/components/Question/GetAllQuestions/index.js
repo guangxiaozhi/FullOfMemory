@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import {fetchAllQuestions} from '../../../store/question'
+import { useHistory } from "react-router-dom"
+import { fetchAllQuestions, fetchOneQuestion } from '../../../store/question'
 import { Link } from "react-router-dom";
 import OpenModalButton from '../../OpenModalButton'
 import CreateQuestion from "../CreateQuestionModal";
@@ -16,9 +17,11 @@ function GetAllQuestions() {
   const allquestions = allQuestionsObj ? Object.values(allQuestionsObj):[];
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
+  const history = useHistory()
   useEffect(() => {
     dispatch(fetchAllQuestions()).then(() => setIsLoaded(true))
   }, [dispatch])
+
 
   return (
     isLoaded && (
@@ -38,7 +41,9 @@ function GetAllQuestions() {
             allquestions.map(question => (
               <div key={question.id} className="question">
                 <div className="like-answer">
+
                   <div>{question.like_count} likes</div>
+
                   <div className="answer">{question.answer_count} answers</div>
                 </div>
                 <div className="question-body">

@@ -33,12 +33,13 @@ def get_all_question():
     data = []
     for question in questions:
       answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
-      like_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id).all())
+      like_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id, QuestionLike.like_unlike == 1).all())
+      unlike_count = len(QuestionLike.query.filter(QuestionLike.question_id ==question.id, QuestionLike.like_unlike == 0).all())
       # print("answer_count", answer_count)
       questionInfo = {}
       questionInfo.update(question.to_dict())
       questionInfo["answer_count"] = answer_count
-      questionInfo["like_count"] = like_count
+      questionInfo["like_count"] = like_count - unlike_count
       data.append(questionInfo)
     return data
 
@@ -51,24 +52,29 @@ def get_question_by_id(id):
    if not question:
       return {"errors": ["question couldn't be found"]}, 404
 
-   like_count = len(QuestionLike.query.filter(QuestionLike.question_id == question.id).all())
+   question_likes = QuestionLike.query.filter(QuestionLike.question_id ==question.id).all()
+   like_count = 0
+   for like in question_likes:
+      like_count = like_count + like.like_unlike
    answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
    questionInfo = {"answer_count":answer_count, "like_count": like_count}
    questionInfo.update(question.to_dict())
 
    return questionInfo
 
-# Get current user's questions and answers
+# Get current user's questions
 @question_routes.route('/current')
 @login_required
 def get_questions_by_current_user():
    questions = Question.query.filter(Question.user_id == current_user.id).all()
+   # if not questions:
+   #    return {"errors": ["current user doesn't have question"]}, 404
    questions_data = {question.id: question.to_dict() for question in questions}
    data = {}
    data["questions"] = questions_data
-   answers = Answer.query.filter(Answer.user_id == current_user.id).all()
-   answers_data = {answer.id:answer.to_dict() for answer in answers}
-   data["answers"] = answers_data
+   # answers = Answer.query.filter(Answer.user_id == current_user.id).all()
+   # answers_data = {answer.id:answer.to_dict() for answer in answers}
+   # data["answers"] = answers_data
    data["user"] = current_user.to_dict()
 
    return data
@@ -142,3 +148,67 @@ def create_question():
    elif form.errors:
       # print("form.errors from backend create question", form.errors)
       return form.errors, 400
+
+
+#get all likes by questionId
+@question_routes.route('/<int:questionId>/likes', methods=["GET"])
+def get_likes(questionId):
+   likes = QuestionLike.query.filter(QuestionLike.question_id == questionId).all()
+   if not likes:
+      return {"message": ["current question doesn't have likes now"]}
+
+   return {"likes":[like.to_dict() for like in likes]}
+
+
+# add like to one question
+@question_routes.route('/<int:questionId>/likes', methods=["POST"])
+@login_required
+def add_like(questionId):
+   print("start backend add like")
+   like = QuestionLike.query.filter(QuestionLike.user_id == current_user.id, QuestionLike.question_id == questionId).all()
+   print("len(likes)", len(like))
+
+   if len(like):
+      if like[0].like_unlike == 1:
+         return {"errors": "you already liked this question"}, 403
+      elif like[0].like_unlike < 1:
+         like[0].like_unlike = like[0].like_unlike + 1
+         db.session.commit()
+         return like[0].to_dict()
+   else:
+      newLike = QuestionLike(
+         user_id = current_user.id,
+         question_id = questionId,
+         like_unlike = request.get_json()["like_unlike"],
+      )
+
+      db.session.add(newLike)
+      db.session.commit()
+      print("newLike.to_dict()", newLike.to_dict())
+      return newLike.to_dict()
+
+
+# remove like by question id:
+@question_routes.route('/<int:questionId>/likes', methods=["DELETE"])
+@login_required
+def remove_like(questionId):
+   like = QuestionLike.query.filter(QuestionLike.user_id == current_user.id, QuestionLike.question_id == questionId).all()
+   print("delete like")
+   if len(like):
+      if like[0].like_unlike == -1:
+         return {"errors": "you already unliked this question"}, 403
+      elif like[0].like_unlike > -1:
+         like[0].like_unlike = like[0].like_unlike - 1
+         db.session.commit()
+         return like[0].to_dict()
+   else:
+      newLike = QuestionLike(
+         user_id = current_user.id,
+         question_id = questionId,
+         like_unlike = request.get_json()["like_unlike"],
+      )
+
+      db.session.add(newLike)
+      db.session.commit()
+      print("newLike.to_dict()", newLike.to_dict())
+      return newLike.to_dict()

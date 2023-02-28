@@ -22,6 +22,7 @@ class Question(db.Model):
 
     user = db.relationship("User", back_populates="questions")
     question_likes = db.relationship("QuestionLike", back_populates="question", cascade="all, delete")
+    answers = db.relationship("Answer", back_populates="question", cascade="all, delete")
 
     def to_dict(self):
         return {

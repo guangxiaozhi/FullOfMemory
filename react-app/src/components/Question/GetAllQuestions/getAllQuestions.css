@@ -71,3 +71,15 @@ a:hover { text-decoration: none; }
 
 
 a:active { text-decoration: none; } */
+
+
+.like-answer img {
+  width: 26px;
+  height: 13px;
+  margin-top: 4px;
+  margin-right: 12px;
+}
+
+.upside-down {
+  transform: scaleY(-1);
+}

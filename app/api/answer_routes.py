@@ -23,13 +23,15 @@ def get_answers_by_questionId(questionId):
   data = []
   for answer in answers:
     user = User.query.filter(User.id == answer.user_id).all()
-    likes = AnswerLike.query.filter(AnswerLike.answer_id == answer.id).all()
+    like_count = len(AnswerLike.query.filter(AnswerLike.answer_id == answer.id, AnswerLike.like_unlike == 1).all())
+    unlike_count = len(AnswerLike.query.filter(AnswerLike.answer_id == answer.id, AnswerLike.like_unlike == 0).all())
+    # like_count = AnswerLike.query.filter(AnswerLike.answer_id == answer.id).all()
     # print("user by answer user_id", user[0].to_dict())
     # print("answer by question id", answer.to_dict())
     answerInfo = {}
     answerInfo.update(answer.to_dict())
     answerInfo["user"]=user[0].to_dict()
-    answerInfo["like_count"] = len(likes)
+    answerInfo["like_count"] = like_count - unlike_count
     # print("answerInfo",answerInfo)
     data.append(answerInfo)
   # print("data", data)
@@ -107,3 +109,9 @@ def delete_answer(answerId):
   db.session.delete(answer)
   db.session.commit()
   return {"message": ["Successfully deleted"]},200
+
+
+@answer_routes.route('/<int:answerId>/likes', methods = ["POST"])
+@login_required
+def add_like_by_answerId(answerId):
+  pass
