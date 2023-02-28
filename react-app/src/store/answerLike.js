@@ -51,8 +51,8 @@ const deleteAnswerLike = (answerLike) => {
 }
 
 export const fetchDeleteAnswerLike = (newAnswerLike, answerId) => async (dispath) => {
-  const res = await fetch(`/api/answers/${answerId}/likes`, {
-    method:"DELETE",
+  const res = await fetch(`/api/answers/${answerId}/unlikes`, {
+    method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newAnswerLike)
   })

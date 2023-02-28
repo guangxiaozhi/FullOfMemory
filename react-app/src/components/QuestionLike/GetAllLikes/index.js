@@ -29,8 +29,6 @@ export default function GetAllLikes({questionId}){
     }else {
       setErrors([addLikeThunkRes.errors])
     }
-
-
   }
 
   const handleDeleteLike = async (questionId) => {
@@ -38,7 +36,7 @@ export default function GetAllLikes({questionId}){
       like_unlike:-1
     }
     const deleteLikeThunkRes = await dispatch(fetchDeleteQuestionLike(newQuestionLike, questionId))
-
+    console.log("deleteLikeThunkRes", deleteLikeThunkRes.errors)
     if(typeof(deleteLikeThunkRes) == "number"){
       dispatch(fetchOneQuestion(questionId))
         .catch(async (res) => {
@@ -51,25 +49,23 @@ export default function GetAllLikes({questionId}){
 
   }
   console.log("errors", errors)
-  const handleClick = (e) => async ()=> {
-    closeModal()
-  }
+
 
   return (
     <div className="all-question-likes-container">
-      <ul className='answer-question-errors-container'>
+      <ul className='answer-question-errors-container' >
         {errors.map((error, idx) => (
-            <li  className='answer-question-errors-item' key={idx}>{error}</li>
+            <div  className='answer-question-errors-item' onClick ={() => setErrors([])} key={idx}>{error}</div>
         ))}
-        {errors.length > 0 ? <OpenModalButton onClick ={handleClick} buttonText = {`${errors}`}/>: ""}
       </ul>
-      <div className="tooltip">
+      <div className="like-tooltip">
         <img src="https://emojis.wiki/thumbs/emojis/eject-button.webp" alt="" className="single-question-upside" onClick={ () => handleAddLike(questionId)} />
-        <span className="tooltiptext">like this question?</span>
+        <span className="like-tooltiptext">like?</span>
       </div>
       <div> {like_count} likes</div>
-      <div>
+      <div className="unlike-tooltip">
         <img src="https://emojis.wiki/thumbs/emojis/eject-button.webp" alt="" className="single-question-upside-down" onClick={ () => handleDeleteLike(questionId)} />
+        <span className="unlike-tooltiptext">unlike?</span>
       </div>
     </div>
   )

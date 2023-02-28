@@ -37,7 +37,7 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     return questionLike.id
   }else{
     const data = await res.json()
-    console.log("res.eroor", await data)
+    console.log("add question like res.eroor", data)
     return data
   }
 }
@@ -51,19 +51,20 @@ const deleteLike = (questionLike) => {
 }
 
 export const fetchDeleteQuestionLike = (newQuestionLike,questionId) => async (dispath) => {
-  const res = await fetch(`/api/questions/${questionId}/likes`, {
-    method:"DELETE",
+  const res = await fetch(`/api/questions/${questionId}/unlikes`, {
+    method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newQuestionLike)
   })
-  console.log("res.ok", res.ok)
+  console.log("delete question like thunk res.ok", res.ok)
   if (res.ok){
     const questionLike = await res.json()
     dispath(deleteLike(questionLike))
     return questionLike.id
   }else{
+    console.log("delete meet error", res)
     const data = await res.json()
-    console.log("res.eroor", await data)
+    console.log("delete question like res.eroor", data)
     return data
   }
 }

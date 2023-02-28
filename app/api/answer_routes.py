@@ -148,7 +148,7 @@ def add_like_by_answerId(answerId):
     return newLike.to_dict()
 
 # delete one like on one answer
-@answer_routes.route('/<int:answerId>/likes', methods = ["DELETE"])
+@answer_routes.route('/<int:answerId>/unlikes', methods = ["POST"])
 @login_required
 def delete_like_by_answerId(answerId):
   like = AnswerLike.query.filter(AnswerLike.user_id == current_user.id, AnswerLike.answer_id == answerId).all()

@@ -191,7 +191,7 @@ def add_like(questionId):
 
 
 # remove like by question id:
-@question_routes.route('/<int:questionId>/likes', methods=["DELETE"])
+@question_routes.route('/<int:questionId>/unlikes', methods=["POST"])
 @login_required
 def remove_like(questionId):
    like = QuestionLike.query.filter(QuestionLike.user_id == current_user.id, QuestionLike.question_id == questionId).all()

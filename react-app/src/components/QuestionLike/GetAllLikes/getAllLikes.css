@@ -9,25 +9,44 @@
   transform: scaleY(-1);
 }
 
-.tooltip {
+.like-tooltip {
   position: relative;
   display: inline-block;
 }
 
-.tootip .tooltiptext {
+.like-tooltiptext {
+  width: 200px;
   position: absolute;
-
+  font-size: 15px;
   visibility: hidden;
 }
 
-.tootip:hover .tooltiptext{
+.like-tooltip:hover .like-tooltiptext{
   visibility: visible;
 }
 
-/* .tooltiptext {
-  display: none;
+
+
+.single-question-upside {
+  cursor: pointer;
 }
 
-.tooltip:hover + tooltiptext {
-  display: block;
-} */
+.unlike-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.unlike-tooltiptext {
+  width: 200px;
+  position: absolute;
+  font-size: 15px;
+  visibility: hidden;
+}
+
+.unlike-tooltip:hover .unlike-tooltiptext{
+  visibility: visible;
+}
+
+.single-question-upside-down {
+  cursor: pointer;
+}
