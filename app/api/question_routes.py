@@ -224,4 +224,14 @@ def remove_like(questionId):
 @user_routes.route('/<int:userId>/questions')
 def get_questions_by_userId(userId):
    questions = Question.query.filter(Question.user_id == userId).all()
-   return [question.to_dict() for question in questions]
+   for question in questions:
+      question_likes = QuestionLike.query.filter(QuestionLike.question_id == question.id)
+      data = []
+      like_count = 0
+      for like in question_likes:
+         like_count = like_count + like.like_unlike
+      questionInfo = {}
+      questionInfo.update(question.to_dict())
+      questionInfo["like_count"] = like_count
+      data.append(questionInfo)
+   return data

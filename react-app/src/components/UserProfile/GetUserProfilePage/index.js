@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { fetchUserProfileInfo } from "../../../store/userProfile"
 import './getUserProfile.css'
 
@@ -26,7 +26,7 @@ export default function UserProfilePage(){
   })
 
   const questions = currentProfileUserQuestions? Object.values(currentProfileUserQuestions):[]
-  console.log("real questions from userProfile", questions)
+  console.log("real questions from userProfile", Array.isArray(questions), questions)
 
   const currentProfileUserAnswers = useSelector(state => {
     console.log("answers from userProfile", state.userProfile.answers)
@@ -34,6 +34,7 @@ export default function UserProfilePage(){
   })
 
   const answers = currentProfileUserAnswers? Object.values(currentProfileUserAnswers):[]
+  console.log("real answers from userProfile", Array.isArray(answers), answers)
 
   useEffect(() => {
     dispatch(fetchUserProfileInfo(userId)).then(() => {
@@ -42,7 +43,7 @@ export default function UserProfilePage(){
   }, [dispatch])
 
 
-  const options = { year: 'numeric', month: 'numeric', day:'numeric' };
+  const options = { year: 'numeric', month: 'long', day:'numeric' };
 
   return (
     isLoaded && (
@@ -60,11 +61,25 @@ export default function UserProfilePage(){
         </div>
         <div className="answers-questions">
           <div className="questions">
-            {questions.map(question => {
-              <div>{question["title"]}</div>
-            })}
+            <h3>All questions</h3>
+            {questions.map(question => (
+              <div key={question.id}>
+                <div>{question.like_count} likes</div>
+                <Link to={`/questions/${question.id}`}> {question.title}</Link>
+                <div>{new Date(question.updatedAt).toLocaleDateString("en-US", options)}</div>
+              </div>
+            ))}
           </div>
-          <div className="answers"></div>
+          <div className="answers">
+              <h3>All answers</h3>
+              {answers.map(answer => (
+                <div key={answer.id}>
+                  <div>{answer.like_count} likes</div>
+                  <Link to={`/questions/${answer.question.id}`}>{answer.question.title}</Link>
+                  <div>{new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     )
