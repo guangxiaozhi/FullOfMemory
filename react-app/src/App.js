@@ -37,7 +37,7 @@ function App() {
           <Route path="/questions/:questionId/answers/:answerId">
             <EditAnswers />
           </Route>
-          <Route path='/users/:userId' exact={true}>
+          <Route  path='/users/:userId' >
             <UserProfilePage />
           </Route>
 

@@ -224,6 +224,8 @@ def remove_like(questionId):
 @user_routes.route('/<int:userId>/questions')
 def get_questions_by_userId(userId):
    questions = Question.query.filter(Question.user_id == userId).all()
+   if not questions:
+      return {"noQuestions":["This user has not asked any questions."]}, 200
    for question in questions:
       question_likes = QuestionLike.query.filter(QuestionLike.question_id == question.id)
       data = []

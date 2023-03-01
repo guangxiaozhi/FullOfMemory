@@ -178,6 +178,8 @@ def delete_like_by_answerId(answerId):
 @user_routes.route('/<int:userId>/answers')
 def get_answers_by_userId(userId):
   answers = Answer.query.filter(Answer.user_id == userId).all()
+  if not answers:
+    return {"noAnswers":["This user has not answered any questions."]}, 200
   data = []
   for answer in answers:
     question = Question.query.filter(Question.id == answer.question_id).all()
