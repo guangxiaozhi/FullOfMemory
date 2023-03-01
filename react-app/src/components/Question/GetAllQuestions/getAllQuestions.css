@@ -63,14 +63,6 @@
 
 a:link { text-decoration: none; }
 
-/*
-a:visited { text-decoration: none; }
-
-
-a:hover { text-decoration: none; }
-
-
-a:active { text-decoration: none; } */
 
 
 .like-answer img {
@@ -82,4 +74,13 @@ a:active { text-decoration: none; } */
 
 .upside-down {
   transform: scaleY(-1);
+}
+
+.tag-username {
+  display: flex;
+  justify-content: space-between
+}
+
+.username {
+  margin:10px;
 }

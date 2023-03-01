@@ -1,0 +1,38 @@
+.signup-container{
+  width:350px
+}
+
+.signup-header {
+  text-align:center
+}
+
+.signup-form-container{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  width:90%;
+  margin:auto
+}
+
+.sign-up-information{
+  display: flex;
+  padding:0.2em 0
+}
+
+.sign-up-information span{
+  width: 130px;
+}
+
+.sign-up-information input {
+  width: 190px;
+  height:18px
+}
+
+.sign-up-button {
+  height: 30px;
+  border-radius: 10px;
+  background-color:antiquewhite;
+  margin-bottom: 10px;
+  width:330px;
+  cursor: pointer;
+}
