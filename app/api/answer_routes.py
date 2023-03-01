@@ -1,6 +1,7 @@
 from flask import Blueprint, request
-from app.models import db, Answer, User, AnswerLike
+from app.models import db, Answer, User, AnswerLike, Question
 from .question_routes import question_routes
+from .user_routes import user_routes
 from flask_login import current_user, login_required
 from app.forms.answer_form import AnswerForm
 
@@ -172,3 +173,17 @@ def delete_like_by_answerId(answerId):
     db.session.commit()
     # print("newLike.to_dict()", newLike.to_dict())
     return newLike.to_dict()
+
+# get answers by userId
+@user_routes.route('/<int:userId>/answers')
+def get_answers_by_userId(userId):
+  answers = Answer.query.filter(Answer.user_id == userId).all()
+  data = []
+  for answer in answers:
+    question = Question.query.filter(Question.id == answer.question_id).all()
+    answerInfo = {}
+    answerInfo.update(answer.to_dict())
+    answerInfo["question"] = question[0].to_dict()
+    data.append(answerInfo)
+
+  return data

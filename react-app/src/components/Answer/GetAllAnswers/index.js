@@ -57,15 +57,13 @@ export default function GetAllAnswers({questionId}) {
                   <div className="delete-update-answer-container">
                     {sessionUser && sessionUser.id == answer.user_id ? <Link  className="delete-update-answer" to={`${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""}
                     {sessionUser && sessionUser.id == answer.user_id ? <Link className="delete-update-answer" onClick ={handleDelete(answer.id)}>Delete Answer</Link>:""}
-
                   </div>
                   <div className="single-answer-time-user">
                     <div className="single-answer-time">edited: {new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>
-                    <Link className="single-answer-user-profile" to={`/`}>
+                    <Link className="single-answer-user-profile" to={`/users/${answer.user.id}`}>
                       <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
                       <div className="single-answer-user"> {answer.user.username} </div>
                     </Link>
-
                   </div>
                 </div>
 

@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 
 from app.forms.question_form import QuestionForm
 from sqlalchemy.sql import func
+from .user_routes import user_routes
 
 question_routes = Blueprint('questions', __name__)
 
@@ -217,3 +218,10 @@ def remove_like(questionId):
       db.session.commit()
       # print("newLike.to_dict()", newLike.to_dict())
       return newLike.to_dict()
+
+
+# get questions by userId
+@user_routes.route('/<int:userId>/questions')
+def get_questions_by_userId(userId):
+   questions = Question.query.filter(Question.user_id == userId).all()
+   return [question.to_dict() for question in questions]
