@@ -5,6 +5,7 @@ import questionReducer from './question'
 import answerReducer from './answer';
 import questionLikeReducer from './questionLike'
 import answerLikeReducer from './answerLike'
+import userProfileReducer from './userProfile';
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   answer: answerReducer,
   questionLike:questionLikeReducer,
   answerLike:answerLikeReducer,
+  userProfile:userProfileReducer,
 });
 
 

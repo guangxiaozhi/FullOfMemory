@@ -54,3 +54,6 @@ button:hover {
   list-style-type: none;
 }
 
+.profile-dropdown-button {
+  cursor: pointer;
+}
