@@ -49,7 +49,11 @@ function GetAllQuestions() {
                 <div className="question-body">
                   <Link className="title" to={`/questions/${question.id}`} >{question.title}</Link>
                   <div className="description">{question.description.substring(0,200)}......</div>
-                  <div className="tags">{question.tags}</div>
+                  <div className="tag-username">
+                    <div className="tags">{question.tags}</div>
+                    <div className="username">{question.user.username}</div>
+                  </div>
+
                 </div>
               </div>
             ))

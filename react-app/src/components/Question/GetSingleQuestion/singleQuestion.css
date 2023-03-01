@@ -68,4 +68,16 @@
   cursor: pointer;
 }
 
+.single-tag-username{
+  display: flex;
+  justify-content: space-between;
+}
 
+.single-tags{
+  margin:10px;
+  color: rgb(74, 192, 221);
+}
+
+.single-username {
+  margin:10px;
+}

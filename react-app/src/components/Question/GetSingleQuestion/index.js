@@ -79,7 +79,11 @@ function GetSingleQuestion() {
             <p className= 'time'>updatedAt: {new Date(question.updatedAt).toLocaleDateString("en-US", options)}</p>
           </div>
           <div className='single-description'> {question.description}</div>
-          <div className="tags">{question.tags}</div>
+          <div className="single-tag-username">
+            <div className="single-tags">{question.tags}</div>
+            <div className="single-username">{question.user.username}</div>
+          </div>
+
           <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div>
         </div>
         <div className='update-delete-button-container'>

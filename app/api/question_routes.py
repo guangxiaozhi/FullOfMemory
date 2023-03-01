@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Question, Answer, QuestionLike
+from app.models import db, Question, Answer, QuestionLike, User
 from flask_login import current_user, login_required
 
 from app.forms.question_form import QuestionForm
@@ -37,11 +37,13 @@ def get_all_question():
       like_count = 0
       for like in question_likes:
          like_count = like_count + like.like_unlike
+      user = User.query.get(question.user_id)
       # print("answer_count", answer_count)
       questionInfo = {}
       questionInfo.update(question.to_dict())
       questionInfo["answer_count"] = answer_count
       questionInfo["like_count"] = like_count
+      questionInfo["user"] = user.to_dict()
       data.append(questionInfo)
     return data
 
@@ -59,7 +61,8 @@ def get_question_by_id(id):
    for like in question_likes:
       like_count = like_count + like.like_unlike
    answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
-   questionInfo = {"answer_count":answer_count, "like_count": like_count}
+   user = User.query.get(question.user_id)
+   questionInfo = {"answer_count":answer_count, "like_count": like_count, "user":user.to_dict()}
    questionInfo.update(question.to_dict())
 
    return questionInfo
