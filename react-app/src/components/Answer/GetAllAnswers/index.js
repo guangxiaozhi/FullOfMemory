@@ -55,8 +55,8 @@ export default function GetAllAnswers({questionId}) {
                 </div>
                 <div>
                   <div className="delete-update-answer-container">
-                    {sessionUser && sessionUser.id == answer.user_id ? <Link  className="delete-update-answer" to={`${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""}
-                    {sessionUser && sessionUser.id == answer.user_id ? <Link className="delete-update-answer" onClick ={handleDelete(answer.id)}>Delete Answer</Link>:""}
+                    {sessionUser && sessionUser.id == answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""}
+                    {sessionUser && sessionUser.id == answer.user_id ? <Link className="delete-update-answer" to={`/questions/${questionId}`} onClick ={handleDelete(answer.id)}>Delete Answer</Link>:""}
                   </div>
                   <div className="single-answer-time-user">
                     <div className="single-answer-time">edited: {new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>

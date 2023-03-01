@@ -181,9 +181,14 @@ def get_answers_by_userId(userId):
   data = []
   for answer in answers:
     question = Question.query.filter(Question.id == answer.question_id).all()
+    answer_likes = AnswerLike.query.filter(AnswerLike.answer_id == answer.id).all()
+    like_count = 0
+    for like in answer_likes:
+      like_count = like_count + like.like_unlike
     answerInfo = {}
     answerInfo.update(answer.to_dict())
     answerInfo["question"] = question[0].to_dict()
+    answerInfo["like_count"] = like_count
     data.append(answerInfo)
 
   return data
