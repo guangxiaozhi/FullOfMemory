@@ -61,7 +61,11 @@ export default function GetAllAnswers({questionId}) {
                   </div>
                   <div className="single-answer-time-user">
                     <div className="single-answer-time">edited: {new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>
-                    <div className="single-answer-user"> {answer.user.username} </div>
+                    <Link className="single-answer-user-profile" to={`/`}>
+                      <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+                      <div className="single-answer-user"> {answer.user.username} </div>
+                    </Link>
+
                   </div>
                 </div>
 

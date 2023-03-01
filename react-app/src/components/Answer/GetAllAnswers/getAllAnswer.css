@@ -29,3 +29,17 @@
   /* background-color:antiquewhite; */
   cursor: pointer;
 }
+
+.single-answer-user-profile {
+  display: flex;
+
+}
+.single-answer-user-profile img{
+  width: 18px;
+  height: 18px;
+  margin:5px;
+}
+
+.single-answer-user {
+  margin:5px;
+}

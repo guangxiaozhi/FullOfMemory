@@ -51,7 +51,11 @@ function GetAllQuestions() {
                   <div className="description">{question.description.substring(0,200)}......</div>
                   <div className="tag-username">
                     <div className="tags">{question.tags}</div>
-                    <div className="username">{question.user.username}</div>
+                    <Link className="user-profile" to={`/questions/${question.id}`}>
+                      <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+                      <div className="username">{question.user.username}</div>
+                    </Link>
+
                   </div>
 
                 </div>

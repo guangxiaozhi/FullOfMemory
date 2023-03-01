@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory,  useParams} from 'react-router-dom';
+import {Link, useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
 import { fetchAddQuestionLike } from '../../../store/questionLike'
 import OpenModalButton from "../../OpenModalButton";
@@ -81,7 +81,11 @@ function GetSingleQuestion() {
           <div className='single-description'> {question.description}</div>
           <div className="single-tag-username">
             <div className="single-tags">{question.tags}</div>
-            <div className="single-username">{question.user.username}</div>
+            <Link className='single-user-profile' to={`/`}>
+              <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+              <div className="single-username">{question.user.username}</div>
+            </Link>
+
           </div>
 
           <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div>

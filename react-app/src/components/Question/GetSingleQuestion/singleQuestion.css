@@ -79,5 +79,16 @@
 }
 
 .single-username {
-  margin:10px;
+  margin:5px;
+}
+
+
+.single-user-profile {
+  display: flex;
+
+}
+.single-user-profile img{
+  width: 18px;
+  height: 18px;
+  margin:5px;
 }

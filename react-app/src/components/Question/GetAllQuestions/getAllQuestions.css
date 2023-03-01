@@ -64,13 +64,13 @@
 a:link { text-decoration: none; }
 
 
-
+/*
 .like-answer img {
   width: 26px;
   height: 13px;
   margin-top: 4px;
   margin-right: 12px;
-}
+} */
 
 .upside-down {
   transform: scaleY(-1);
@@ -82,5 +82,15 @@ a:link { text-decoration: none; }
 }
 
 .username {
-  margin:10px;
+  margin:5px;
+}
+
+.user-profile {
+  display: flex;
+
+}
+.user-profile img{
+  width: 18px;
+  height: 18px;
+  margin:5px;
 }
