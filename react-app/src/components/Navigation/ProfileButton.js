@@ -4,10 +4,12 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useHistory } from "react-router-dom";
 import './Navigation.css'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -35,6 +37,12 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
+  const jumpingToProfile = (e) => {
+    e.preventDefault();
+    history.push(`/users/${user.id}`)
+    closeMenu()
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
@@ -48,6 +56,9 @@ function ProfileButton({ user }) {
           <div className="profile-dropdown-information">
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li>
+              <button className="profile-dropdown-userProfile" onClick={jumpingToProfile}>My Profile</button>
+            </li>
             <li  className="profile-dropdown-li">
               <button onClick={handleLogout}>Log Out</button>
             </li>

@@ -57,3 +57,9 @@ button:hover {
 .profile-dropdown-button {
   cursor: pointer;
 }
+.profile-dropdown-userProfile {
+  border-radius: 10px;
+  background-color:antiquewhite;
+  margin:2px;
+  cursor: pointer;
+}
