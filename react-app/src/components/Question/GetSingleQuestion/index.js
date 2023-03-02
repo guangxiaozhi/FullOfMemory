@@ -49,12 +49,12 @@ function GetSingleQuestion() {
   useEffect( () => {
     // console.log("%%%%%% start fetchONeQuestion")
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
-  }, [dispatch, questionId])
+  }, [dispatch])
 
   const handleDelete = (questionId) => async (e) => {
     // console.log("handle delete ")
     await dispatch(deleteOneQuestionThunk(questionId))
-    history.push(`/`)
+    history.push('/')
   }
 
   const handleUpdate = (questionId) => async (e) => {
