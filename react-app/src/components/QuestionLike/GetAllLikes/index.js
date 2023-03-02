@@ -55,7 +55,6 @@ export default function GetAllLikes({questionId}){
             <div key={idx}>{error}</div>
             <button onClick ={() => setErrors([])} > X </button>
           </div>
-
         ))}
       </ul>
       <div className="like-tooltip">
