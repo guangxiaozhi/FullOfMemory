@@ -61,6 +61,18 @@ function GetSingleQuestion() {
     history.push(`/questions/${questionId}/update`)
   }
 
+  let answerQuestionSession
+
+  if(!sessionUser ){
+    answerQuestionSession = (
+      <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div>
+    )
+  }else {
+    if (question.user_id !== sessionUser.id && !hasAnswer){
+      answerQuestionSession = (<div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div>)
+    }
+  }
+
 
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
@@ -88,7 +100,8 @@ function GetSingleQuestion() {
 
           </div>
 
-          <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div>
+          {/* <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div> */}
+          {answerQuestionSession}
         </div>
         <div className='update-delete-button-container'>
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
