@@ -33,15 +33,15 @@ export default function UserProfilePage(){
   let questionSession
   if (Array.isArray(questions[0])){
     questionSession = (
-      <div>{questions[0][0]}</div>
+      <div className="no-question-answer">{questions[0][0]}</div>
     )
   }else{
     questionSession = (
       <div>
         {questions.map(question => (
-              <div key={question.id}>
-                <div>{question.like_count} likes</div>
-                <Link to={`/questions/${question.id}`}> {question.title}</Link>
+              <div key={question.id} className="user-profile-single-question-container">
+                <div className="single-question-like">{question.like_count} likes</div>
+                <Link to={`/questions/${question.id}`}> {question.title.substring(0,30)}...</Link>
                 <div>{new Date(question.updatedAt).toLocaleDateString("en-US", options)}</div>
               </div>
             ))}
@@ -61,15 +61,15 @@ export default function UserProfilePage(){
   let answerSession
   if (Array.isArray(answers[0])){
     answerSession = (
-      <div>{answers[0][0]}</div>
+      <div className="no-question-answer">{answers[0][0]}</div>
     )
   }else{
     answerSession = (
       <div>
         {answers.map(answer => (
-          <div key={answer.id}>
-            <div>{answer.like_count} likes</div>
-            <Link to={`/questions/${answer.question.id}`}>{answer.question.title}</Link>
+          <div key={answer.id} className="user-profile-single-answer-container">
+            <div className="single-answer-like">{answer.like_count} likes</div>
+            <Link to={`/questions/${answer.question.id}`}>{answer.question.title.substring(0,30)}...</Link>
             <div>{new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>
           </div>
         ))}
@@ -87,16 +87,19 @@ export default function UserProfilePage(){
 
   return (
     isLoaded && (
-      <div>
-      <h2> current user profile page</h2>
-      <div className="user-info">
-        <div className="user-portrait">
-        <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
-        </div>
-        <div className="user-name-time">
-          <div>{currentProfileUser.username}</div>
-          <div>{new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
-        </div>
+      <div className="user-profile-container">
+        <div className="user-info">
+          <div className="user-portrait">
+            <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+          </div>
+          <div className="user-name-time-container">
+            <div className="user-name">{currentProfileUser.username}</div>
+            <div className="user-time">
+              <img src="https://img.myloview.com/canvas-prints/simple-birthday-cake-icon-illustration-design-cake-symbol-with-outlined-style-template-vector-400-283950708.jpg" alt="" />
+              <div>Member from {new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
+            </div>
+
+          </div>
         </div>
         <div className="answers-questions">
           <div className="questions">
