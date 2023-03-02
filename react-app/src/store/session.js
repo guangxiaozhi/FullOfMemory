@@ -79,7 +79,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 			password,
 		}),
 	});
-
+	// console.log("sign up thunk res.ok", response.ok)
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));

@@ -7,28 +7,26 @@ import './getUserProfile.css'
 
 export default function UserProfilePage(){
   const dispatch = useDispatch()
-  console.log("useParams", useParams())
+  // console.log("useParams", useParams())
   const {userId} = useParams()
   const [isLoaded, setIsLoaded] = useState(false)
 
   // const options = { year: 'numeric', month: 'long', day:'numeric' };
   const options = { year: 'numeric', month: 'long', day:'numeric' };
-  const variable = useSelector(state => {
-    console.log("state from userProfile", state)
-  })
+
 
   const currentProfileUser = useSelector(state => {
-    console.log("user from userProfile", state.userProfile.user)
+    // console.log("user from userProfile", state.userProfile.user)
     return state.userProfile.user
   })
 
   const currentProfileUserQuestions = useSelector(state => {
-    console.log("questions from userProfile", state.userProfile.questions)
+    // console.log("questions from userProfile", state.userProfile.questions)
     return state.userProfile.questions
   })
 
   const questions = currentProfileUserQuestions? Object.values(currentProfileUserQuestions):[]
-  console.log("real questions from userProfile", Array.isArray(questions[0]), questions)
+  // console.log("real questions from userProfile", Array.isArray(questions[0]), questions)
 
   let questionSession
   if (Array.isArray(questions[0])){
@@ -51,12 +49,12 @@ export default function UserProfilePage(){
 
 
   const currentProfileUserAnswers = useSelector(state => {
-    console.log("answers from userProfile", state.userProfile.answers)
+    // console.log("answers from userProfile", state.userProfile.answers)
     return state.userProfile.answers
   })
 
   const answers = currentProfileUserAnswers? Object.values(currentProfileUserAnswers):[]
-  console.log("real answers from userProfile", Array.isArray(answers), answers)
+  // console.log("real answers from userProfile", Array.isArray(answers), answers)
 
   let answerSession
   if (Array.isArray(answers[0])){
