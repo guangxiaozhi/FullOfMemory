@@ -14,15 +14,19 @@ function SignupFormModal() {
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
+		const regex = new RegExp('.+@.+\\..+')
+		const isvalidEmail = regex.test(email)
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password));
-			if (data) {
-				setErrors(data);
-			} else {
+			if (! isvalidEmail){
+				setErrors(["Please enter a valid email address"])
+			}else if (username.length < 4 || username.length > 60){
+				setErrors(["Username must be between 4 and 60 characters"])
+			}else{
 				closeModal();
 			}
-		} else {
+		} else{
 			setErrors([
 				"Confirm Password field must be the same as the Password field",
 			]);
@@ -35,7 +39,7 @@ function SignupFormModal() {
 			<form onSubmit={handleSubmit} className="signup-form-container">
 				<ul>
 					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li key={idx} className="signup-error">{error}</li>
 					))}
 				</ul>
 				<label className="sign-up-information">
