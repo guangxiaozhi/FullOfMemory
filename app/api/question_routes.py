@@ -14,6 +14,7 @@ question_routes = Blueprint('questions', __name__)
 @login_required
 def delete_question(id):
    # print("delete start")
+   print("delete question 3")
    question = Question.query.get(id)
 
    if not question:
