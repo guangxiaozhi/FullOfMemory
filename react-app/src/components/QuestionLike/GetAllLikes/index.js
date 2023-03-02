@@ -51,7 +51,11 @@ export default function GetAllLikes({questionId}){
     <div className="all-question-likes-container">
       <ul className='answer-question-errors-container' >
         {errors.map((error, idx) => (
-            <div  className='answer-question-errors-item' onClick ={() => setErrors([])} key={idx}>{error}</div>
+          <div  className='answer-question-errors-item'>
+            <div key={idx}>{error}</div>
+            <button onClick ={() => setErrors([])} > X </button>
+          </div>
+
         ))}
       </ul>
       <div className="like-tooltip">
