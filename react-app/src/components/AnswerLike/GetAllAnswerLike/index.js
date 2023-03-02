@@ -28,7 +28,8 @@ export default function GetAllAnswerLikes({answer, questionId}){
           if(res && res.errors) setErrors(res.errors)
         });
     }else {
-      setErrors([addLikeThunkRes.errors])
+      // setErrors([addLikeThunkRes.errors])
+      alert("You already liked this answer")
     }
 
   }
@@ -50,7 +51,8 @@ export default function GetAllAnswerLikes({answer, questionId}){
           if(res && res.errors) setErrors(res.errors)
         });
     }else {
-      setErrors([deleteLikeThunkRes.errors])
+      // setErrors([deleteLikeThunkRes.errors])
+      alert("You already unliked this answer")
     }
 
   }
