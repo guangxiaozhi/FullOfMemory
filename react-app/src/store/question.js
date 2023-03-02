@@ -47,6 +47,7 @@ const deleteOneQuestion = (questionId) => {
 }
 
 export const deleteOneQuestionThunk = (questionId) => async (dispatch) => {
+  console.log("delete question 2")
   const res = await fetch(`/api/questions/${questionId}`, {
     method:"DELETE"
   })

@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
-import { fetchAllQuestions, fetchOneQuestion } from '../../../store/question'
+import { fetchAllQuestions, } from '../../../store/question'
 import { Link } from "react-router-dom";
 import OpenModalButton from '../../OpenModalButton'
 import CreateQuestion from "../CreateQuestionModal";
 import './getAllQuestions.css'
 
 function GetAllQuestions() {
+  console.log("delete question 4")
   const sessionUser = useSelector(state => state.session.user)
   const allQuestionsObj = useSelector(state => {
     // console.log("state from useSelector", state)

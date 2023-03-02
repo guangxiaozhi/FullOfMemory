@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useHistory,  useParams} from 'react-router-dom';
 import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
-import { fetchAddQuestionLike } from '../../../store/questionLike'
 import OpenModalButton from "../../OpenModalButton";
 import UpdateQuestion from '../UpdateQuestionModal';
 import GetAllAnswers from '../../Answer/GetAllAnswers'
@@ -53,13 +52,12 @@ function GetSingleQuestion() {
 
   const handleDelete = (questionId) => async (e) => {
     // console.log("handle delete ")
+    console.log("delete question 1")
     await dispatch(deleteOneQuestionThunk(questionId))
-    history.push('/')
+      .then( history.push('/'))
+
   }
 
-  const handleUpdate = (questionId) => async (e) => {
-    history.push(`/questions/${questionId}/update`)
-  }
 
   let answerQuestionSession
 
@@ -77,7 +75,7 @@ function GetSingleQuestion() {
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
-    isLoaded && (
+    isLoaded && question && (
       <div key={question.id} className="single-question-root-container">
         <div className="single-question-container">
           <div className="single-like-answer">
@@ -99,8 +97,6 @@ function GetSingleQuestion() {
             </Link>
 
           </div>
-
-          {/* <div>{sessionUser && question.user_id !== sessionUser.id && !hasAnswer? <div className="answer-question-model"><OpenModalButton buttonText = "Answer Question" modalComponent={<AnswerQuestion singleQuestion={question}/>}/></div> : ""}</div> */}
           {answerQuestionSession}
         </div>
         <div className='update-delete-button-container'>
