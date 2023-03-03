@@ -47,7 +47,7 @@ export const fetchUpdateUser = (newUser, userId) => async (dispatch) => {
     dispatch(updateUserInfo(user))
     return userId
   }else{
-    return ["This username has been used."]
+    return [" Username is already in use."]
   }
 }
 
