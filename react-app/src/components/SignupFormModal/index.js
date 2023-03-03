@@ -18,13 +18,17 @@ function SignupFormModal() {
 		const isvalidEmail = regex.test(email)
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
 			if (! isvalidEmail){
 				setErrors(["Please enter a valid email address"])
 			}else if (username.length < 4 || username.length > 60){
 				setErrors(["Username must be between 4 and 60 characters"])
 			}else{
-				closeModal();
+				const data = await dispatch(signUp(username, email, password));
+				if (data){
+					setErrors(data)
+				}else{
+					closeModal();
+				}
 			}
 		} else{
 			setErrors([

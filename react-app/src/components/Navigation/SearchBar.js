@@ -17,7 +17,7 @@ export default function SearchBar(){
             maxLength="100"
           />
           <button type="submit" className="search-button">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>

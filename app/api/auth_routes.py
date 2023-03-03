@@ -62,17 +62,20 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    print("form.validate_on_submit", form.validate_on_submit())
     if form.validate_on_submit():
+        print("form message validate?")
         user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password']
+            username=request.get_json()['username'],
+            email=request.get_json()['email'],
+            password=request.get_json()['password']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    print("error from backend?", validation_errors_to_error_messages(form.errors))
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @auth_routes.route('/unauthorized')
