@@ -28,6 +28,29 @@ export const fetchUserProfileInfo = (userId)=> async (dispatch) => {
   }
 }
 
+const  UPDATE_USER = 'users/UPDATE_USER'
+const updateUserInfo = (user) => {
+  return {
+    type:UPDATE_USER,
+    user
+  }
+}
+
+export const fetchUpdateUser = (newUser, userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`, {
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(newUser)
+  })
+  if (res.ok){
+    const user = await res.json()
+    dispatch(updateUserInfo(user))
+    return userId
+  }else{
+    return ["This username has been used."]
+  }
+}
+
 const initialState = {}
 export default function userProfileReducer(state = initialState, action){
   let newState
@@ -43,6 +66,11 @@ export default function userProfileReducer(state = initialState, action){
       newState.user = {...action.userProfileInfo.user}
       newState.answers = {...action.userProfileInfo.answers}
       newState.questions = {...action.userProfileInfo.questions}
+      return newState
+
+    case UPDATE_USER:
+      newState = {...state}
+      newState.user[`${action.user.id}`] = action.user
       return newState
     default:
       return state
