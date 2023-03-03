@@ -63,3 +63,15 @@ button:hover {
   margin:2px;
   cursor: pointer;
 }
+
+.search-button {
+  background-color: red;
+  border: none;
+  height: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  /* position: absolute; */
+  right: 0;
+  margin: 0;
+}

@@ -88,7 +88,7 @@ export default function UserProfilePage(){
       <div className="user-profile-container">
         <div className="user-info">
           <div className="user-portrait">
-            <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+            <img src={`${currentProfileUser.portrait}`} alt="" />
           </div>
           <div className="user-name-time-container">
             <div className="user-name">{currentProfileUser.username}</div>
