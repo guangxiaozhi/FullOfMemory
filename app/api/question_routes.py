@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from app.models import db, Question, Answer, QuestionLike, User
 from flask_login import current_user, login_required
 
-from app.forms.question_form import QuestionForm
+from app.forms import QuestionForm
 from sqlalchemy.sql import func
 from .user_routes import user_routes
 

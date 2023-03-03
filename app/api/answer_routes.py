@@ -3,7 +3,7 @@ from app.models import db, Answer, User, AnswerLike, Question
 from .question_routes import question_routes
 from .user_routes import user_routes
 from flask_login import current_user, login_required
-from app.forms.answer_form import AnswerForm
+from app.forms import AnswerForm
 
 answer_routes = Blueprint('answer', __name__)
 

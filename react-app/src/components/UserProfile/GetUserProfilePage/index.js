@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams, Link } from "react-router-dom"
 import { fetchUserProfileInfo } from "../../../store/userProfile"
+import OpenModalButton from "../../OpenModalButton"
+import UpdateProfile from "../UpdateProfileModal"
 import './getUserProfile.css'
 
 
@@ -14,6 +16,7 @@ export default function UserProfilePage(){
   // const options = { year: 'numeric', month: 'long', day:'numeric' };
   const options = { year: 'numeric', month: 'long', day:'numeric' };
 
+  const sessionUser = useSelector(state => state.session.user)
 
   const currentProfileUser = useSelector(state => {
     // console.log("user from userProfile", state.userProfile.user)
@@ -98,6 +101,7 @@ export default function UserProfilePage(){
             </div>
 
           </div>
+          {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update Profile" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
         </div>
         <div className="answers-questions">
           <div className="questions">

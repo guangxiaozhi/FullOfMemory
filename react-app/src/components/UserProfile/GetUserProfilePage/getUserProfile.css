@@ -7,7 +7,7 @@
 
 .user-info {
   display: flex;
-  width:50%
+  width:60%
 }
 
 .user-portrait img{
@@ -64,4 +64,15 @@
 
 .no-question-answer {
   margin:15px
+}
+
+.update-profile button{
+  height:25px;
+  width: 100px;
+  margin-top: 20px;
+  margin-right:10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color:antiquewhite;
+  cursor: pointer;
 }
