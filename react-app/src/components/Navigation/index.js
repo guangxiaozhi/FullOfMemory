@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import SearchBar from './SearchBar';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -17,6 +18,10 @@ function Navigation({ isLoaded }){
 					<NavLink exact to="/">All Questions</NavLink>
 				</li>
 			</div>
+			<div>
+				<SearchBar />
+			</div>
+
 
 			{isLoaded && (
 				<li className='dropdown-menu'>

@@ -92,7 +92,7 @@ function GetSingleQuestion() {
           <div className="single-tag-username">
             <div className="single-tags">{question.tags}</div>
             <Link className='single-user-profile' to={`/users/${question.user.id}`}>
-              <img src="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG" alt="" />
+              <img src={`${question.user.portrait}`} alt="" />
               <div className="single-username">{question.user.username}</div>
             </Link>
 

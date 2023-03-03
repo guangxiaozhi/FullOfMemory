@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     is_deleted = db.Column(db.Integer, default=0)
     createdAt = db.Column(db.DateTime, nullable=False, server_default=func.now())
+    portrait = db.Column(db.String(255),  nullable=False, default="https://www.gravatar.com/avatar/b4ef3ecedbeb1da0e39d12175ffe87a7?s=256&d=identicon&r=PG")
 
     questions = db.relationship("Question", back_populates="user")
     answers = db.relationship("Answer", back_populates="user")
@@ -40,5 +41,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'createdAt': self.createdAt
+            'createdAt': self.createdAt,
+            'portrait':self.portrait
         }
