@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useHistory,  useParams} from 'react-router-dom';
-import {fetchOneQuestion, deleteOneQuestionThunk} from '../../../store/question';
+import {fetchOneQuestion, fetchAllQuestions, deleteOneQuestionThunk} from '../../../store/question';
 import OpenModalButton from "../../OpenModalButton";
 import UpdateQuestion from '../UpdateQuestionModal';
 import GetAllAnswers from '../../Answer/GetAllAnswers'
@@ -52,8 +52,9 @@ function GetSingleQuestion() {
 
   const handleDelete = (questionId) => async (e) => {
     // console.log("handle delete ")
-    console.log("delete question 1")
+    // console.log("delete question 1")
     await dispatch(deleteOneQuestionThunk(questionId))
+      .then(() => dispatch(fetchAllQuestions()))
       .then( history.push('/'))
 
   }

@@ -79,9 +79,9 @@ export const signUp = (username, email, password) => async (dispatch) => {
 			password,
 		}),
 	});
-	console.log("response")
-	console.log("sign up thunk res.ok", response.ok)
-	console.log("sign up thunk res.status", response.status)
+	// console.log("response")
+	// console.log("sign up thunk res.ok", response.ok)
+	// console.log("sign up thunk res.status", response.status)
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
