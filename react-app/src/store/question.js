@@ -47,7 +47,7 @@ const deleteOneQuestion = (questionId) => {
 }
 
 export const deleteOneQuestionThunk = (questionId) => async (dispatch) => {
-  console.log("delete question 2")
+  // console.log("delete question 2")
   const res = await fetch(`/api/questions/${questionId}`, {
     method:"DELETE"
   })
@@ -156,8 +156,8 @@ export default function questionReducer(state = initialState, action){
       return newState
 
     case DELETE_ONE_QUESTION:
-      // console.log("state from delete question reducer", state)
       delete newState.allQuestions[action.questionId]
+      // console.log("new state from delete question reducer", newState)
       newState.singleQuestion = {}
       // console.log("state from delete question reducer", newState)
       return newState

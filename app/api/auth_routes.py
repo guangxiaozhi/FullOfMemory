@@ -62,9 +62,9 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print("form.validate_on_submit", form.validate_on_submit())
+    # print("form.validate_on_submit", form.validate_on_submit())
     if form.validate_on_submit():
-        print("form message validate?")
+        # print("form message validate?")
         user = User(
             username=request.get_json()['username'],
             email=request.get_json()['email'],
@@ -74,7 +74,7 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    print("error from backend?", validation_errors_to_error_messages(form.errors))
+    # print("error from backend?", validation_errors_to_error_messages(form.errors))
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
