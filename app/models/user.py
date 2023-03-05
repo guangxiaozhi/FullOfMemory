@@ -42,5 +42,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'createdAt': self.createdAt,
-            'portrait':self.portrait
+            'portrait':self.portrait,
+            'is_deleted':self.is_deleted,
         }
