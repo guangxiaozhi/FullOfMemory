@@ -51,6 +51,24 @@ export const fetchUpdateUser = (newUser, userId) => async (dispatch) => {
   }
 }
 
+const DELETE_USER = 'users/DELETE_USER'
+const deleteUser = (user) =>{
+  return {
+    type:DELETE_USER,
+    user
+  }
+}
+export const deleteUserThunk = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/delete`, {
+    method:"PUT"
+  })
+  if (res.ok) {
+    const user = await res.json()
+    dispatch(deleteUser(user))
+    return user.id
+  }
+}
+
 const initialState = {}
 export default function userProfileReducer(state = initialState, action){
   let newState
@@ -72,6 +90,12 @@ export default function userProfileReducer(state = initialState, action){
       newState = {...state}
       newState.user[`${action.user.id}`] = action.user
       return newState
+
+    case DELETE_USER:
+      newState = {...state}
+      newState.user[`${action.user.id}`] = action.user
+      return newState
+      
     default:
       return state
   }

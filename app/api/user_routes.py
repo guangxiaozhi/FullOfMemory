@@ -30,7 +30,7 @@ def user(id):
 @login_required
 def update_user(id):
     user = User.query.get(id)
-    if not user:
+    if not user or user.is_deleted == 1:
         return {"errors":["user doesn't exit"]}, 404
     users = User.query.all()
     usernames = [userele.username for userele in users if userele.id != id]
@@ -47,3 +47,14 @@ def update_user(id):
     elif form.errors:
         print("update user profile errors", form.errors)
         return form.errors, 400
+
+# delete user
+@user_routes.route('/<int:id>/delete', methods=["PUT"])
+@login_required
+def remove_user(id):
+    user = User.query.get(id)
+    if not user:
+        return {"errors":["user doesn't exit"]}, 404
+    user.is_deleted = 1
+    db.session.commit()
+    return user.to_dict()

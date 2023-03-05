@@ -14,6 +14,7 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    // console.log("login form modal data", data)
     if (data) {
       setErrors(data);
     } else {
@@ -21,14 +22,21 @@ function LoginFormModal() {
     }
   };
 
-  const demoUserClick = (e) => {
+  const demoUserClick = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(login("demo@aa.io", "password" )).then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    // dispatch(login("demo@aa.io", "password" )).then(closeModal)
+    //   .catch(async (res) => {
+    //     const data = await res.json();
+    //     if (data && data.errors) setErrors(data.errors);
+    //   });
+    const data = await dispatch(login("demo@aa.io", "password" ));
+    // console.log("demo login form modal data", data)
+    if (data) {
+      setErrors(data);
+    } else {
+        closeModal()
+    }
   }
 
   return (
