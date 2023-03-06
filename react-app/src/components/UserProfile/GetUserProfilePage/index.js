@@ -18,30 +18,46 @@ export default function UserProfilePage(){
   // const options = { year: 'numeric', month: 'long', day:'numeric' };
   const options = { year: 'numeric', month: 'long', day:'numeric' };
 
-  const handleDelete = (userId) => async (e) => {
-    await dispatch (deleteUserThunk(userId))
-      .then(() => dispatch(logout()))
-      .then( history.push('/'))
-  }
 
-  const sessionUser = useSelector(state => state.session.user)
 
+  useEffect(() => {
+    // console.log("start fetch?")
+    dispatch(fetchUserProfileInfo(userId))
+      .then(() => {
+        setIsLoaded(true)
+      })
+  }, [dispatch, userId])
+
+  const sessionUser = useSelector(state => {
+    // console.log("%%%%%%%%%%%%%%%############ state ", state)
+    return state.session.user
+  })
   const currentProfileUser = useSelector(state => {
-    console.log("user from userProfile", state.userProfile.user)
+    // console.log("user from userProfile", state.userProfile.user)
     return state.userProfile.user
   })
 
-  console.log("currentProfileUser", currentProfileUser.is_deleted)
 
   const currentProfileUserQuestions = useSelector(state => {
     // console.log("questions from userProfile", state.userProfile.questions)
     return state.userProfile.questions
   })
 
+  const currentProfileUserAnswers = useSelector(state => {
+    // console.log("answers from userProfile", state.userProfile.answers)
+    return state.userProfile.answers
+  })
+
+ let questionSession
+ let answerSession
+
+  if (isLoaded) {
+
+
   const questions = currentProfileUserQuestions? Object.values(currentProfileUserQuestions):[]
   // console.log("real questions from userProfile", Array.isArray(questions[0]), questions)
 
-  let questionSession
+
   if (Array.isArray(questions[0])){
     questionSession = (
       <div className="no-question-answer">{questions[0][0]}</div>
@@ -61,15 +77,11 @@ export default function UserProfilePage(){
   }
 
 
-  const currentProfileUserAnswers = useSelector(state => {
-    // console.log("answers from userProfile", state.userProfile.answers)
-    return state.userProfile.answers
-  })
 
   const answers = currentProfileUserAnswers? Object.values(currentProfileUserAnswers):[]
   // console.log("real answers from userProfile", Array.isArray(answers), answers)
 
-  let answerSession
+
   if (Array.isArray(answers[0])){
     answerSession = (
       <div className="no-question-answer">{answers[0][0]}</div>
@@ -88,49 +100,50 @@ export default function UserProfilePage(){
     )
   }
 
-  useEffect(() => {
-    dispatch(fetchUserProfileInfo(userId)).then(() => {
-      return setIsLoaded(true)
-    })
-  }, [dispatch])
+  }
 
-
+  const handleDelete = (userId) => async (e) => {
+    await dispatch (deleteUserThunk(userId))
+      .then(() => dispatch(logout()))
+      .then( history.push('/'))
+  }
 
   return (
     <div>
       {currentProfileUser.is_deleted == 1 ? <h1>user is not exit</h1>:
-        isLoaded && (
-          <div className="user-profile-container">
-            <div className="user-info">
-              <div className="user-portrait">
-                <img src={`${currentProfileUser.portrait}`} alt="" />
-              </div>
-              <div className="user-name-time-container">
-                <div className="user-name">{currentProfileUser.username}</div>
-                <div className="user-time">
-                  <img src="https://img.myloview.com/canvas-prints/simple-birthday-cake-icon-illustration-design-cake-symbol-with-outlined-style-template-vector-400-283950708.jpg" alt="" />
-                  <div>Member from {new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
+        <div>
+          {isLoaded && (
+            <div className="user-profile-container">
+              <div className="user-info">
+                <div className="user-portrait">
+                  <img src={`${currentProfileUser.portrait}`} alt="" />
                 </div>
+                <div className="user-name-time-container">
+                  <div className="user-name">{currentProfileUser.username}</div>
+                  <div className="user-time">
+                    <img src="https://img.myloview.com/canvas-prints/simple-birthday-cake-icon-illustration-design-cake-symbol-with-outlined-style-template-vector-400-283950708.jpg" alt="" />
+                    <div>Member from {new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
+                  </div>
 
-              </div>
-              <div>
-                {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
-                {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
-              </div>
-              </div>
-            <div className="answers-questions">
-              <div className="questions">
-                <h3>All questions</h3>
-                {questionSession}
-              </div>
-              <div className="answers">
-                <h3>All answers</h3>
-                {answerSession}
+                </div>
+                <div>
+                  {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
+                  {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
+                </div>
+                </div>
+              <div className="answers-questions">
+                <div className="questions">
+                  <h3>All questions</h3>
+                  {questionSession}
+                </div>
+                <div className="answers">
+                  <h3>All answers</h3>
+                  {answerSession}
+                </div>
               </div>
             </div>
-          </div>
-        )
-      }
+          )}
+        </div>}
     </div>
   )
 }

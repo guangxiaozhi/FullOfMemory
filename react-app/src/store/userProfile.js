@@ -11,6 +11,9 @@ export const fetchUserProfileInfo = (userId)=> async (dispatch) => {
   const user = await fetch(`/api/users/${userId}`)
   const questions = await fetch(`/api/users/${userId}/questions`)
   const answers = await fetch(`/api/users/${userId}/answers`)
+  // console.log("user.ok", user.ok)
+  // console.log("questions.ok", questions.ok)
+  // console.log("answers.ok", answers.ok)
   if (user.ok && questions.ok && answers.ok){
     const userInfo = await user.json()
     const quesInfo = await questions.json()
@@ -95,7 +98,7 @@ export default function userProfileReducer(state = initialState, action){
       newState = {...state}
       newState.user[`${action.user.id}`] = action.user
       return newState
-      
+
     default:
       return state
   }
