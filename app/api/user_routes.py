@@ -22,7 +22,9 @@ def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
+    # print("id", id)
     user = User.query.get(id)
+    # print("get user by id", user.to_dict())
     return user.to_dict()
 
 # update user name or portrait.
@@ -42,10 +44,10 @@ def update_user(id):
         user.username = request.get_json()["username"]
         user.portrait = request.get_json()["portrait"]
         db.session.commit()
-        print("update user profile user.to_dict()", user.to_dict())
+        # print("update user profile user.to_dict()", user.to_dict())
         return user.to_dict()
     elif form.errors:
-        print("update user profile errors", form.errors)
+        # print("update user profile errors", form.errors)
         return form.errors, 400
 
 # delete user

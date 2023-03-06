@@ -42,17 +42,17 @@ export const login = (email, password) => async (dispatch) => {
 			password,
 		}),
 	});
-	console.log("login errors", response.ok)
+	// console.log("login errors", response.ok)
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
-		console.log("ok < 500")
+		// console.log("ok < 500")
 		const data = await response.json();
-		console.log("date eroors", data)
+		// console.log("date eroors", data)
 		if (data.errors) {
-			console.log("data errors", data.errors)
+			// console.log("data errors", data.errors)
 			return data.errors;
 		}
 	} else {

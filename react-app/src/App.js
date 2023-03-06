@@ -9,6 +9,7 @@ import GetAllQuestions from "./components/Question/GetAllQuestions";
 import GetSingleQuestion from "./components/Question/GetSingleQuestion";
 import EditAnswers from "./components/Answer/EditAnswer";
 import UserProfilePage from "./components/UserProfile/GetUserProfilePage";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,27 +22,30 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route exact path="/">
-            <GetAllQuestions />
-          </Route>
-          <Route exact path="/questions/:questionId">
-            <GetSingleQuestion />
-          </Route>
-          <Route path="/questions/:questionId/answers/:answerId">
-            <EditAnswers />
-          </Route>
-          <Route  path='/users/:userId' >
-            <UserProfilePage />
-          </Route>
+        <>
+          <Switch>
+            <Route path="/login" >
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route exact path="/">
+              <GetAllQuestions />
+            </Route>
+            <Route exact path="/questions/:questionId">
+              <GetSingleQuestion />
+            </Route>
+            <Route path="/questions/:questionId/answers/:answerId">
+              <EditAnswers />
+            </Route>
+            <Route  path='/users/:userId' >
+              <UserProfilePage />
+            </Route>
+          </Switch>
+          <Footer />
+        </>
 
-        </Switch>
       )}
     </>
   );
