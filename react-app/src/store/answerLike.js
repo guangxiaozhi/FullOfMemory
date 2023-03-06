@@ -35,6 +35,9 @@ export const fetchAddAnswerLike = (newAnswerLike, answerId) => async (dispath) =
     const answerLike = await res.json()
     dispath(addLike(answerLike))
     return answerLike.id
+  }else if(res.status == 401){
+
+    return {"error": ["please login first"]}
   }else{
     const data = await res.json()
     // console.log("add thunk res.eroor", await data)
@@ -62,6 +65,8 @@ export const fetchDeleteAnswerLike = (newAnswerLike, answerId) => async (dispath
     // console.log("deleted answerLike", answerLike)
     dispath(deleteAnswerLike(answerLike))
     return answerLike.id
+  }else if(res.status == 401){
+    return {"error": ["please login first"]}
   }else{
     const data = await res.json()
     // console.log("res.eroor", await data)
