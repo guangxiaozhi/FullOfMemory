@@ -4,3 +4,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+body{
+  font-family: 'Noto Sans Limbu', sans-serif;
+  padding-bottom: 30px;
+}

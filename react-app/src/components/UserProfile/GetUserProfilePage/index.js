@@ -102,48 +102,49 @@ export default function UserProfilePage(){
 
   }
 
+
+
+
   const handleDelete = (userId) => async (e) => {
     await dispatch (deleteUserThunk(userId))
       .then(() => dispatch(logout()))
       .then( history.push('/'))
   }
 
-  return (
-    <div>
-      {currentProfileUser.is_deleted == 1 ? <h1>user is not exit</h1>:
-        <div>
-          {isLoaded && (
-            <div className="user-profile-container">
-              <div className="user-info">
-                <div className="user-portrait">
-                  <img src={`${currentProfileUser.portrait}`} alt="" />
-                </div>
-                <div className="user-name-time-container">
-                  <div className="user-name">{currentProfileUser.username}</div>
-                  <div className="user-time">
-                    <img src="https://img.myloview.com/canvas-prints/simple-birthday-cake-icon-illustration-design-cake-symbol-with-outlined-style-template-vector-400-283950708.jpg" alt="" />
-                    <div>Member from {new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
-                  </div>
 
-                </div>
-                <div>
-                  {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
-                  {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
-                </div>
-                </div>
-              <div className="answers-questions">
-                <div className="questions">
-                  <h3>All questions</h3>
-                  {questionSession}
-                </div>
-                <div className="answers">
-                  <h3>All answers</h3>
-                  {answerSession}
-                </div>
-              </div>
+  return (
+    isLoaded &&(
+      (currentProfileUser.is_deleted == 0)
+      ? (<div className="user-profile-container">
+          <div className="user-info">
+            <div className="user-portrait">
+              <img src={`${currentProfileUser.portrait}`} alt="" />
             </div>
-          )}
-        </div>}
-    </div>
+            <div className="user-name-time-container">
+              <div className="user-name">{currentProfileUser.username}</div>
+              <div className="user-time">
+                <img src="https://img.myloview.com/canvas-prints/simple-birthday-cake-icon-illustration-design-cake-symbol-with-outlined-style-template-vector-400-283950708.jpg" alt="" />
+                <div>Member from {new Date(currentProfileUser.createdAt).toLocaleDateString("en-US", options)}</div>
+              </div>
+
+            </div>
+            <div>
+              {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
+              {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
+            </div>
+          </div>
+          <div className="answers-questions">
+            <div className="questions">
+              <h3>All questions</h3>
+              {questionSession}
+            </div>
+            <div className="answers">
+              <h3>All answers</h3>
+              {answerSession}
+            </div>
+          </div>
+        </div>)
+      :(<h2>user not exits now</h2>)
+    )
   )
 }
