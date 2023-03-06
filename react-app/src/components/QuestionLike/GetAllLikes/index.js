@@ -24,7 +24,8 @@ export default function GetAllLikes({questionId}){
         });
     }else {
       // setErrors([addLikeThunkRes.errors])
-      alert("You already liked this question")
+      console.log("addLikeThunkRes", addLikeThunkRes, Object.values(addLikeThunkRes))
+      alert(Object.values(addLikeThunkRes))
     }
   }
 
@@ -42,7 +43,7 @@ export default function GetAllLikes({questionId}){
         });
     }else {
       // setErrors([deleteLikeThunkRes.errors])
-      alert("You already unliked this question")
+      alert(Object.values(deleteLikeThunkRes))
     }
 
   }

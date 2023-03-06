@@ -30,14 +30,17 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newQuestionLike)
   })
-  // console.log("res.ok", res.ok)
+  console.log("res.ok", res.ok, res.status)
   if (res.ok){
     const questionLike = await res.json()
     dispath(addLike(questionLike))
     return questionLike.id
-  }else{
+  }else if(res.status == 401){
+
+    return {"error": ["please login first"]}
+  }else {
     const data = await res.json()
-    // console.log("add question like res.eroor", data)
+    console.log("add question like res.eroor", data)
     return data
   }
 }
@@ -61,6 +64,8 @@ export const fetchDeleteQuestionLike = (newQuestionLike,questionId) => async (di
     const questionLike = await res.json()
     dispath(deleteLike(questionLike))
     return questionLike.id
+  }else if(res.status == 401){
+    return {"error": ["please login first"]}
   }else{
     // console.log("delete meet error", res)
     const data = await res.json()
