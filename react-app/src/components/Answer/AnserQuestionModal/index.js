@@ -15,7 +15,7 @@ export default function AnswerQuestion({singleQuestion}) {
 
   const [answer_body, setAnser_body] = useState("")
   const [errors, setErrors] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
+  // const [isLoaded, setIsLoaded] = useState(false)
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {

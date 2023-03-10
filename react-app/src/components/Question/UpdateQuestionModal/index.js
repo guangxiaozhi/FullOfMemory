@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateQuestionThunk, fetchOneQuestion} from '../../../store/question';
 import { useModal } from '../../../context/Modal';
@@ -21,7 +21,7 @@ function UpdateQuestion({singleQuestion}) {
   const handleUpdate = async (e) => {
     e.preventDefault();
     const questionId = singleQuestion.id;
-    const userId = sessionUser.id
+    // const userId = sessionUser.id
     const updatedQuestion = {
       title,
       description,

@@ -35,7 +35,7 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     const questionLike = await res.json()
     dispath(addLike(questionLike))
     return questionLike.id
-  }else if(res.status == 401){
+  }else if(res.status === 401){
 
     return {"error": ["please login first"]}
   }else {
@@ -64,7 +64,7 @@ export const fetchDeleteQuestionLike = (newQuestionLike,questionId) => async (di
     const questionLike = await res.json()
     dispath(deleteLike(questionLike))
     return questionLike.id
-  }else if(res.status == 401){
+  }else if(res.status === 401){
     return {"error": ["please login first"]}
   }else{
     // console.log("delete meet error", res)

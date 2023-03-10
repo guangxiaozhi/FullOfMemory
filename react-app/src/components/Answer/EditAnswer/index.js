@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchEditAnswer, fetchAllAnswersByQuestionId } from '../../../store/answer'
-import { useModal } from '../../../context/Modal';
+// import { useModal } from '../../../context/Modal';
 import { useHistory } from "react-router-dom";
 import './editAnswer.css'
 
@@ -23,11 +23,11 @@ export default function EditAnswers() {
   const [answer_body, setAnser_body] = useState(oldAnswer.answer_body)
   const [isLoaded, setIsLoaded] = useState(false);
   const [errors, setErrors] = useState([])
-  const { closeModal } = useModal();
+  // const { closeModal } = useModal();
 
   useEffect( () => {
     dispatch (fetchAllAnswersByQuestionId(questionId)).then(() => setIsLoaded(true))
-  }, [dispatch])
+  }, [dispatch, questionId])
 
   const handleSubmit = async (e) => {
     // console.log("start handleSumit")

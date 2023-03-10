@@ -114,7 +114,7 @@ export default function UserProfilePage(){
 
   return (
     isLoaded &&(
-      (currentProfileUser.is_deleted == 0)
+      (currentProfileUser.is_deleted === 0)
       ? (<div className="user-profile-container">
           <div className="user-info">
             <div className="user-portrait">
@@ -129,8 +129,8 @@ export default function UserProfilePage(){
 
             </div>
             <div>
-              {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
-              {sessionUser && sessionUser.id == currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
+              {sessionUser && sessionUser.id === currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
+              {sessionUser && sessionUser.id === currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
             </div>
           </div>
           <div className="answers-questions">

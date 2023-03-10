@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom"
+// import { useHistory } from "react-router-dom"
 import { fetchAllQuestions, } from '../../../store/question'
 import { Link } from "react-router-dom";
 import OpenModalButton from '../../OpenModalButton'
@@ -9,7 +9,7 @@ import './getAllQuestions.css'
 
 function GetAllQuestions() {
   // console.log("delete question 4")
-  const sessionUser = useSelector(state => state.session.user)
+  // const sessionUser = useSelector(state => state.session.user)
   const allQuestionsObj = useSelector(state => {
     // console.log("state from useSelector", state)
     return state.question.allQuestions
@@ -18,7 +18,7 @@ function GetAllQuestions() {
   const allquestions = allQuestionsObj ? Object.values(allQuestionsObj):[];
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
-  const history = useHistory()
+  // const history = useHistory()
   useEffect(() => {
     dispatch(fetchAllQuestions()).then(() => setIsLoaded(true))
   }, [dispatch])
