@@ -191,6 +191,19 @@ export default function questionReducer(state = initialState, action){
 
       return newState
 
+    case UPDATE_ONE_QUESTION:
+      newState = {...state}
+
+      console.log("newState before change", newState)
+      newState["allQuestions"] ={...state.allQuestions}
+      newState["singleQuestion"] ={...state.singleQuestion}
+      console.log("newState after change", newState)
+
+
+      newState.allQuestions[action.question.id.toString()] = action.question;
+      newState.singleQuestion = action.question;
+      return newState
+
     default:
       return state;
   }
