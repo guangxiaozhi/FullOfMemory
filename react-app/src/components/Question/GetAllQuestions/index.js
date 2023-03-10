@@ -20,7 +20,9 @@ function GetAllQuestions() {
   const dispatch = useDispatch()
   // const history = useHistory()
   useEffect(() => {
-    dispatch(fetchAllQuestions()).then(() => setIsLoaded(true))
+    dispatch(fetchAllQuestions())
+      .then(() => setIsLoaded(true))
+      // .then(() => history.push('/'))
   }, [dispatch])
 
 

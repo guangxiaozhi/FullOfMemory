@@ -131,24 +131,40 @@ export const createQuestionThunk = (newQuestion) => async (dispatch) => {
   }
 }
 
-const initialState = {};
+const initialState = {
+  allQuestions: {},
+  singleQuestion: {}
+};
 export default function questionReducer(state = initialState, action){
-  const newState = {...state}
+  let newState
   switch (action.type){
     case LOAD_ALL_QUESTIONS:
-      const newAllQuestions = {}
-      // console.log("action.allQuestions", action.allQuestions)
-      action.allQuestions.forEach(question => {
-        // console.log("each question", question)
-        newAllQuestions[question.id] = question
-      });
-      // console.log("newAllQuestions", newAllQuestions)
-      return {
-        ...state,
-        allQuestions:{...newAllQuestions}
+      // const newAllQuestions = {}
+      // // console.log("action.allQuestions", action.allQuestions)
+      // action.allQuestions.forEach(question => {
+      //   // console.log("each question", question)
+      //   newAllQuestions[question.id] = question
+      // });
+      // // console.log("newAllQuestions", newAllQuestions)
+      // return {
+      //   ...state,
+      //   allQuestions:{...newAllQuestions}
+      // }
+      newState = {
+        allQuestions: {},
+        singleQuestion: {}
       }
+      // console.log("newState", newState)
+      action.allQuestions.forEach(question => {
+        // console.log("questionId", typeof(question.id))
+        // console.log("newState.allQuestions", newState.allQuestions)
+        newState.allQuestions[question.id] = question
+      });
+      return newState
+
 
     case GET_QUESTION_DETAILS:
+      newState = {...state}
       // console.log("?????? state ????????", state)
       // console.log("action.singleQuestion", action.singleQuestion)
       // console.log("newState in reducer", newState)
@@ -156,6 +172,7 @@ export default function questionReducer(state = initialState, action){
       return newState
 
     case DELETE_ONE_QUESTION:
+      newState = {...state}
       delete newState.allQuestions[action.questionId]
       // console.log("new state from delete question reducer", newState)
       newState.singleQuestion = {}
@@ -163,8 +180,14 @@ export default function questionReducer(state = initialState, action){
       return newState
 
     case CREATE_QUESTION:
+      newState = {...state}
+      newState["allQuestions"] ={...state.allQuestions}
+      // newState["singleQuestion"] = {...state.singleQuestion}
       // console.log("state from create question", state)
-      newState.allQuestions[action.question.id] = action.question;
+      // console.log("newState spread from old state before create question", newState)
+      newState.allQuestions[action.question.id.toString()] = action.question;
+      // console.log("newState spread from old state after create question", newState)
+
       return newState
 
     default:
