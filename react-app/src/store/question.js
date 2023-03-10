@@ -173,6 +173,7 @@ export default function questionReducer(state = initialState, action){
 
     case DELETE_ONE_QUESTION:
       newState = {...state}
+      newState["allQuestions"] ={...state.allQuestions}
       delete newState.allQuestions[action.questionId]
       // console.log("new state from delete question reducer", newState)
       newState.singleQuestion = {}
