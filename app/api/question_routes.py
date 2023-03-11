@@ -116,7 +116,11 @@ def update_question(id):
          return {"errors": "Question description should be unique"}, 400
 
       db.session.commit()
-      return question.to_dict()
+
+      data = {}
+      data.update(question.to_dict())
+      data["user"] = current_user.to_dict()
+      return data
    elif form.errors:
       return form.errors, 400
 
@@ -151,7 +155,10 @@ def create_question():
          return {"errors": "Question description should be unique"}, 400
       db.session.add(question)
       db.session.commit()
-      return question.to_dict()
+      data = {}
+      data.update(question.to_dict())
+      data["user"] = current_user.to_dict()
+      return data
    elif form.errors:
       # print("form.errors from backend create question", form.errors)
       return form.errors, 400

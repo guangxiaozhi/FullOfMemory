@@ -13,7 +13,7 @@ function GetSingleQuestion() {
   const dispatch = useDispatch();
   const history = useHistory();
   const {questionId} = useParams();
-  const [errors, setErrors] = useState([])
+  // const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -48,7 +48,7 @@ function GetSingleQuestion() {
   useEffect( () => {
     // console.log("%%%%%% start fetchONeQuestion")
     dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
-  }, [dispatch])
+  }, [dispatch, questionId])
 
   const handleDelete = (questionId) => async (e) => {
     // console.log("handle delete ")
