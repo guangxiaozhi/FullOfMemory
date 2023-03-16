@@ -11,6 +11,8 @@ import EditAnswers from "./components/Answer/EditAnswer";
 import UserProfilePage from "./components/UserProfile/GetUserProfilePage";
 import Footer from "./components/Footer";
 
+import NotFound from "./components/NotFound";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,11 +38,14 @@ function App() {
             <Route exact path="/questions/:questionId">
               <GetSingleQuestion />
             </Route>
-            <Route path="/questions/:questionId/answers/:answerId">
+            <Route exact path="/questions/:questionId/answers/:answerId">
               <EditAnswers />
             </Route>
-            <Route  path='/users/:userId' >
+            <Route exact  path='/users/:userId' >
               <UserProfilePage />
+            </Route>
+            <Route path='*'>
+              <NotFound />
             </Route>
           </Switch>
           <Footer />
