@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-around;
   font-family: Helvetica;
   border-top: 1px solid rgb(211, 211, 211);
   background-color: #FFFAF1;
@@ -22,4 +22,13 @@
   align-items: center;
   bottom: 0;
   width: 250px;
+}
+
+.git-hub-svg{
+  align-items: end;
+}
+
+.linkedin-in-svg{
+  fill:rgb(1, 70, 138);
+  /* align-items: end; */
 }
