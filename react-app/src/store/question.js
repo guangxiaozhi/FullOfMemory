@@ -27,16 +27,17 @@ const loadOneQuestion = (singleQuestion) => {
 export const fetchOneQuestion = (questionId) => async (dispatch) => {
   // console.log("start thunk", questionId)
   const res = await fetch(`/api/questions/${questionId}`);
-  console.log(res.ok)
+  // console.log(res.ok)
   // console.log("res.ok", await res.json())
   if(res.ok){
     const singleQuestion = await res.json();
     // console.log("singleQuestion from thunk", singleQuestion)
     await dispatch(loadOneQuestion(singleQuestion))
-    console.log(typeof(questionId), questionId)
+    // console.log(typeof(questionId), questionId)
     return questionId
   }else{{
-    console.log("no questions error", await res.json())
+    // console.log("no questions error", await res.json())
+    return await res.json()
   }}
 }
 

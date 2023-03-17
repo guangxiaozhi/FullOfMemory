@@ -250,7 +250,7 @@ def get_questions_by_userId(userId):
 # search questions
 @question_routes.route('/search/<keyword>')
 def search_questions(keyword):
-   print("keywords", keyword)
+   # print("keywords", keyword)
    questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
-   print("questions", questions)
+   # print("questions", questions)
    return [ques.to_dict() for ques in questions]
