@@ -45,9 +45,16 @@ function GetSingleQuestion() {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect( () => {
+  useEffect( async () => {
     // console.log("%%%%%% start fetchONeQuestion")
-    dispatch(fetchOneQuestion(+questionId)).then(() => setIsLoaded(true));
+    const result = await dispatch(fetchOneQuestion(+questionId))
+    // console.log("result form fetchOneQuestion", result, typeof(result))
+    if (typeof(result) === "number"){
+      setIsLoaded(true)
+    }else{
+      // console.log("result form fetchOneQuestion", result, typeof(result))
+      history.push('questions/*')
+    }
   }, [dispatch, questionId])
 
   const handleDelete = (questionId) => async (e) => {
