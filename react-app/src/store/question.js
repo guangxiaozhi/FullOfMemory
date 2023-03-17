@@ -27,14 +27,17 @@ const loadOneQuestion = (singleQuestion) => {
 export const fetchOneQuestion = (questionId) => async (dispatch) => {
   // console.log("start thunk", questionId)
   const res = await fetch(`/api/questions/${questionId}`);
-  // console.log(res.ok)
+  console.log(res.ok)
   // console.log("res.ok", await res.json())
   if(res.ok){
     const singleQuestion = await res.json();
     // console.log("singleQuestion from thunk", singleQuestion)
     await dispatch(loadOneQuestion(singleQuestion))
-    return singleQuestion
-  }
+    console.log(typeof(questionId), questionId)
+    return questionId
+  }else{{
+    console.log("no questions error", await res.json())
+  }}
 }
 
 // delete one question by id
@@ -139,17 +142,6 @@ export default function questionReducer(state = initialState, action){
   let newState
   switch (action.type){
     case LOAD_ALL_QUESTIONS:
-      // const newAllQuestions = {}
-      // // console.log("action.allQuestions", action.allQuestions)
-      // action.allQuestions.forEach(question => {
-      //   // console.log("each question", question)
-      //   newAllQuestions[question.id] = question
-      // });
-      // // console.log("newAllQuestions", newAllQuestions)
-      // return {
-      //   ...state,
-      //   allQuestions:{...newAllQuestions}
-      // }
       newState = {
         allQuestions: {},
         singleQuestion: {}
@@ -194,15 +186,16 @@ export default function questionReducer(state = initialState, action){
     case UPDATE_ONE_QUESTION:
       newState = {...state}
 
-      console.log("newState before change", newState)
+      // console.log("newState before change", newState)
       newState["allQuestions"] ={...state.allQuestions}
       newState["singleQuestion"] ={...state.singleQuestion}
-      console.log("newState after change", newState)
-
+      // console.log("newState after change", newState)
 
       newState.allQuestions[action.question.id.toString()] = action.question;
       newState.singleQuestion = action.question;
       return newState
+
+
 
     default:
       return state;
