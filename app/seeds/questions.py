@@ -10,9 +10,36 @@ def seed_questions():
     ques3 = Question(
         user_id=3, title="How can I convert a Datable to a List<T> when class properties match table columns without using a for loop?", description = "What's the fastest way to convert a DataTable with matching class properties to a List?", tags = "c#-datatable")
 
+    ques4 = Question(
+        user_id=4,
+        title="Does Object.assign() create a deep copy or a shallow copy?",
+        description = "61 I just came across this concept of var copy = Object.assign({}, originalObject); which creates a copy of original object into the 'copy' object. However, my question is, does this way of cloning object create a deep copy or a shallow copy?",
+        tags = "Javascript object deep-copy")
+
+    ques5 = Question(
+        user_id=6,
+        title="Kotlin JS: Search complete course",
+        description = "after a lot of research on the internet I do not find a lot of tutorials on kotlin JS, and the few that there are are incomplete. Someone would have the link of a full stack course in Kotlin JS? Design pattern, front end, back end",
+        tags = "kotlin")
+
+    ques6 = Question(
+        user_id=1,
+        title="Export google search to a spreadsheet",
+        description = "Is it possible for me to create a list of google search results from a specific query and export it into excel? For example, I'd like to google orthodontists in Florida and be able to export the business name, phone number and address to an excel spreadsheet. I've done a lot of searching but I can't find any solutions. I'm looking for someone to point me in the right direction. Any help is appreciated, thanks",
+        tags = "excel google-search")
+    ques7 = Question(
+        user_id=8,
+        title="How to make a GET (REST API) from xray Jira Cloud with Postman",
+        description = "My organization has a Jira Cloud Xray environment, I want to get test steps of a particular Test issue (or many) in Postman. I managed to authenticate performing a POST request with Bearer token Auth that links to the body of request with 2 codes: client_id and client_secret The output of this request is one token, so I stored it in a variable. I think I have to use this token to perform a GET request but I get this output: 'error': Authentication request has expired. Try reloading the page.",
+        tags = "api testing postman jira jira-xray")
+
     db.session.add(ques1)
     db.session.add(ques2)
     db.session.add(ques3)
+    db.session.add(ques4)
+    db.session.add(ques5)
+    db.session.add(ques6)
+    db.session.add(ques7)
     db.session.commit()
 
 
