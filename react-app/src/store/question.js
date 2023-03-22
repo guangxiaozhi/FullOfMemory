@@ -148,7 +148,7 @@ const searchQuestions = (questions) => {
 export const searchQuestionsThunk = (keyword) => async (dispatch) => {
   // alert(keyword)
   console.log("keyword from react", keyword)
-  const res = await fetch(`/api/questions/search/${keyword}`)
+  const res = await fetch(`/api/questions/search/${encodeURIComponent(keyword)}`)
   console.log("res.ok", res.ok)
   if (res.ok){
     const questions = await res.json()

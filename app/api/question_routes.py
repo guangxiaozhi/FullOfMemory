@@ -6,6 +6,8 @@ from app.forms import QuestionForm
 from sqlalchemy.sql import func
 from .user_routes import user_routes
 
+from urllib.parse import unquote
+
 question_routes = Blueprint('questions', __name__)
 
 
@@ -251,6 +253,8 @@ def get_questions_by_userId(userId):
 @question_routes.route('/search/<keyword>')
 def search_questions(keyword):
    print("search keywords", keyword)
+   print("search keywords", unquote(keyword))
+   keyword = unquote(keyword)
    questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
    print("search result questions", questions)
    # if not questions:
