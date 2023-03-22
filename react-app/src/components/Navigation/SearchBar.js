@@ -19,7 +19,7 @@ export default function SearchBar(){
     }else{
       await dispatch(searchQuestionsThunk(keyword))
       setKeyword("")
-      history.push(`/tags/${keyword}`)
+      history.push(`/tags/${encodeURIComponent(keyword)}`)
     }
 
   }

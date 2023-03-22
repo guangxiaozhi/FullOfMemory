@@ -60,7 +60,7 @@ export default function SearchPage(){
     : (<div className="no-question-container">
       <h2>We couldn't find any results for "{keyword}", try using another tag to find!</h2>
       <h2>or</h2>
-      <h2><Link to="/"> go back to home</Link></h2>
+      <h2><Link to="/"> go back to home page</Link></h2>
       </div>)
     ))
 }
