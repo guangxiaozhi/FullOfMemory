@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 				</li>
 			</div>
 			<div>
-				{/* <SearchBar /> */}
+				<SearchBar />
 			</div>
 
 
