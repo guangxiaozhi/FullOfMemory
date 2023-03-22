@@ -250,7 +250,25 @@ def get_questions_by_userId(userId):
 # search questions
 @question_routes.route('/search/<keyword>')
 def search_questions(keyword):
-   # print("keywords", keyword)
+   print("search keywords", keyword)
    questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
-   # print("questions", questions)
-   return [ques.to_dict() for ques in questions]
+   print("search result questions", questions)
+   # if not questions:
+   #    print("question couldn't be found")
+   #    return {"errors": ["question couldn't be found"]}, 404
+   data = []
+   for question in questions:
+      answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
+      question_likes = QuestionLike.query.filter(QuestionLike.question_id ==question.id).all()
+      like_count = 0
+      for like in question_likes:
+         like_count = like_count + like.like_unlike
+      user = User.query.get(question.user_id)
+      # print("answer_count", answer_count)
+      questionInfo = {}
+      questionInfo.update(question.to_dict())
+      questionInfo["answer_count"] = answer_count
+      questionInfo["like_count"] = like_count
+      questionInfo["user"] = user.to_dict()
+      data.append(questionInfo)
+   return data

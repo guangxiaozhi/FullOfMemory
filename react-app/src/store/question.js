@@ -35,10 +35,10 @@ export const fetchOneQuestion = (questionId) => async (dispatch) => {
     await dispatch(loadOneQuestion(singleQuestion))
     // console.log(typeof(questionId), questionId)
     return questionId
-  }else{{
+  }else{
     // console.log("no questions error", await res.json())
     return await res.json()
-  }}
+  }
 }
 
 // delete one question by id
@@ -135,6 +135,33 @@ export const createQuestionThunk = (newQuestion) => async (dispatch) => {
   }
 }
 
+
+// Search Question
+const SEARCH_QUESTION = "questions/SEARCH_QUESTION"
+const searchQuestions = (questions) => {
+  return {
+    type:SEARCH_QUESTION,
+    questions
+  }
+}
+
+export const searchQuestionsThunk = (keyword) => async (dispatch) => {
+  // alert(keyword)
+  console.log("keyword from react", keyword)
+  const res = await fetch(`/api/questions/search/${keyword}`)
+  console.log("res.ok", res.ok)
+  if (res.ok){
+    const questions = await res.json()
+    console.log("search result", questions)
+    dispatch(searchQuestions(questions))
+    // alert(`questionId, ${questions[0].id}`)
+    return questions
+  }else{
+    return 404
+  }
+}
+
+
 const initialState = {
   allQuestions: {},
   singleQuestion: {}
@@ -196,7 +223,16 @@ export default function questionReducer(state = initialState, action){
       newState.singleQuestion = action.question;
       return newState
 
+    case SEARCH_QUESTION:
+      console.log("search question prev state", state)
+      newState = {...state, searchQuestions:{}}
 
+      console.log("search question before search new state", newState)
+      console.log("search question before search prev state", state)
+      action.questions.forEach(question => newState.searchQuestions[question.id] = question)
+      console.log("search question after search new state", newState)
+      console.log("search question after search pre state", state)
+      return newState
 
     default:
       return state;

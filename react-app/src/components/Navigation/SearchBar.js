@@ -1,10 +1,27 @@
 import { useHistory } from "react-router-dom"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import {searchQuestionsThunk} from '../../store/question'
+
+
+
 export default function SearchBar(){
   const history = useHistory()
+  const dispatch = useDispatch()
   const [keyword, setKeyword] = useState("")
-  const handleSearch = () => {
-    history.push('/questions/3')
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    console.log("keyword?", keyword)
+    if (keyword.length == 0){
+      history.push('/')
+      alert('please input some word in search area')
+    }else{
+      await dispatch(searchQuestionsThunk(keyword))
+      setKeyword("")
+      history.push(`/tags/${keyword}`)
+    }
+
   }
   return (
     <div className="nav-search">
@@ -17,7 +34,7 @@ export default function SearchBar(){
             maxLength="100"
           />
           <button type="submit" className="search-button">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i class="fas fa-search"></i>
           </button>
         </form>
       </div>

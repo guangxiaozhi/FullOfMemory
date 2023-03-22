@@ -10,6 +10,7 @@ import GetSingleQuestion from "./components/Question/GetSingleQuestion";
 import EditAnswers from "./components/Answer/EditAnswer";
 import UserProfilePage from "./components/UserProfile/GetUserProfilePage";
 import Footer from "./components/Footer";
+import SearchPage from "./components/SearchPage";
 
 import NotFound from "./components/NotFound";
 
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route exact  path='/users/:userId' >
               <UserProfilePage />
+            </Route>
+            <Route exact path='/tags/:keyword'>
+              <SearchPage />
             </Route>
             <Route path='*'>
               <NotFound />
