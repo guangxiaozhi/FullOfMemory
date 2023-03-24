@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@stackoverflow/stacks-editor": "^0.8.6",
+    "react-quill": "^2.0.0"
+  }
+}

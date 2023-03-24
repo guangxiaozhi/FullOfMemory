@@ -1,0 +1,28 @@
+.question-package-container{
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start
+}
+
+.ask-img-container{
+  display: flex;
+  justify-content: space-between;
+}
+.ask-h1{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+}
+
+img{
+  width:50%;
+  background-attachment: fixed;
+}
+
+.writing-container{
+  width:85%;
+  border: 1px solid lightblue;
+  padding: 10px;
+  background-color: rgba(172, 226, 243, 0.2);
+  margin-top: 10px;
+}
