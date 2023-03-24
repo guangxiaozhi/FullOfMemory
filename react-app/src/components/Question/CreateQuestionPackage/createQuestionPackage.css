@@ -22,7 +22,20 @@ img{
 .writing-container{
   width:85%;
   border: 1px solid lightblue;
-  padding: 10px;
+  padding: 20px;
   background-color: rgba(172, 226, 243, 0.2);
   margin-top: 10px;
+}
+
+.create-question-package-errors-item {
+  color:red;
+  font-size: large;
+}
+
+.create-question-package-errors-container{
+  border:1px solid red
+}
+
+.no-boder{
+  border:hidden
 }

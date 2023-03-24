@@ -252,11 +252,11 @@ def get_questions_by_userId(userId):
 # search questions
 @question_routes.route('/search/<keyword>')
 def search_questions(keyword):
-   print("search keywords", keyword)
-   print("search keywords", unquote(keyword))
+   # print("search keywords", keyword)
+   # print("search keywords", unquote(keyword))
    keyword = unquote(keyword)
    questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
-   print("search result questions", questions)
+   # print("search result questions", questions)
    # if not questions:
    #    print("question couldn't be found")
    #    return {"errors": ["question couldn't be found"]}, 404
