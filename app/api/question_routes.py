@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 
 from app.forms import QuestionForm
 from sqlalchemy.sql import func
+from datetime import datetime
 from .user_routes import user_routes
 
 from urllib.parse import unquote
@@ -110,7 +111,8 @@ def update_question(id):
       question.title = request.get_json()["title"]
       question.description = request.get_json()["description"]
       question.tags = request.get_json()["tags"]
-      question.updatedAt = func.now()
+      question.updatedAt = datetime.now()
+      print("question.updatedAt", question.updatedAt)
 
       if question.to_dict()["title"] in titles:
          return {"errors": "Question title should be unique"}, 400
@@ -148,8 +150,10 @@ def create_question():
          title = request.get_json()["title"],
          description = request.get_json()["description"],
          tags = request.get_json()["tags"],
-         createdAt = func.now(),
-         updatedAt = func.now()
+         # createdAt = func.now(),
+         # updatedAt = func.now(),
+         createdAt = datetime.now(),
+         updatedAt = datetime.now()
       )
       if question.to_dict()["title"] in titles:
          return {"errors": "Question title should be unique"}, 400
