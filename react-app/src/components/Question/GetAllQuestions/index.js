@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { fetchAllQuestions, } from '../../../store/question'
 import { Link } from "react-router-dom";
 import OpenModalButton from '../../OpenModalButton'
 import CreateQuestion from "../CreateQuestionModal";
+import CreateQuestionPackage from '../CreateQuestionPackage'
 import './getAllQuestions.css'
 
 function GetAllQuestions() {
@@ -18,14 +19,17 @@ function GetAllQuestions() {
   const allquestions = allQuestionsObj ? Object.values(allQuestionsObj):[];
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
-  // const history = useHistory()
+  const history = useHistory()
   useEffect(() => {
     dispatch(fetchAllQuestions())
       .then(() => setIsLoaded(true))
       // .then(() => history.push('/'))
   }, [dispatch])
 
-
+  const jumpingToCreateQuestion = (e) => {
+    e.preventDefault()
+    history.push('/questions/ask')
+  }
   return (
     isLoaded && (
       <div className="all-question-container" >
@@ -36,6 +40,7 @@ function GetAllQuestions() {
                 buttonText="Ask Question"
                 modalComponent={< CreateQuestion />}
               />
+              <button onClick={jumpingToCreateQuestion}>Ask Question package</button>
             </div>
           }
         </div>

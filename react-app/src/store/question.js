@@ -147,12 +147,12 @@ const searchQuestions = (questions) => {
 
 export const searchQuestionsThunk = (keyword) => async (dispatch) => {
   // alert(keyword)
-  console.log("keyword from react", keyword)
+  // console.log("keyword from react", keyword)
   const res = await fetch(`/api/questions/search/${encodeURIComponent(keyword)}`)
-  console.log("res.ok", res.ok)
+  // console.log("res.ok", res.ok)
   if (res.ok){
     const questions = await res.json()
-    console.log("search result", questions)
+    // console.log("search result", questions)
     dispatch(searchQuestions(questions))
     // alert(`questionId, ${questions[0].id}`)
     return questions
@@ -224,14 +224,14 @@ export default function questionReducer(state = initialState, action){
       return newState
 
     case SEARCH_QUESTION:
-      console.log("search question prev state", state)
+      // console.log("search question prev state", state)
       newState = {...state, searchQuestions:{}}
 
-      console.log("search question before search new state", newState)
-      console.log("search question before search prev state", state)
+      // console.log("search question before search new state", newState)
+      // console.log("search question before search prev state", state)
       action.questions.forEach(question => newState.searchQuestions[question.id] = question)
-      console.log("search question after search new state", newState)
-      console.log("search question after search pre state", state)
+      // console.log("search question after search new state", newState)
+      // console.log("search question after search pre state", state)
       return newState
 
     default:

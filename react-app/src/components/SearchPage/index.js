@@ -9,12 +9,12 @@ import './searchPage.css'
 export default function SearchPage(){
   const {keyword} = useParams()
   const history = useHistory()
-  console.log("keyword from searchPage", keyword)
+  // console.log("keyword from searchPage", keyword)
 
   const searchResultsObj = useSelector(state => state.question.searchQuestions)
 
   let allquestions = searchResultsObj ? Object.values(searchResultsObj): []
-  console.log("allquestions", allquestions)
+  // console.log("allquestions", allquestions)
   const [isLoaded, setIsLoaded] = useState(false)
   const dispatch = useDispatch()
 
