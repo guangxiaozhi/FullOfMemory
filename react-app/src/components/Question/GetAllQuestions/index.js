@@ -36,10 +36,10 @@ function GetAllQuestions() {
         <div className="create-question-button-container">
           {
             <div className="create-question-model-button">
-              <OpenModalButton
+              {/* <OpenModalButton
                 buttonText="Ask Question"
                 modalComponent={< CreateQuestion />}
-              />
+              /> */}
               <button onClick={jumpingToCreateQuestion}>Ask Question package</button>
             </div>
           }

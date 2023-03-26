@@ -112,8 +112,8 @@ function GetSingleQuestion() {
         </div>
         <div className='update-delete-button-container'>
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
-          {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""}
-          <div className="delete-update-question"><button onClick={jumpingToUpdateQuestion}>Update Question Package</button></div>
+          {/* {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""} */}
+          {sessionUser && question.user_id === sessionUser.id ?<div className="delete-update-question"><button onClick={jumpingToUpdateQuestion}>Update Question</button></div>: ""}
         </div>
         </div>
 

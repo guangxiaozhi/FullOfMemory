@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { Link, useHistory } from "react-router-dom"
+import { Link, useHistory, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 
@@ -16,8 +16,17 @@ import "@stackoverflow/stacks/dist/css/stacks.css";
 
 
 export default function UpdateQuestionPackage(){
+  const { questionId } = useParams()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchOneQuestion(questionId))
+  },[])
   const question = useSelector(state => state.question.singleQuestion)
   question ? console.log(Object.values(question)): console.log("no question")
+
+
+
+
 
   const [title, setTitle] = useState(question.title);
   let [description, setDescription] = useState(question.description);
@@ -26,12 +35,12 @@ export default function UpdateQuestionPackage(){
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [errors, setErrors] = useState([]);
-  const dispatch = useDispatch()
   const history = useHistory()
 
   console.log("description", description)
   const editorContainerRef = useRef(null);
   // const tryContainerRef = useRef(null);
+
 
   useEffect(() => {
     if (editorContainerRef.current) {
