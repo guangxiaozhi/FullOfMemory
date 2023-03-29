@@ -40,7 +40,7 @@ function GetSingleQuestion() {
   // console.log("hasAnswer", hasAnswer)
   // console.log("singleQuestion????????", singleQuestion)
   const question = singleQuestion?singleQuestion:[]
-  // console.log("???????? question", question)
+  console.log("???????? question", question)
   // console.log("???????? sessionUser", sessionUser)
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -48,7 +48,7 @@ function GetSingleQuestion() {
   useEffect( async () => {
     // console.log("%%%%%% start fetchONeQuestion")
     const result = await dispatch(fetchOneQuestion(+questionId))
-    // console.log("result form fetchOneQuestion", result, typeof(result))
+    console.log("result form fetchOneQuestion", result, typeof(result))
     if (typeof(result) === "number"){
       setIsLoaded(true)
     }else{
@@ -79,7 +79,10 @@ function GetSingleQuestion() {
     }
   }
 
-
+  const jumpingToUpdateQuestion = (e) => {
+    e.preventDefault()
+    history.push(`/questions/${question.id}/edit`)
+  }
 
   const options = { year: 'numeric', month: 'numeric', day:'numeric' };
   return (
@@ -109,7 +112,8 @@ function GetSingleQuestion() {
         </div>
         <div className='update-delete-button-container'>
           {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete Question</button></div> : ""}
-          {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""}
+          {/* {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""} */}
+          {sessionUser && question.user_id === sessionUser.id ?<div className="delete-update-question"><button onClick={jumpingToUpdateQuestion}>Update Question</button></div>: ""}
         </div>
         </div>
 

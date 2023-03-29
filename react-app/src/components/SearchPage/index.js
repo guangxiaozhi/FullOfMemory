@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useState, useEffect} from "react"
 import { useParams, useHistory } from "react-router-dom"
-import {  } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { searchQuestionsThunk } from "../../store/question"
 import './searchPage.css'

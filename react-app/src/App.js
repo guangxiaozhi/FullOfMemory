@@ -12,6 +12,7 @@ import UserProfilePage from "./components/UserProfile/GetUserProfilePage";
 import Footer from "./components/Footer";
 import SearchPage from "./components/SearchPage";
 import CreateQuestionPackage from "./components/Question/CreateQuestionPackage";
+import UpdateQuestionPackage from "./components/Question/UpdateQuestionPackage"
 
 import NotFound from "./components/NotFound";
 
@@ -34,6 +35,9 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route> */}
+            <Route exact path='/questions/:questionId/edit'>
+              <UpdateQuestionPackage />
+            </Route>
             <Route exact path='/questions/ask'>
               <CreateQuestionPackage />
             </Route>
