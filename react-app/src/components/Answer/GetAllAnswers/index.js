@@ -40,7 +40,7 @@ export default function GetAllAnswers({questionId}) {
 
   return (
     isLoaded && (
-      <>
+      <div className="all-answer-container">
         <h2>All Answers</h2>
         {
           answers.map(answer => (
@@ -71,7 +71,7 @@ export default function GetAllAnswers({questionId}) {
             </div>
           ))
         }
-      </>
+      </div>
 
     )
 

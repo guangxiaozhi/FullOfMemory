@@ -2,18 +2,26 @@
   width:75%;
 }
 .single-question-container {
-  width:auto;
+  /* width:100%; */
   display: flex;
-  margin:20px;
+  margin-top:20px;
 }
-
+.all-answers-owned-by-current-question {
+  width:100%;
+}
+.single-question-related-answers-container {
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  margin-top:20px;
+}
 .single-like-answer {
-  width: 30%;
+  width:6%;
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 5px;
+  margin-right: 25px;
 }
 
 .single-answer {
@@ -23,7 +31,7 @@
 }
 
 .single-question-body {
-  width:95%
+  width:82%;
 }
 
 
@@ -44,18 +52,24 @@
 }
 
 .update-delete-button-container {
-  width:30%;
   display:flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 12%;
 }
 
+.update-delete-button {
+  display: flex;
+}
 
 .delete-update-question button {
   height:25px;
   margin-right:10px;
   margin-bottom: 10px;
   border-radius: 8px;
-  background-color:antiquewhite;
+  /* background-color:antiquewhite; */
+  background-color: white;
+  border: none;
   cursor: pointer;
 }
 
@@ -71,6 +85,7 @@
 .single-tag-username{
   display: flex;
   justify-content: space-between;
+  background-color: rgba(161, 220, 238, 0.4);
 }
 
 .single-tags{
@@ -91,4 +106,12 @@
   width: 18px;
   height: 18px;
   margin:5px;
+}
+
+/* .noError {
+  display: none;
+} */
+
+.ansers-and-package {
+  width:100%
 }
