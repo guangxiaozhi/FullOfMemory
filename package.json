@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@stackoverflow/stacks-editor": "^0.8.6",
-    "react-quill": "^2.0.0"
+    "react-markdown": "^8.0.6",
+    "react-quill": "^2.0.0",
+    "remark-gfm": "^3.0.1"
   }
 }

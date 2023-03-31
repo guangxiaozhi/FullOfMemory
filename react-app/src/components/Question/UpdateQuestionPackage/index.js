@@ -18,9 +18,7 @@ import "@stackoverflow/stacks/dist/css/stacks.css";
 export default function UpdateQuestionPackage(){
   const { questionId } = useParams()
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchOneQuestion(questionId))
-  },[])
+
   const question = useSelector(state => state.question.singleQuestion)
   question ? console.log(Object.values(question)): console.log("no question")
 

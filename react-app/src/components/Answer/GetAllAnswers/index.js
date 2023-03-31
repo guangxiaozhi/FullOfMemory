@@ -5,6 +5,9 @@ import { fetchOneQuestion } from "../../../store/question"
 import { useHistory } from "react-router-dom"
 import {Link} from 'react-router-dom'
 import GetAllAnswerLikes from "../../AnswerLike/GetAllAnswerLike"
+
+import ReactMarkdown from 'react-markdown'
+
 import './getAllAnswer.css'
 
 export default function GetAllAnswers({questionId}) {
@@ -51,12 +54,14 @@ export default function GetAllAnswers({questionId}) {
               <div> <GetAllAnswerLikes answer={answer} questionId={questionId}/></div>
               <div className="single-answer-body-container">
                 <div className="single-answer-body">
-                  {answer.answer_body}
+                <ReactMarkdown>{answer.answer_body}</ReactMarkdown>
                 </div>
                 <div>
                   <div className="delete-update-answer-container">
                     {sessionUser && sessionUser.id === answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""}
-                    {sessionUser && sessionUser.id === answer.user_id ? <Link className="delete-update-answer" to={`/questions/${questionId}`} onClick ={handleDelete(answer.id)}>Delete Answer</Link>:""}
+
+                    {sessionUser && sessionUser.id === answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}/edit`}>Edit</Link>:""}
+                    {sessionUser && sessionUser.id === answer.user_id ? <Link className="delete-update-answer" to={`/questions/${questionId}`} onClick ={handleDelete(answer.id)}>Delete</Link>:""}
                   </div>
                   <div className="single-answer-time-user">
                     <div className="single-answer-time">edited: {new Date(answer.updatedAt).toLocaleDateString("en-US", options)}</div>
