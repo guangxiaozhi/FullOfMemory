@@ -1,0 +1,32 @@
+.update-answer-package-container{
+  border:1px solid red
+}
+
+.update-answer-fixed-container{
+  width:20%;
+  position: fixed;
+  top:10%;
+  left:75%;
+
+}
+
+.update-answer-fixed-title{
+  background-color: hsl(47,65%,84%);
+  font-size: 16px;
+  padding: 12px;
+}
+
+.update-answer-fixed-list{
+  background-color:hsl(47,83%,91%);
+  font-size: 14px;
+}
+
+.update-answer-fixed-list li{
+  padding-top: 10px;
+}
+
+.side-bar {
+  margin: 20px;
+  background-color: hsl(47,83%,91%);
+  margin: 5px;
+}

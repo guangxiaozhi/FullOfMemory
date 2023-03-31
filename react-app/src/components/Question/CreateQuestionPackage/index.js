@@ -74,7 +74,9 @@ export default function CreateQuestionPackage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editor) {
-      // console.log("has editor")
+      console.log("has editor")
+      console.log("editor", editor)
+      console.log("editor content", editor.content)
       description = editor.content
     }
     // setDescription(editor.getContent());

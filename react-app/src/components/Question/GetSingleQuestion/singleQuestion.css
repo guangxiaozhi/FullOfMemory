@@ -115,3 +115,14 @@
 .ansers-and-package {
   width:100%
 }
+
+
+.answer-question-package-no-login{
+  pointer-events: none;
+}
+
+
+pre {
+  background: rgb(240, 240, 240);
+  padding:10px;
+}

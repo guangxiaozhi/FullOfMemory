@@ -4,14 +4,16 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { fetchOneQuestion, fetchAllQuestions, deleteOneQuestionThunk } from '../../../store/question';
 import { fetchAnswerOneQuestion, fetchAllAnswersByQuestionId } from '../../../store/answer'
 import OpenModalButton from "../../OpenModalButton";
-import UpdateQuestion from '../UpdateQuestionModal';
+// import UpdateQuestion from '../UpdateQuestionModal';
 import GetAllAnswers from '../../Answer/GetAllAnswers'
-import AnswerQuestion from '../../Answer/AnserQuestionModal'
+// import AnswerQuestion from '../../Answer/AnserQuestionModal'
 import GetAllLikes from '../../QuestionLike/GetAllLikes'
 import LoginFormModal from '../../LoginFormModal';
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ReactMarkdown from 'react-markdown'
+// import gfm from 'remark-gfm'
 
 import './singleQuestion.css'
 
@@ -186,16 +188,18 @@ function GetSingleQuestion() {
               <p className='time'>Asked {new Date(question.createdAt).toLocaleDateString("en-US", options)}</p>
               <p className='time'>Modified {new Date(question.updatedAt).toLocaleDateString("en-US", options)}</p>
             </div>
-            <div className='single-description'> {question.description}</div>
+            {/* <div className='single-description'> {question.description}</div> */}
+            {/* <div dangerouslySetInnerHTML={{ __html: question.description }} /> */}
+            <ReactMarkdown>{question.description}</ReactMarkdown>
             <div className="single-tags">{question.tags}</div>
             {/* {answerQuestionSession} */}
           </div>
         </div>
         <div className='update-delete-button-container'>
           <div className='update-delete-button'>
+            {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={jumpingToUpdateQuestion}>Edit</button></div> : ""}
             {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={handleDelete(question.id)}>Delete</button></div> : ""}
             {/* {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><OpenModalButton buttonText = "Update Question" modalComponent={<UpdateQuestion singleQuestion={question}/>}/></div> : ""} */}
-            {sessionUser && question.user_id === sessionUser.id ? <div className="delete-update-question"><button onClick={jumpingToUpdateQuestion}>Edit</button></div> : ""}
 
           </div>
           <div className="single-tag-username">
@@ -232,7 +236,7 @@ function GetSingleQuestion() {
                     <li className='create-question-package-errors-item' key={idx}>{error}</li>
                   ))}
                 </ul>
-                <ReactQuill value={value} onChange={setValue} modules={modules} />
+                <ReactQuill value={value} onChange={setValue} modules={modules}  className='answer-question-package-no-login' />
               </div>
               <div>
                 Sign up or <OpenModalButton
@@ -241,7 +245,7 @@ function GetSingleQuestion() {
                   modalComponent={<LoginFormModal />}
                 /> first to answer question
               </div>
-              <div><button onClick={postYourQuestion}>Post Your Answer</button></div>
+              {/* <div><button onClick={postYourQuestion}>Post Your Answer</button></div> */}
             </div>
           }
 
