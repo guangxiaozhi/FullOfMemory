@@ -40,7 +40,7 @@ function GetAllQuestions() {
                 buttonText="Ask Question"
                 modalComponent={< CreateQuestion />}
               /> */}
-              <button onClick={jumpingToCreateQuestion}>Ask Question package</button>
+              <button onClick={jumpingToCreateQuestion}>Ask Question</button>
             </div>
           }
         </div>

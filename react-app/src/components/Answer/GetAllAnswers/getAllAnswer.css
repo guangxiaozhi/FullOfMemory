@@ -1,3 +1,6 @@
+.all-answer-container {
+  width:100%
+}
 .single-answer-container {
   width: auto;
   display: flex;

@@ -77,18 +77,22 @@ const answerOneQuestion = (newAnswer) => {
   }
 }
 export const fetchAnswerOneQuestion = (answerBody, questionId) => async (dispatch) => {
-  // console.log("answerBody", answerBody)
+  console.log("answerBody", answerBody)
   const res = await fetch (`/api/questions/${questionId}/answers`, {
     method: "POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(answerBody)
   })
-  // console.log("res.ok", res.ok)
+  console.log("res.ok", res.ok)
   if (res.ok){
     const newAnswer = await res.json()
     dispatch(answerOneQuestion(newAnswer))
     return newAnswer.id
-  }else {
+  }else if(res.status == 401){
+    return ["please login first"]
+  }
+  else {
+    console.log("res.json()", await res.json())
     return ["answer field is required"]
   }
 }
@@ -126,4 +130,5 @@ export default function answerReducer(state = initialState, action){
     default:
       return state
   }
+  
 }
