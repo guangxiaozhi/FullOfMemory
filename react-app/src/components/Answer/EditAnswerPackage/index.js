@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 import './editAnswerPackage.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchEditAnswer } from "../../../store/answer"
-import ReactMarkdown from 'react-markdown'
+
+import { StacksEditor } from "@stackoverflow/stacks-editor";
+// don't forget to include the styles as well
+import "@stackoverflow/stacks-editor/dist/styles.css";
+// include the Stacks js and css as they're not included in the bundle
+import "@stackoverflow/stacks";
+import "@stackoverflow/stacks/dist/css/stacks.css";
 
 export default function UpdateAnswerPackage() {
   const dispatch = useDispatch()
@@ -16,27 +20,28 @@ export default function UpdateAnswerPackage() {
   const oldAnswer = useSelector(state => state.answer[`${answerId}`])
   const [errors, setErrors] = useState([])
 
-  const [value, setValue] = useState(oldAnswer.answer_body);
-  console.log("value from react-quill package?", value)
-  const toolbarOptions = [['bold', 'italic', 'link', 'blockquote', 'code', 'image', 'snippet'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'color': [] }, { 'background': [] }],
-  [{ 'align': [] }],
-  ['horizontal'],
-  ['undo', 'redo']
-  ];
 
-  const modules = {
-    toolbar: toolbarOptions,
-    clipboard: {
-      matchVisual: false
+  const [editor, setEditor] = useState(null);
+  const editorContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (editorContainerRef.current) {
+      const editorInstance = new StacksEditor(
+        editorContainerRef.current,
+        oldAnswer.answer_body
+      );
+      setEditor(editorInstance);
     }
-  }
+    // setIsLoaded(true)
+  }, []);
 
   const handleUpdate = async() => {
+    let plaint
+    if (editor){
+      plaint = editor.content
+    }
     const newAnswer = {
-      answer_body: document.getElementsByClassName("ql-editor")[0].innerText
+      answer_body:plaint
     }
     // console.log("new answer", newAnswer)
     const editAnswerRes = await dispatch(fetchEditAnswer(newAnswer, answerId))
@@ -51,7 +56,7 @@ export default function UpdateAnswerPackage() {
     <div className="update-answer-package-container">
       <div>
         <span>Answer</span>
-        <div><ReactQuill value={<ReactMarkdown>{value}</ReactMarkdown>} onChange={setValue} modules={modules}/></div>
+        <div ref={editorContainerRef} id="editor-container"  />
         <div>
           <button onClick={handleUpdate}>Save edits</button>
           <Link to={`/questions/${parseInt(questionId)}`}>Cancel</Link>

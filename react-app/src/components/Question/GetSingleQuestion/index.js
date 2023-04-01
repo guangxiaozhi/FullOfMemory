@@ -10,8 +10,12 @@ import GetAllAnswers from '../../Answer/GetAllAnswers'
 import GetAllLikes from '../../QuestionLike/GetAllLikes'
 import LoginFormModal from '../../LoginFormModal';
 
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { StacksEditor } from "@stackoverflow/stacks-editor";
+// don't forget to include the styles as well
+import "@stackoverflow/stacks-editor/dist/styles.css";
+// include the Stacks js and css as they're not included in the bundle
+import "@stackoverflow/stacks";
+import "@stackoverflow/stacks/dist/css/stacks.css";
 import ReactMarkdown from 'react-markdown'
 // import gfm from 'remark-gfm'
 
@@ -23,26 +27,25 @@ function GetSingleQuestion() {
   const { questionId } = useParams();
   let [answer_body, setAnser_body] = useState("")
   const [errors, setErrors] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [value, setValue] = useState('');
-  console.log("value from react-quill package?", value)
-  const toolbarOptions = [['bold', 'italic', 'link', 'blockquote', 'code', 'image', 'snippet'],
-  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  [{ 'color': [] }, { 'background': [] }],
-  [{ 'align': [] }],
-  ['horizontal'],
-  ['undo', 'redo']
-  ];
+  const [editor, setEditor] = useState(null);
 
-  const modules = {
-    toolbar: toolbarOptions,
-    clipboard: {
-      matchVisual: false
+  const editorContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (editorContainerRef.current) {
+      const editorInstance = new StacksEditor(
+        editorContainerRef.current,
+        ""
+      );
+
+      setEditor(editorInstance);
     }
-  }
+  }, [isLoaded]);
 
   const sessionUser = useSelector(state => state.session.user)
+
 
   const singleQuestion = useSelector(state => {
     // console.log("state from get single question component", state)
@@ -71,7 +74,6 @@ function GetSingleQuestion() {
   console.log("???????? question", question)
   // console.log("???????? sessionUser", sessionUser)
 
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(async () => {
     // console.log("%%%%%% start fetchONeQuestion")
@@ -91,7 +93,6 @@ function GetSingleQuestion() {
     await dispatch(deleteOneQuestionThunk(questionId))
       .then(() => dispatch(fetchAllQuestions()))
       .then(history.push('/'))
-
   }
 
 
@@ -135,13 +136,13 @@ function GetSingleQuestion() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const postYourQuestion = async (e) => {
+  const postYourAnswer = async (e) => {
 
     e.preventDefault()
-    const plainText = document.getElementsByClassName("ql-editor")[0].innerText;
+    const plainText = editor.content;
     console.log("plainText", plainText);
     answer_body = plainText;
-    setValue("")
+    editor.content = ""
     const newAnswer = {
       answer_body
     }
@@ -167,12 +168,6 @@ function GetSingleQuestion() {
 
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
-  // let errorContainer
-  // if (!sessionUser){
-  //   errorContainer = "hasError"
-  // }else{
-  //   errorContainer = "noError"
-  // }
 
   return (
     isLoaded && (
@@ -224,9 +219,9 @@ function GetSingleQuestion() {
                       <li className='create-question-package-errors-item' key={idx}>{error}</li>
                     ))}
                   </ul>
-                  <ReactQuill value={value} onChange={setValue} modules={modules} className='answer-question-package' />
+                  <div ref={editorContainerRef} />
                 </div>
-                <div><button onClick={postYourQuestion}>Post Your Answer</button></div>
+                <div><button onClick={postYourAnswer}>Post Your Answer</button></div>
               </div> : "")
             : <div className='ansers-and-package'>
               <div>
@@ -236,7 +231,7 @@ function GetSingleQuestion() {
                     <li className='create-question-package-errors-item' key={idx}>{error}</li>
                   ))}
                 </ul>
-                <ReactQuill value={value} onChange={setValue} modules={modules}  className='answer-question-package-no-login' />
+                <div ref={editorContainerRef}  className="answer-question-package-no-login" />
               </div>
               <div>
                 Sign up or <OpenModalButton

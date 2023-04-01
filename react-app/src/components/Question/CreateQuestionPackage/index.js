@@ -1,4 +1,10 @@
-// import ReactQuill from "react-quill"
+import { StacksEditor } from "@stackoverflow/stacks-editor";
+// don't forget to include the styles as well
+import "@stackoverflow/stacks-editor/dist/styles.css";
+// include the Stacks js and css as they're not included in the bundle
+import "@stackoverflow/stacks";
+import "@stackoverflow/stacks/dist/css/stacks.css";
+
 import { useState, useRef, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"
@@ -6,12 +12,7 @@ import './createQuestionPackage.css'
 import { createQuestionThunk, fetchAllQuestions } from "../../../store/question";
 import LoginFormModal from '../../LoginFormModal';
 
-import { StacksEditor } from "@stackoverflow/stacks-editor";
-// don't forget to include the styles as well
-import "@stackoverflow/stacks-editor/dist/styles.css";
-// include the Stacks js and css as they're not included in the bundle
-import "@stackoverflow/stacks";
-import "@stackoverflow/stacks/dist/css/stacks.css";
+
 
 const pencilSVG = (<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 20.25c0-.402-.356-.75-.75-.75-2.561 0-11.939 0-14.5 0-.394 0-.75.348-.75.75s.356.75.75.75h14.5c.394 0 .75-.348.75-.75zm-7.403-3.398 9.124-9.125c.171-.171.279-.423.279-.684 0-.229-.083-.466-.28-.662l-3.115-3.104c-.185-.185-.429-.277-.672-.277s-.486.092-.672.277l-9.143 9.103c-.569 1.763-1.555 4.823-1.626 5.081-.02.075-.029.15-.029.224 0 .461.349.848.765.848.511 0 .991-.189 5.369-1.681zm-3.27-3.342 2.137 2.137-3.168 1.046zm.955-1.166 7.651-7.616 2.335 2.327-7.637 7.638z" fill-rule="nonzero"/></svg>)
 
@@ -24,52 +25,32 @@ export default function CreateQuestionPackage() {
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch()
   const history = useHistory()
+  const [isLoggedin, setIsLoggedin] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user);
 
+
   const editorContainerRef = useRef(null);
   // const tryContainerRef = useRef(null);
+  useEffect(() => {
+    if (sessionUser) {
+      setIsLoggedin(true);
+    } else {
+      setIsLoggedin(false);
+    }
+  }, [sessionUser])
 
   useEffect(() => {
-    if (editorContainerRef.current) {
-      const editorInstance = new StacksEditor(
-        editorContainerRef.current,
-        ""
-      );
-
-      setEditor(editorInstance);
-      // editorInstance.editor.commands.addHelpCommand("https://stackoverflow.com/editing-help");
-
+    if(!editor){
+      if (editorContainerRef.current) {
+        const editorInstance = new StacksEditor(
+          editorContainerRef.current,
+          ""
+        );
+        setEditor(editorInstance);
+      }
     }
-  }, []);
-
-  useEffect(() => {
-    const helpButtonElement = document.querySelector(
-      ".stacks-editor .toolbar .help"
-    );
-    if (helpButtonElement) {
-      helpButtonElement.setAttribute(
-        "href",
-        "https://full-of-memory.onrender.com/"
-      );
-    }
-  }, []);
-  // useEffect(() => {
-  //   if (editorContainerRef.current) {
-  //     const editorInstance = new StacksEditor(editorContainerRef.current, "");
-  //     editorInstance.commands.updateToolbar = () => {
-  //       const helpButtonElement = document.querySelector(
-  //         ".stacks-editor .toolbar .help"
-  //       );
-  //       if (helpButtonElement) {
-  //         helpButtonElement.setAttribute(
-  //           "href",
-  //           "https://stackoverflow.com/editing-help"
-  //         );
-  //       }
-  //     };
-  //   }
-  // }, []);
+  }, [isLoggedin]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -159,7 +140,7 @@ export default function CreateQuestionPackage() {
                 <label className="description-lable">What are the details of your problem? <p className="description-p">Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p></label>
               </div>
 
-              <div className="description-editor" ref={editorContainerRef} id="editor-container"  />
+              <div className="description-editor" ref={editorContainerRef} id="editor-container" />
 
             </div>
             <div className="explain-of-description">
