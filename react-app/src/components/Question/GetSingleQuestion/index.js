@@ -17,7 +17,7 @@ import "@stackoverflow/stacks-editor/dist/styles.css";
 import "@stackoverflow/stacks";
 import "@stackoverflow/stacks/dist/css/stacks.css";
 import ReactMarkdown from 'react-markdown'
-// import gfm from 'remark-gfm'
+import gfm from 'remark-gfm'
 
 import './singleQuestion.css'
 
@@ -34,14 +34,17 @@ function GetSingleQuestion() {
   const editorContainerRef = useRef(null);
 
   useEffect(() => {
-    if (editorContainerRef.current) {
+    if (!editor){
+      if (editorContainerRef.current) {
       const editorInstance = new StacksEditor(
         editorContainerRef.current,
         ""
       );
 
       setEditor(editorInstance);
+      }
     }
+
   }, [isLoaded]);
 
   const sessionUser = useSelector(state => state.session.user)
@@ -186,7 +189,7 @@ function GetSingleQuestion() {
             </div>
             {/* <div className='single-description'> {question.description}</div> */}
             {/* <div dangerouslySetInnerHTML={{ __html: question.description }} /> */}
-            <ReactMarkdown>{question.description}</ReactMarkdown>
+            <ReactMarkdown plugins={[gfm]}>{question.description}</ReactMarkdown>
             <div className="single-tags">{question.tags}</div>
             {/* {answerQuestionSession} */}
           </div>

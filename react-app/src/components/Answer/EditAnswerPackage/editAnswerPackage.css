@@ -60,5 +60,5 @@
 .side-bar {
   margin: 20px;
   background-color: hsl(47,83%,91%);
-  margin: 5px;
+  padding-bottom: 8px;
 }
