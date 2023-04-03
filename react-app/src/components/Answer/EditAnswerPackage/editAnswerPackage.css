@@ -1,5 +1,37 @@
 .update-answer-package-container{
-  border:1px solid red
+  /* border:1px solid red; */
+  display: flex;
+  flex-direction: row;
+}
+
+.update-answer-package{
+  width:90%
+}
+.anser-title span{
+  font-size: 25px;
+
+}
+
+.anser-title {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.button-and-cancel {
+  padding-top:20px;
+  font-size: 15px;
+}
+
+.button-and-cancel button {
+  margin-right: 20px;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
+  cursor: pointer;
+}
+
+.button-and-cancel button:hover{
+  background-color:hsl(206,100%,40%);
 }
 
 .update-answer-fixed-container{

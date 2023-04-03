@@ -59,10 +59,10 @@ export default function UpdateAnswerPackage() {
   }
   return (
     <div className="update-answer-package-container">
-      <div>
-        <span>Answer</span>
+      <div className='update-answer-package'>
+        <div className='anser-title'><span>Answer</span></div>
         <div ref={editorContainerRef} id="editor-container"  />
-        <div>
+        <div className='button-and-cancel'>
           <button onClick={handleUpdate}>Save edits</button>
           <Link to={`/questions/${parseInt(questionId)}`}>Cancel</Link>
         </div>
