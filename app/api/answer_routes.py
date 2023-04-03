@@ -4,6 +4,7 @@ from .question_routes import question_routes
 from .user_routes import user_routes
 from flask_login import current_user, login_required
 from app.forms import AnswerForm
+from sqlalchemy.sql import func
 
 answer_routes = Blueprint('answer', __name__)
 
@@ -15,6 +16,7 @@ def get_all_answers():
     data = [answer.to_dict() for answer in answers]
     # print("all answers", data)
     return data
+
 
 # get all answers by question Id
 @question_routes.route('/<int:questionId>/answers')
@@ -57,12 +59,24 @@ def edit_answer_by_answerId(answerId):
 
   if form.validate_on_submit():
     answer.answer_body = request.get_json()['answer_body']
+    answer.updatedAt = func.now()
     db.session.commit()
     # print("returned answer from backend ", answer.to_dict())
     return answer.to_dict()
   elif form.errors:
     # print("answer_body is empty, get errors?", form.errors)
     return form.errors, 400
+
+
+# get one answer by answer id
+@answer_routes.route('/<int:answerId>')
+def get_answer_by_id(answerId):
+  answer = Answer.query.get(answerId)
+  if not answer:
+    return {"errors":["answer coldn't be found"]}, 404
+  return answer.to_dict()
+
+
 
 
 # answer one question

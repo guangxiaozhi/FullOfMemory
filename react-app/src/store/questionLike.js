@@ -30,7 +30,7 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify(newQuestionLike)
   })
-  console.log("res.ok", res.ok, res.status)
+  // console.log("res.ok", res.ok, res.status)
   if (res.ok){
     const questionLike = await res.json()
     dispath(addLike(questionLike))
@@ -40,7 +40,7 @@ export const fetchAddQuestionLike = (newQuestionLike,questionId) => async (dispa
     return {"error": ["please login first"]}
   }else {
     const data = await res.json()
-    console.log("add question like res.eroor", data)
+    // console.log("add question like res.eroor", data)
     return data
   }
 }

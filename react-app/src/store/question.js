@@ -34,7 +34,7 @@ export const fetchOneQuestion = (questionId) => async (dispatch) => {
     // console.log("singleQuestion from thunk", singleQuestion)
     await dispatch(loadOneQuestion(singleQuestion))
     // console.log(typeof(questionId), questionId)
-    return questionId
+    return [questionId, singleQuestion]
   }else{
     // console.log("no questions error", await res.json())
     return await res.json()

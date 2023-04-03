@@ -24,7 +24,7 @@ export default function GetAllLikes({questionId}){
         });
     }else {
       // setErrors(Object.values(addLikeThunkRes))
-      console.log("addLikeThunkRes", Object.values(addLikeThunkRes))
+      // console.log("addLikeThunkRes", Object.values(addLikeThunkRes))
       alert(Object.values(addLikeThunkRes))
     }
   }
