@@ -12,7 +12,7 @@ export default function SearchBar(){
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    console.log("keyword?", keyword)
+    // console.log("keyword?", keyword)
     if (keyword.length == 0){
       history.push('/')
       alert('please input some word in search area')

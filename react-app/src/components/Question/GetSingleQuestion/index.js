@@ -71,18 +71,19 @@ function GetSingleQuestion() {
   // console.log("hasAnswer", hasAnswer)
   // console.log("singleQuestion????????", singleQuestion)
   const question = singleQuestion ? singleQuestion : []
-  console.log("???????? question", question)
+  // console.log("???????? question", question)
   // console.log("???????? sessionUser", sessionUser)
 
 
   useEffect(async () => {
     // console.log("%%%%%% start fetchONeQuestion")
     const result = await dispatch(fetchOneQuestion(+questionId))
-    console.log("result form fetchOneQuestion", result, typeof (result))
-    if (typeof (result) === "number") {
+    // console.log("result form fetchOneQuestion", result, typeof (result))
+    if (Array.isArray(result)) {
+      // console.log("result[1]", result[1])
       setIsLoaded(true)
     } else {
-      // console.log("result form fetchOneQuestion", result, typeof(result))
+      // console.log("result form fetchOneQuestion 222222", result, typeof(result))
       history.push('questions/*')
     }
   }, [dispatch, questionId])
@@ -140,7 +141,7 @@ function GetSingleQuestion() {
 
     e.preventDefault()
     const plainText = editor.content;
-    console.log("plainText", plainText);
+    // console.log("plainText", plainText);
     answer_body = plainText;
     editor.content = ""
     const newAnswer = {
@@ -162,7 +163,7 @@ function GetSingleQuestion() {
       }
     } else {
       setErrors(newAnswerThunkRes)
-      console.log("errors", errors)
+      // console.log("errors", errors)
     }
   }
 

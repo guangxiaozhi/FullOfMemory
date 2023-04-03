@@ -17,45 +17,60 @@ import "@stackoverflow/stacks/dist/css/stacks.css";
 
 export default function UpdateQuestionPackage(){
   const { questionId } = useParams()
+  const [isLoaded, setIsLoaded] = useState(false);
   const dispatch = useDispatch()
 
-  const question = useSelector(state => state.question.singleQuestion)
+  let question = useSelector(state => state.question.singleQuestion)
   question ? console.log(Object.values(question)): console.log("no question")
 
+  useEffect(() => {
+    dispatch(fetchOneQuestion(questionId))
+      .then(() => setIsLoaded(true))
+  }, [dispatch, questionId])
 
 
-
-
-  const [title, setTitle] = useState(question.title);
-  let [description, setDescription] = useState(question.description);
-  const [tags, setTags] = useState(question.tags)
+  const [title, setTitle] = useState(question?.title || localStorage.getItem("title") || "");
+  const [description, setDescription] = useState(question?.description || localStorage.getItem("description") || "");
+  console.log("description", description)
+  const [tags, setTags] = useState(question?.tags || localStorage.getItem("tags") || "")
   const [editor, setEditor] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const [errors, setErrors] = useState([]);
   const history = useHistory()
 
-  console.log("description", description)
+  // console.log("description", description)
   const editorContainerRef = useRef(null);
   // const tryContainerRef = useRef(null);
 
 
+  const editorRef = useRef(null);
   useEffect(() => {
     if (editorContainerRef.current) {
       const editorInstance = new StacksEditor(
         editorContainerRef.current,
         description
       );
-      setEditor(editorInstance);
+      return () => {
+        if (editorRef.current) {
+          editorRef.current.destroy();
+          editorRef.current = null;
+        }
+      };
     }
-    // setIsLoaded(true)
-  }, []);
+  }, [description]);
 
+  useEffect(() => {
+    localStorage.setItem("title", title);
+    localStorage.setItem("description", description);
+    localStorage.setItem("tags", tags);
+
+  }, [description]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (editor) {
-      description = editor.content
+    const editorInstance = editorRef.current;
+    if (editorInstance) {
+      description = editorInstance.content;
     }
     const questionId = question.id;
     // const userId = sessionUser.id

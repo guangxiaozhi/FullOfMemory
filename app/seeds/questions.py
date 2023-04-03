@@ -32,6 +32,12 @@ def seed_questions():
         title="How to make a GET (REST API) from xray Jira Cloud with Postman",
         description = "My organization has a Jira Cloud Xray environment, I want to get test steps of a particular Test issue (or many) in Postman. I managed to authenticate performing a POST request with Bearer token Auth that links to the body of request with 2 codes: client_id and client_secret The output of this request is one token, so I stored it in a variable. I think I have to use this token to perform a GET request but I get this output: 'error': Authentication request has expired. Try reloading the page.",
         tags = "api testing postman jira jira-xray")
+    ques8 = Question(
+        user_id=12,
+        title="How to sync wsl time with windows system",
+        description = "sudo hwclock -s",
+        tags = "command")
+
 
     db.session.add(ques1)
     db.session.add(ques2)
@@ -40,6 +46,7 @@ def seed_questions():
     db.session.add(ques5)
     db.session.add(ques6)
     db.session.add(ques7)
+    db.session.add(ques8)
     db.session.commit()
 
 
