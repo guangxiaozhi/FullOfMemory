@@ -23,11 +23,6 @@ export default function UpdateQuestionPackage(){
   let question = useSelector(state => state.question.singleQuestion)
   question ? console.log(Object.values(question)): console.log("no question")
 
-  useEffect(() => {
-    dispatch(fetchOneQuestion(questionId))
-      .then(() => setIsLoaded(true))
-  }, [dispatch, questionId])
-
 
   const [title, setTitle] = useState(question?.title || localStorage.getItem("title") || "");
   const [description, setDescription] = useState(question?.description || localStorage.getItem("description") || "");
@@ -64,7 +59,7 @@ export default function UpdateQuestionPackage(){
     localStorage.setItem("description", description);
     localStorage.setItem("tags", tags);
 
-  }, [description]);
+  }, [title, description, tags]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();

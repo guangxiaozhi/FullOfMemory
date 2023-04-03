@@ -20,6 +20,7 @@ export default function UpdateAnswerPackage() {
   const oldAnswer = useSelector(state => state.answer[`${answerId}`])
   const [errors, setErrors] = useState([])
 
+  const [answer_body, setAnser_body] = useState(oldAnswer?.answer_body || localStorage.getItem("answer_body") || "");
 
   const [editor, setEditor] = useState(null);
   const editorContainerRef = useRef(null);
@@ -28,12 +29,16 @@ export default function UpdateAnswerPackage() {
     if (editorContainerRef.current) {
       const editorInstance = new StacksEditor(
         editorContainerRef.current,
-        oldAnswer.answer_body
+        answer_body
       );
       setEditor(editorInstance);
     }
-    // setIsLoaded(true)
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("answer_body", answer_body);
+
+  }, [answer_body]);
 
   const handleUpdate = async() => {
     let plaint
