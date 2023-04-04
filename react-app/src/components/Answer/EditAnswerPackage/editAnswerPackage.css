@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  --first-width: 75%;
-  --second-width: 25%;
+  --first-width: 70%;
+  --second-width: 40%;
 }
 
 .update-answer-package{
