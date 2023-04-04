@@ -52,7 +52,7 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        {user ? (
+        {/* {user ? ( */}
           <div className="profile-dropdown-information">
             <li>{user.username}</li>
             <li>{user.email}</li>
@@ -63,7 +63,7 @@ function ProfileButton({ user }) {
               <button onClick={handleLogout}>Log Out</button>
             </li>
           </div>
-        ) : (
+        {/* ) : (
           <div className="profile-dropdown-information">
             <li className="profile-dropdown-li">
               <OpenModalButton
@@ -82,7 +82,7 @@ function ProfileButton({ user }) {
             </li>
 
           </div>
-        )}
+        )} */}
       </ul>
     </>
   );

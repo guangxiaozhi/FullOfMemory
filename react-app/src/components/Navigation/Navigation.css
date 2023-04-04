@@ -38,17 +38,17 @@
   list-style-type: none;
 }
 
-.profile-dropdown-li button{
+/* .profile-dropdown-li button{
   border-radius: 10px;
   background-color:antiquewhite;
   margin:2px;
   cursor: pointer;
-}
+} */
 
 
-button:hover {
+/* button:hover {
   background-color: lightgray;
-}
+} */
 
 .profile-dropdown-information{
   list-style-type: none;
@@ -57,12 +57,8 @@ button:hover {
 .profile-dropdown-button {
   cursor: pointer;
 }
-.profile-dropdown-userProfile {
-  border-radius: 10px;
-  background-color:antiquewhite;
-  margin:2px;
-  cursor: pointer;
-}
+
+
 /*
 .search-button {
   background-color: red;
@@ -76,12 +72,52 @@ button:hover {
 } */
 
 .dropdown-menu button{
-  border-radius: 12px;
-  background-color:antiquewhite;
-  margin-bottom: 10px;
+  height:25px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
   cursor: pointer;
+  margin-top: 10px;
+}
+.dropdown-menu button:hover {
+  background-color:hsl(207, 71%, 66%);
+}
+.search-input-values {
+  width:80%;
+  height: 28px;
+}
+.search-button {
+  height:28px;
+}
+.search-container{
+  width:70%
 }
 
-.search-input-values {
-  width:80%
+.login-signup-button {
+  display: flex;
+  width:12%;
+  justify-content: space-around;
+}
+
+.login-button button {
+  /* margin-right: 20px; */
+  height:32px;
+  width: 110%;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
+  cursor: pointer;
+}
+.login-button button:hover{
+  background-color:hsl(207, 71%, 66%);
+}
+
+.signup-button button {
+  margin-right: 20px;
+  width: 80%;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(207, 74%, 63%);
+  cursor: pointer;
+}
+.signup-button button:hover{
+  background-color:hsl(207, 83%, 57%);
 }

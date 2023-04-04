@@ -49,7 +49,7 @@ function LoginFormModal() {
           ))}
         </ul>
         <label className='login-information'>
-          <span>Email:</span>
+          <span>Email</span>
           <input
             type="text"
             value={email}
@@ -58,7 +58,7 @@ function LoginFormModal() {
           />
         </label>
         <label className='login-information'>
-          <span>Password:</span>
+          <span>Password</span>
           <input
             type="password"
             value={password}
@@ -66,8 +66,8 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button className='login-button' type="submit">Log In</button>
-        <button className='login-button' onClick={demoUserClick}>demo-user</button>
+        <button className='login-modle-button' type="submit">Log In</button>
+        <button className='login-modle-button' onClick={demoUserClick}>demo-user</button>
       </form>
     </div>
   );
