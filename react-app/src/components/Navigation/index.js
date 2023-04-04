@@ -41,7 +41,7 @@ function Navigation({ isLoaded }){
 					<NavLink exact to="/"><img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR71-Pz4ApR2-rKpzs1UQg7shcX3N0-BLiTYfjs6ZGvFu-Zv6e1ennmYeznXxGVASzpXBQ&usqp=CAU' alt=""/></NavLink>
 				</li>
 				<li className="menu-list">
-					<NavLink exact to="/">All Questions</NavLink>
+					<NavLink exact to="/">FullOfMemory</NavLink>
 				</li>
 			</div>
 			<div className='search-container'>
