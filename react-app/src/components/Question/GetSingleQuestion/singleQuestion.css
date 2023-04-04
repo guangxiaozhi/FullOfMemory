@@ -1,5 +1,6 @@
 .single-question-root-container {
   width:75%;
+  margin-bottom: 40px;
 }
 
 .single-title {
@@ -157,19 +158,30 @@ pre {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+  --first-width: 70%;
+  --second-width: 25%;
 }
 
 .single-question-related-answers {
-  flex-basis: 70%;
+  flex-basis: var(--first-width);
+  width: var(--first-width);
 }
 .single-question-side-bar {
-  flex-basis: 25%;
+  flex-basis: var(--second-width);
+  width: var(--second-width);
 }
 
 @media (max-width: 600px) {
-  .single-question-related-answers,
+  .except-title-time {
+    flex-wrap: wrap;
+    --first-width: 100%;
+    --second-width: 100%;
+  }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
   .single-question-side-bar {
-    flex-basis: 100%;
+    flex-basis: 40%;
+    width: 40%;
   }
 }
