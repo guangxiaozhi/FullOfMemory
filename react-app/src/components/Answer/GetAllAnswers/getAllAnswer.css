@@ -1,17 +1,19 @@
 .all-answer-container {
-  width:100%
+  width:100%;
+  margin-bottom:40px;
 }
 .single-answer-container {
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 
 
 
 .single-answer-body-container {
-  width:80%
+  width:85%
 }
 
 .single-answer-time-user {
@@ -51,3 +53,6 @@
   background: rgb(240, 240, 240);
   padding:10px;
 } */
+.get-all-answer-like-container{
+  width:10%
+}

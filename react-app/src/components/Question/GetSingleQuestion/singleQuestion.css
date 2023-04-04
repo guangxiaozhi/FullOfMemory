@@ -1,9 +1,25 @@
 .single-question-root-container {
   width:75%;
 }
-.single-question-container {
-  /* width:100%; */
+
+.single-title {
+  font-size: 20px
+}
+
+.single-time {
   display: flex;
+  border-bottom: 1px solid;
+}
+
+.time {
+  margin: 10px;
+}
+
+
+.single-question-container {
+  width:100%;
+  display: flex;
+  justify-content: space-between;
   margin-top:20px;
 }
 .all-answers-owned-by-current-question {
@@ -16,36 +32,28 @@
   margin-top:20px;
 }
 .single-like-answer {
-  width:6%;
+  /* width:10%;
   display:flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-right: 25px;
+  justify-content: center; */
+  width:80px;
 }
 
-.single-answer {
+/* .single-answer {
   border:1px solid green;
   border-radius: 5px;
   padding: 2px;
+} */
+
+.get-question-like {
+  width:10%;
 }
 
 .single-question-body {
-  width:82%;
+  width:85%;
 }
 
-
-.single-title {
-  font-size: 20px
-}
-
-.single-time {
-  display: flex;
-}
-
-.time {
-  margin: 10px;
-}
 
 .single-description {
   margin: 10px;
@@ -54,8 +62,7 @@
 .update-delete-button-container {
   display:flex;
   justify-content: space-between;
-  margin-left: 20%;
-  margin-right: 12%;
+  margin-left: 15%;
 }
 
 .update-delete-button {
@@ -125,4 +132,44 @@
 pre {
   background: rgb(240, 240, 240);
   padding:10px;
+}
+
+.has-two-items {
+  display: flex;
+  padding: 10px;
+  background-color:hsl(47, 77%, 92%)
+}
+
+.svg {
+  margin-right: 35px;
+  margin-left: 25px;
+}
+
+.side-basr-title{
+  font-weight: bold;
+  padding: 10px;
+  background-color: hsl(47,65%,84%);
+  border:1px solid hsl(47,65%,84%);
+  list-style-type: none;
+}
+
+.except-title-time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.single-question-related-answers {
+  flex-basis: 70%;
+}
+.single-question-side-bar {
+  flex-basis: 25%;
+}
+
+@media (max-width: 600px) {
+  .single-question-related-answers,
+  .single-question-side-bar {
+    flex-basis: 100%;
+  }
 }

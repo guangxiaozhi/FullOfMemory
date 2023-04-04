@@ -64,7 +64,7 @@ export default function GetAllLikes({questionId}){
         <img src="https://emojis.wiki/thumbs/emojis/eject-button.webp" alt="" className="single-question-upside" onClick={ () => handleAddLike(questionId)} />
         <span className="like-tooltiptext">like?</span>
       </div>
-      <div> {like_count} likes</div>
+      <div className="question-like-account"> {like_count} likes</div>
       <div className="unlike-tooltip">
         <img src="https://emojis.wiki/thumbs/emojis/eject-button.webp" alt="" className="single-question-upside-down" onClick={ () => handleDeleteLike(questionId)} />
         <span className="unlike-tooltiptext">unlike?</span>
