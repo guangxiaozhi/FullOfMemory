@@ -85,7 +85,7 @@ function GetAllQuestions() {
 
 
         <div className="fixed-context-on-home-page">
-        <ul className='single-question-side-bar'>
+        <ul className='single-question-side-bar-on-home-page'>
             <li className='side-basr-title '>The FullOfMemory Blog</li>
             <li className='has-two-items'>
               <div className='svg'>{penSVG}</div>
