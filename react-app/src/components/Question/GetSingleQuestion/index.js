@@ -9,6 +9,7 @@ import GetAllAnswers from '../../Answer/GetAllAnswers'
 // import AnswerQuestion from '../../Answer/AnserQuestionModal'
 import GetAllLikes from '../../QuestionLike/GetAllLikes'
 import LoginFormModal from '../../LoginFormModal';
+import SignupFormModal from '../../SignupFormModal';
 
 import { StacksEditor } from "@stackoverflow/stacks-editor";
 // don't forget to include the styles as well
@@ -224,7 +225,7 @@ function GetSingleQuestion() {
                   ? (question.user_id !== sessionUser.id && !hasAnswer
                     ? <div className='ansers-and-package'>
                       <div className='answer-question-title-error-package'>
-                        <h2>{question.answer_count} answers</h2>
+                        <h2>Your answer</h2>
                         <ul className="">
                           {errors.map((error, idx) => (
                             <li className='create-question-package-errors-item' key={idx}>{error}</li>
@@ -236,7 +237,7 @@ function GetSingleQuestion() {
                     </div> : "")
                   : <div className='ansers-and-package'>
                     <div>
-                      <h2>{question.answer_count} answers</h2>
+                      <h2>Your answer</h2>
                       <ul className="">
                         {errors.map((error, idx) => (
                           <li className='create-question-package-errors-item' key={idx}>{error}</li>
@@ -244,8 +245,14 @@ function GetSingleQuestion() {
                       </ul>
                       <div ref={editorContainerRef}  className="answer-question-package-no-login" />
                     </div>
-                    <div>
-                      Sign up or <OpenModalButton
+                    <div className='let-you-signup-or-login-first'>
+                    <OpenModalButton
+                      buttonText="Sign Up"
+                      onItemClick={closeMenu}
+                      modalComponent={<SignupFormModal />}
+                    />
+                      <span> or </span>
+                      <OpenModalButton
                         buttonText="Log In"
                         onItemClick={closeMenu}
                         modalComponent={<LoginFormModal />}
