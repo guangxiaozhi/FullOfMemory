@@ -93,16 +93,16 @@
 }
 
 .update-question-package button{
-  width:90px;
-  height:25px;
-  margin-left: 10px;
-  margin-right:10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color:antiquewhite;
+  margin-right: 20px;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
   cursor: pointer;
 }
 
+.update-question-package button:hover{
+  background-color:hsl(207, 71%, 66%);
+}
 
 .question-body-item  input:focus {
   outline: none;
