@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import GetAllAnswerLikes from "../../AnswerLike/GetAllAnswerLike"
 
 import ReactMarkdown from 'react-markdown'
+import gfm from 'remark-gfm'
 
 import './getAllAnswer.css'
 
@@ -54,7 +55,7 @@ export default function GetAllAnswers({questionId}) {
               <div> <GetAllAnswerLikes answer={answer} questionId={questionId}/></div>
               <div className="single-answer-body-container">
                 <div className="single-answer-body">
-                <ReactMarkdown>{answer.answer_body}</ReactMarkdown>
+                <ReactMarkdown  plugins={[gfm]}>{answer.answer_body}</ReactMarkdown>
                 </div>
                 <div>
                   <div className="delete-update-answer-container">

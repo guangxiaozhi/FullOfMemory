@@ -37,20 +37,13 @@ export default function UpdateQuestionPackage(){
   const editorContainerRef = useRef(null);
   // const tryContainerRef = useRef(null);
 
-
-  const editorRef = useRef(null);
   useEffect(() => {
     if (editorContainerRef.current) {
       const editorInstance = new StacksEditor(
         editorContainerRef.current,
         description
       );
-      return () => {
-        if (editorRef.current) {
-          editorRef.current.destroy();
-          editorRef.current = null;
-        }
-      };
+      setEditor(editorInstance);
     }
   }, [description]);
 
@@ -63,9 +56,8 @@ export default function UpdateQuestionPackage(){
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const editorInstance = editorRef.current;
-    if (editorInstance) {
-      description = editorInstance.content;
+    if (editor){
+      description = editor.content
     }
     const questionId = question.id;
     // const userId = sessionUser.id
