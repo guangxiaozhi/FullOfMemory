@@ -12,7 +12,7 @@ import gfm from 'remark-gfm'
 import './getAllAnswer.css'
 
 export default function GetAllAnswers({questionId, answerAccount}) {
-  console.log("answerAccount from single question page", answerAccount)
+  // console.log("answerAccount from single question page", answerAccount)
   const dispatch = useDispatch()
   const history = useHistory()
   const [isLoaded, setIsLoaded] = useState(false);
