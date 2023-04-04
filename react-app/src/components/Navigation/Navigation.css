@@ -20,6 +20,7 @@
   list-style-type: none;
   margin-left: 3px;
   font-weight: bold;
+  font-size:22px;
 }
 
 .icon-list{
@@ -90,6 +91,7 @@
   height:28px;
 }
 .search-container{
+  margin-left: 5%;
   width:70%
 }
 
