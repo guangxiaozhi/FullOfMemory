@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllAnswersByQuestionId, fetchDeleteAnswer } from '../../../store/answer'
 import { fetchOneQuestion } from "../../../store/question"
-import { useHistory } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import {Link} from 'react-router-dom'
 import GetAllAnswerLikes from "../../AnswerLike/GetAllAnswerLike"
 
@@ -11,7 +11,8 @@ import gfm from 'remark-gfm'
 
 import './getAllAnswer.css'
 
-export default function GetAllAnswers({questionId}) {
+export default function GetAllAnswers({questionId, answerAccount}) {
+  console.log("answerAccount from single question page", answerAccount)
   const dispatch = useDispatch()
   const history = useHistory()
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,21 +46,21 @@ export default function GetAllAnswers({questionId}) {
   return (
     isLoaded && (
       <div className="all-answer-container">
-        <h2>All Answers</h2>
+        <h2>{answerAccount} Answers</h2>
         {
           answers.map(answer => (
             <div key={answer.id} className="single-answer-container">
               {/* <div className="single-answer-likes">
                 {answer.like_count} likes
               </div> */}
-              <div> <GetAllAnswerLikes answer={answer} questionId={questionId}/></div>
+              <div className="get-all-answer-like-container"> <GetAllAnswerLikes answer={answer} questionId={questionId}/></div>
               <div className="single-answer-body-container">
                 <div className="single-answer-body">
                 <ReactMarkdown  plugins={[gfm]}>{answer.answer_body}</ReactMarkdown>
                 </div>
                 <div>
                   <div className="delete-update-answer-container">
-                    {sessionUser && sessionUser.id === answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""}
+                    {/* {sessionUser && sessionUser.id === answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}`}>Edit Answer</Link>:""} */}
 
                     {sessionUser && sessionUser.id === answer.user_id ? <Link  className="delete-update-answer" to={`/questions/${questionId}/answers/${answer.id}/edit`}>Edit</Link>:""}
                     {sessionUser && sessionUser.id === answer.user_id ? <Link className="delete-update-answer" to={`/questions/${questionId}`} onClick ={handleDelete(answer.id)}>Delete</Link>:""}

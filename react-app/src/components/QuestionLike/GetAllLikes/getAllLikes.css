@@ -51,3 +51,7 @@
 .single-question-upside-down {
   cursor: pointer;
 }
+
+.question-like-account {
+  width:70px;
+}
