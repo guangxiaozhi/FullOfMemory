@@ -1,6 +1,7 @@
 .single-question-root-container {
   width:75%;
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .single-title {
@@ -143,7 +144,7 @@ pre {
 
 .svg {
   margin-right: 35px;
-  margin-left: 25px;
+  margin-left: 10px;
 }
 
 .side-basr-title{

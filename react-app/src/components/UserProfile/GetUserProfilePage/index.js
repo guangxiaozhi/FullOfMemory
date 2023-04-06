@@ -124,7 +124,7 @@ export default function UserProfilePage(){
               </div>
 
             </div>
-            <div>
+            <div className="userProfile-update-delete-button">
               {sessionUser && sessionUser.id === currentProfileUser.id ? <div className="update-profile"><OpenModalButton buttonText = "Update User" modalComponent={<UpdateProfile user={currentProfileUser}/>}/></div> : ""}
               {sessionUser && sessionUser.id === currentProfileUser.id ? <div className="update-profile"><button onClick={handleDelete(currentProfileUser.id)}>Delete User</button></div>:""}
             </div>
