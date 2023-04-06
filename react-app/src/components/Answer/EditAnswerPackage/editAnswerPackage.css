@@ -1,11 +1,16 @@
 .update-answer-package-container{
   /* border:1px solid red; */
+  width:75%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  --first-width: 70%;
+  --second-width: 40%;
 }
 
 .update-answer-package{
-  width:90%
+  flex-basis: var(--first-width);
+  width: var(--first-width);
 }
 .anser-title span{
   font-size: 25px;
@@ -31,15 +36,27 @@
 }
 
 .button-and-cancel button:hover{
-  background-color:hsl(206,100%,40%);
+  background-color:hsl(207, 71%, 66%);
 }
 
 .update-answer-fixed-container{
-  width:20%;
-  position: fixed;
-  top:10%;
-  left:75%;
+  flex-basis: var(--second-width);
+  width: var(--second-width);
 
+}
+
+@media (max-width: 600px) {
+  .update-answer-package-container {
+    flex-wrap: wrap;
+    --first-width: 100%;
+    --second-width: 100%;
+  }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+  .update-answer-fixed-container {
+    flex-basis: 40%;
+    width: 40%;
+  }
 }
 
 .update-answer-fixed-title{

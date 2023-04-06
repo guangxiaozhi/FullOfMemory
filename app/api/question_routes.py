@@ -112,7 +112,7 @@ def update_question(id):
       question.description = request.get_json()["description"]
       question.tags = request.get_json()["tags"]
       question.updatedAt = datetime.now()
-      print("question.updatedAt", question.updatedAt)
+      # print("question.updatedAt", question.updatedAt)
 
       if question.to_dict()["title"] in titles:
          return {"errors": "Question title should be unique"}, 400
@@ -256,8 +256,8 @@ def get_questions_by_userId(userId):
 # search questions
 @question_routes.route('/search/<keyword>')
 def search_questions(keyword):
-   print("search keywords", keyword)
-   print("unquote search keywords", unquote(keyword))
+   # print("search keywords", keyword)
+   # print("unquote search keywords", unquote(keyword))
    keyword = unquote(keyword)
    questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
    # print("search result questions", questions)

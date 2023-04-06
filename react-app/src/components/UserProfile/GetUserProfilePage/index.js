@@ -97,13 +97,9 @@ export default function UserProfilePage(){
           </div>
         ))}
       </div>
-    )
+      )
+    }
   }
-
-  }
-
-
-
 
   const handleDelete = (userId) => async (e) => {
     await dispatch (deleteUserThunk(userId))

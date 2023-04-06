@@ -1,10 +1,15 @@
 .update-package-container{
   display: flex;
-  width: 80%
+  width: 80%;
+  flex-direction: row;
+  justify-content: space-between;
+  --first-width: 70%;
+  --second-width: 25%;
 }
 
 .update-question-container{
-  width: 70%;
+  flex-basis: var(--first-width);
+  width: var(--first-width);
   margin-left: 8%;
 }
 
@@ -41,12 +46,34 @@
 }
 
 .fixed-container{
-  width:20%;
-  position: fixed;
-  top:10%;
-  left:75%;
+  height:100px;
+  flex-basis: var(--second-width);
+  width: var(--second-width);
   background-color: hsl(47,83%,91%);
-  margin: 5px;
+  margin: 25px;
+}
+
+@media (max-width: 600px) {
+  .update-package-container {
+    flex-wrap: wrap;
+    --first-width: 100%;
+    --second-width: 100%;
+  }
+  .fixed-container {
+    margin-left: 20%;
+  }
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+  .fixed-container {
+    flex-basis: 40%;
+    width: 40%;
+  }
+}
+@media (max-width: 125px) {
+  .fixed-container {
+    flex-basis: 100%;
+    width: 100%;
+  }
 }
 
 .fixed-title{
@@ -62,19 +89,20 @@
 
 .fixed-list li{
   padding-top: 10px;
+  padding-right: 10px;
 }
 
 .update-question-package button{
-  width:90px;
-  height:25px;
-  margin-left: 10px;
-  margin-right:10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color:antiquewhite;
+  margin-right: 20px;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
   cursor: pointer;
 }
 
+.update-question-package button:hover{
+  background-color:hsl(207, 71%, 66%);
+}
 
 .question-body-item  input:focus {
   outline: none;

@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content:flex-start;
   width:80%;
+  margin-bottom: 30px;
 }
 
 /* .ask-writing-container {
@@ -207,16 +208,16 @@ img{
 }
 
 .ask-question-package-button {
-  width:160px;
-  height:25px;
-  margin-left:9px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  border-radius: 8px;
-  background-color:antiquewhite;
+  margin-top: 15px;
+  margin-right: 20px;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
   cursor: pointer;
 }
-
+.ask-question-package-button:hover{
+  background-color:hsl(207, 71%, 66%);
+}
 
 .create-question-title-input input:focus {
   outline: none;

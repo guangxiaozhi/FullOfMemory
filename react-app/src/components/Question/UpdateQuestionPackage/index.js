@@ -25,8 +25,8 @@ export default function UpdateQuestionPackage(){
 
 
   const [title, setTitle] = useState(question?.title || localStorage.getItem("title") || "");
-  const [description, setDescription] = useState(question?.description || localStorage.getItem("description") || "");
-  console.log("description", description)
+  let [description, setDescription] = useState(question?.description || localStorage.getItem("description") || "");
+  // console.log("description", description)
   const [tags, setTags] = useState(question?.tags || localStorage.getItem("tags") || "")
   const [editor, setEditor] = useState(null);
 

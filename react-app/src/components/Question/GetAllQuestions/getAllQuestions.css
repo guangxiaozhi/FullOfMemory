@@ -54,12 +54,14 @@
 
 
 .create-question-model-button button {
-  /* list-style-type: none; */
-  border-radius: 10px;
-  background-color:antiquewhite;
-  margin:2px;
-  margin-right:50px;
+  margin-right: 20px;
+  height:32px;
+  border-radius: 5px;
+  background-color:hsl(206, 90%, 73%);
   cursor: pointer;
+}
+.create-question-model-button button:hover{
+  background-color:hsl(207, 71%, 66%);
 }
 
 a:link { text-decoration: none; }

@@ -48,9 +48,9 @@ function App() {
             <Route exact path="/questions/:questionId">
               <GetSingleQuestion />
             </Route>
-            <Route exact path="/questions/:questionId/answers/:answerId">
+            {/* <Route exact path="/questions/:questionId/answers/:answerId">
               <EditAnswers />
-            </Route>
+            </Route> */}
             <Route exact path="/questions/:questionId/answers/:answerId/edit">
               <UpdateAnswerPackage />
             </Route>
