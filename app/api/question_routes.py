@@ -259,13 +259,23 @@ def search_questions(keyword):
    # print("search keywords", keyword)
    # print("unquote search keywords", unquote(keyword))
    keyword = unquote(keyword)
-   questions = Question.query.filter(Question.tags.like(f'%{keyword}%')).all()
-   # print("search result questions", questions)
+   keywords = keyword.split()
+   # print("keywords", keywords)
+   all_questions = set()
+   for key in keywords:
+      title_contain_questions = Question.query.filter(Question.title.like(f'%{key}%')).all()
+      description_contain_questions = Question.query.filter(Question.description.like(f'%{key}%')).all()
+      for question in title_contain_questions:
+         all_questions.add(question)
+      for question in description_contain_questions:
+         all_questions.add(question)
+   # print("search result questions", all_questions)
    # if not questions:
    #    print("question couldn't be found")
    #    return {"errors": ["question couldn't be found"]}, 404
    data = []
-   for question in questions:
+   for question in all_questions:
+      # print("the question in all_quesions", question.to_dict())
       answer_count = len(Answer.query.filter(Answer.question_id == question.id).all())
       question_likes = QuestionLike.query.filter(QuestionLike.question_id ==question.id).all()
       like_count = 0
@@ -279,4 +289,5 @@ def search_questions(keyword):
       questionInfo["like_count"] = like_count
       questionInfo["user"] = user.to_dict()
       data.append(questionInfo)
+   # print("data", data)
    return data
