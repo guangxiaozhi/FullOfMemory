@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllAnswersByQuestionId, fetchDeleteAnswer } from '../../../store/answer'
+import { fetchAllAnswersByQuestionId, fetchDeleteAnswer, fetchAnswerOneQuestion } from '../../../store/answer'
 import { fetchOneQuestion } from "../../../store/question"
 import { useHistory, useParams } from "react-router-dom"
 import {Link} from 'react-router-dom'
@@ -10,6 +10,19 @@ import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 
 import './getAllAnswer.css'
+
+
+import LoginFormModal from '../../LoginFormModal';
+import SignupFormModal from '../../SignupFormModal';
+import OpenModalButton from "../../OpenModalButton";
+import { StacksEditor } from "@stackoverflow/stacks-editor";
+// don't forget to include the styles as well
+import "@stackoverflow/stacks-editor/dist/styles.css";
+// include the Stacks js and css as they're not included in the bundle
+import "@stackoverflow/stacks";
+import "@stackoverflow/stacks/dist/css/stacks.css";
+
+
 
 export default function GetAllAnswers({questionId, answerAccount}) {
   // console.log("answerAccount from single question page", answerAccount)
@@ -38,8 +51,118 @@ export default function GetAllAnswers({questionId, answerAccount}) {
     // console.log("handle delete ")
     await dispatch(fetchDeleteAnswer(answerId))
       .then(() => dispatch(fetchOneQuestion(questionId)))
+      .then(() => {
+        if (editorContainerRef.current) {
+          const editorInstance = new StacksEditor(
+            editorContainerRef.current,
+            ""
+          );
+
+          setEditor(editorInstance);
+        }
+      })
+      .then(() => setErrors(""))
     history.push(`/questions/${questionId}`)
   }
+
+
+
+
+  let [answer_body, setAnser_body] = useState("")
+  const [errors, setErrors] = useState([])
+  const [editor, setEditor] = useState(null);
+
+  const editorContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (!editor) {
+      if (editorContainerRef.current) {
+        const editorInstance = new StacksEditor(
+          editorContainerRef.current,
+          ""
+        );
+
+        setEditor(editorInstance);
+      }
+    }
+
+  }, [isLoaded]);
+
+
+  const singleQuestion = useSelector(state => {
+    // console.log("state from get single question component", state)
+    return state.question.singleQuestion
+  })
+  const allAnswersForCurrentQuestion = useSelector(state => state.answer)
+  const allId = []
+  for (let answer of Object.values(allAnswersForCurrentQuestion)) {
+    // console.log("anser", answer)
+    // console.log("answer.user_id", answer.user_id)
+    allId.push(answer.user_id)
+  }
+  // console.log("allId", allId)
+  // console.log("sessionUser.id", sessionUser.id)
+  let hasAnswer
+
+  hasAnswer = sessionUser ? allId.includes(sessionUser.id) : true
+  // console.log("hasAnswer", hasAnswer)
+  // console.log("singleQuestion????????", singleQuestion)
+  const question = singleQuestion ? singleQuestion : []
+
+
+  const closeMenu = () => setShowMenu(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const ulRef = useRef();
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const postYourAnswer = async (e) => {
+
+    e.preventDefault()
+    const plainText = editor.content;
+    // console.log("plainText", plainText);
+    answer_body = plainText;
+    editor.content = ""
+    const newAnswer = {
+      answer_body
+    }
+    const newAnswerThunkRes = await dispatch(fetchAnswerOneQuestion(newAnswer, singleQuestion.id))
+
+    // console.log("newAnswerThunkRes", newAnswerThunkRes)
+    if (typeof (newAnswerThunkRes) == "number") {
+      dispatch(fetchOneQuestion(singleQuestion.id))
+        .then(() => dispatch(fetchAllAnswersByQuestionId(singleQuestion.id)))
+        // .then(() => closeModal())
+        .catch(async (res) => {
+          if (res && res.errors) setErrors(res.errors)
+        });
+
+      if (errors.length === 0) {
+        history.push(`/questions/${singleQuestion.id}`)
+      }
+    } else {
+      setErrors(newAnswerThunkRes)
+      // console.log("errors", errors)
+    }
+  }
+
 
 
 
@@ -78,8 +201,49 @@ export default function GetAllAnswers({questionId, answerAccount}) {
             </div>
           ))
         }
-      </div>
 
+
+        {sessionUser
+          ? (question.user_id !== sessionUser.id && !hasAnswer
+            ? <div className='ansers-and-package'>
+              <div className='answer-question-title-error-package'>
+                <h2>Your answer</h2>
+                <ul className="">
+                  {errors.length > 0 && errors.map((error, idx) => (
+                    <li className='create-question-package-errors-item' key={idx}>{error}</li>
+                  ))}
+                </ul>
+                <div ref={editorContainerRef} />
+              </div>
+              <div className="post-answer-button"><button onClick={postYourAnswer}>Post Your Answer</button></div>
+            </div> : "")
+          : <div className='ansers-and-package'>
+            <div>
+              <h2>Your answer</h2>
+              <ul className="">
+                  {errors.length > 0 && errors.map((error, idx) => (
+                    <li className='create-question-package-errors-item' key={idx}>{error}</li>
+                  ))}
+                </ul>
+              <div ref={editorContainerRef} className="answer-question-package-no-login" />
+            </div>
+            <div className='let-you-signup-or-login-first'>
+              <OpenModalButton
+                buttonText="Sign Up"
+                onItemClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
+              <span> or </span>
+              <OpenModalButton
+                buttonText="Log In"
+                onItemClick={closeMenu}
+                modalComponent={<LoginFormModal />}
+              /> first to answer question
+            </div>
+          </div>
+        }
+
+      </div>
     )
 
   )
