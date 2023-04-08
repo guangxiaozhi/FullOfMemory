@@ -233,7 +233,7 @@ function GetSingleQuestion() {
                         </ul>
                         <div ref={editorContainerRef} />
                       </div>
-                      <div><button onClick={postYourAnswer}>Post Your Answer</button></div>
+                      <div className="post-answer-button"><button onClick={postYourAnswer}>Post Your Answer</button></div>
                     </div> : "")
                   : <div className='ansers-and-package'>
                     <div>
