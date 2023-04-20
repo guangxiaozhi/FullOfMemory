@@ -26,7 +26,7 @@ Logged-in users can create/edit/delete questions, or create /edit /delete a new 
 
 
 
-![image](https://user-images.githubusercontent.com/49548213/223045112-5826b078-3254-49ba-b874-641ebfade7b6.png)
+![image](https://user-images.githubusercontent.com/49548213/233263441-325167fe-b14f-4ff1-a913-556a25994a07.png)
 
 
 
@@ -35,7 +35,7 @@ Logged-in users can create/edit/delete questions, or create /edit /delete a new 
 All users can see a list of answers belong to the question.
 Logged-in users can create /edit /delete a new answers for questions.
 
-![image](https://user-images.githubusercontent.com/49548213/223045494-9d287801-1cbf-41f7-9e89-2e6b75f1879f.png)
+![image](https://user-images.githubusercontent.com/49548213/233263699-4f8ce147-53db-4ad6-a451-4bcae8f063bb.png)
 
 ## Likes for quesitons/answers
 
